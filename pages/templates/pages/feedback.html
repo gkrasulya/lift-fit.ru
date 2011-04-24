@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block pagetitle %}{{ page.title }}{% endblock pagetitle %}
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block content %}
+	<p>
+		{{ page.text_html|safe }}
+	</p>
+	
+	<form action="." method="POST" id="feedbackForm" enctype="multipart/form-data">
+		{% csrf_token %}
+
+		{% for f in form %}
+			<p>
+				{{ f.label_tag }}:<br/>
+				{{ f }}
+				{% if f.errors %}
+					<label generated="true" class="invalid">
+						{{ f.errors|join:"" }}
+					</label>
+				{% endif %}
+			</p>
+		{% endfor %}
+		<p>
+			<label>Дополнения</label>:<br/>
+			<span class="b-help-text">вы можете прикрепить файлы к сообщению</span><br/>
+			<input type="file" name="attachment1" />
+		</p>
+		<p class="a-submit">
+			<button type="submit">Отправить</button>
+		</p>
+	</form>
+{% endblock content %}
+
+{% block extrajslibs %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
+{% endblock extrajslibs %}

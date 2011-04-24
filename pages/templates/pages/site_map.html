@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load spares_tags %}
+
+{% block pagetitle %}Карта сайта{% endblock pagetitle %}
+{% block title %}Карта сайта{% endblock title %}
+
+{% block content %}
+	<ul class="b-sitemap">
+		<li><a href="{% url pages-feedback %}">Обратная связь</a></li>
+		<li><a href="{% url pages-about %}">О компании</a></li>
+		<li>
+			<a href="{% url pages-index %}">Каталог:</a>
+
+			{% get_producer_list as producer_list %}
+			<ul>
+				{% for p in producer_list %}
+					<li><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</li>
+	</ul>
+{% endblock content %}

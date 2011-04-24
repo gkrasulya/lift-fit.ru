@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block pagetitle %}Обратная связь{% endblock pagetitle %}
+{% block title %}Спасибо за сообщение!{% endblock title %}
+
+{% block content %}
+	<p>
+		Мы постараемся ответить в ближайшее время
+	</p>
+{% endblock content %}
+
+{% block extrajslibs %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
+{% endblock extrajslibs %}

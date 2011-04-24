@@ -1,0 +1,13 @@
+{% load spares_tags %}
+
+{% get_random_spare_list as random_spare_list %}
+
+<div class="b-random-spare-list">
+	{% for spare in random_spare_list %}
+			<a href="{{ spare.get_absolute_url }}" title="{{ spare.title }}" class="b-random-spare">
+				<img src="{{ spare.photo.url }}" alt="{{ spare.title }}"
+					width="{{ spare.photo.width }}" height="{{ spare.photo.height }}" />
+				<span>{{ spare.title }}</span>
+			</a>
+	{% endfor %}
+</div>

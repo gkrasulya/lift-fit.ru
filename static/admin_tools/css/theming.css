@@ -1,0 +1,26 @@
+/** 
+ * theming styles
+ * 
+ */
+
+#header {
+    background: #369 }
+
+#header #branding h1 {
+    margin: 0;
+    padding: 5px 10px;
+    text-indent: -9999px;
+    height: 31px;
+    width: 93px; }
+
+div.breadcrumbs {
+    display: block;
+    padding: 10px 15px;
+    border: 0;
+    background-position: 0 -8px;
+    border-bottom: 1px solid #ededed; }
+
+div.breadcrumbs a {
+    display: inline; }
+
+a:hover { text-decoration: underline; }

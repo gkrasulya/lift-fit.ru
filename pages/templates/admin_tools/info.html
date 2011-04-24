@@ -1,0 +1,13 @@
+{% extends "admin_tools/dashboard/module.html" %}
+
+{% block module_content %}
+	<p>
+		<a href="pages/message/">
+			Всего сообщений: <strong>{{ messages_count }}</strong></a>
+	</p>
+
+	<p>
+		<a href="pages/message/?read__exact=0">
+			Новых сообщений: <strong>{{ new_messages_count }}</strong></a>
+	</p>
+{% endblock module_content %}

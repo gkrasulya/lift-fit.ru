@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta_keywords %}{{ producer.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ producer.meta_description }}{% endblock meta_description %}
+
+{% block pagetitle %}{{ producer.get_page_title }}{% endblock pagetitle %}
+{% block title %}
+	<span><a href="/">{% trans 'Главная' %}</a> &rarr; {{ producer.title }}</span>
+{% endblock title %}
+
+{% block content %}
+	{% for spare in spare_list %}
+		{% include 'spares/_spare.html' %}
+	{% endfor %}
+{% endblock content %}

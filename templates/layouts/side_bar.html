@@ -1,0 +1,12 @@
+{% load spares_tags %}
+
+{% get_producer_list as producer_list %}
+
+<ul class="b-nav-left" id="sideNav">
+	{% for producer in producer_list %}
+		<li>
+			<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}" class="png-pg">
+				{{ producer.title }}</a>
+		</li>
+	{% endfor %}
+</ul>
