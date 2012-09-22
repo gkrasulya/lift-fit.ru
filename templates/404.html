@@ -1,1 +1,72 @@
-404
+{% load i18n %}
+<html>
+	<head>
+	  <meta charset="utf-8" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+		<meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}" />
+		<meta name="description" content="{% block meta_description %}{% endblock meta_description %}" />
+		<meta name='yandex-verification' content='5c71b6bd8c1b5996' />
+
+		<title>
+			Lift Fit - {% block pagetitle %}{% trans 'Каталог запчастей' %}{% endblock pagetitle %}
+		</title>
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  <link rel="shortcut icon" href="/favicon.ico" />
+	  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+	  <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css?v=4" />
+	  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/jquery.fancybox-1.3.4.css" />	
+	  {% block extrahead %}{% endblock extrahead %}
+	  <script src="{{ MEDIA_URL }}js/libs/modernizr-1.7.min.js"></script>
+	</head>
+	<body>
+
+
+	<table class="wrapper">
+		<tr>
+			<td colspan="5" class="header">
+			  <div class="l-header-inner bt">
+			    {% include 'layouts/header.html' %}
+			  </div>
+			</td>
+		</tr>
+		<tr class="b-nav">
+			<td class="space"></td>
+			<td class="left-cell">
+				<a href="{% url pages-index %}" title="Каталог">Каталог запчастей</a>
+			</td>
+			<td class="center-cell">
+				<a href="{% url pages-about %}" title="О нас">О компании</a>
+			</td>
+			<td class="right-cell">
+				<a href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
+			</td>
+			<td class="space"></td>
+		</tr>
+		<tr class="middle">
+			<td class="space"></td>
+			<td class="left-cell">
+				{% include 'layouts/side_bar.html' %}
+			</td>
+			<td class="center-cell">
+				<h1>404 Страница не найдена</h1>
+			</td>
+			<td class="right-cell">
+				{% if not catalog %}
+					{% include 'layouts/alt_side_bar.html' %}
+				{% endif %}
+			</td>
+			<td class="space"></td>
+		</tr>
+	</table>
+
+	<div class="l-footer">
+	    <div class="l-footer-inner c">
+	    	{% include 'layouts/footer.html' %}
+	    </div>
+	</div>
+	</body>
+</html>

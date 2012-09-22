@@ -1,0 +1,93 @@
+{% load i18n %}
+<html>
+	<head>
+	  <meta charset="utf-8" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+		<meta name="keywords" content="{% block meta_keywords %}{% endblock meta_keywords %}" />
+		<meta name="description" content="{% block meta_description %}{% endblock meta_description %}" />
+
+		<title>
+			Lift Fit - {% block pagetitle %}{% trans 'Каталог запчастей' %}{% endblock pagetitle %}
+		</title>
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  <link rel="shortcut icon" href="/favicon.ico" />
+	  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+	  <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css?v=3" />
+	  {% block extrahead %}{% endblock extrahead %}
+	  <script src="{{ MEDIA_URL }}js/libs/modernizr-1.7.min.js"></script>
+	</head>
+	<body>
+
+		<div class="l-wrapper">	
+
+			<header>
+			  <div class="l-header-inner bt">
+			    {% include 'layouts/header.html' %}
+			  </div>
+			</header>
+
+			<nav class="a-top">
+			  <div class="b-nav-top-inner">
+			  	{% include 'layouts/nav.html' %}
+			  </div>
+			</nav>
+			
+			<div class="l-content c">
+				<div class="l-side-bar l">
+					{% include 'layouts/side_bar.html' %}
+				</div>
+
+				<div class="l-main-bar l">
+					<h1>{% block title %}{% endblock title %}</h1>
+				
+					{% block content %}{% endblock content %}
+				</div>
+
+				{% if not catalog %}
+					<div class="l-alt-side-bar l">
+						{% include 'layouts/alt_side_bar.html' %}
+					</div>
+				{% endif %}
+			</div>
+
+			 <footer>
+		    <div class="l-footer-inner c">
+		    	{% include 'layouts/footer.html' %}
+		    </div>
+		  </footer>
+		 
+		</div>
+		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.color.js"></script>
+		{% block extrajslibs %}{% endblock extrajslibs %}
+		<script src="{{ MEDIA_URL }}js/script.js?v=2" type="text/javascript"></script>
+		{% block extrajs %}{% endblock extrajs %}
+
+	  <!--[if lt IE 7 ]>
+	    <script src="js/libs/dd_belatedpng.js"></script>
+	    <script>DD_belatedPNG.fix("img, .png-bg");</script>
+	  <![endif]-->
+
+		<!-- Yandex.Metrika counter -->
+		<div style="display:none;"><script type="text/javascript">
+		(function(w, c) {
+		    (w[c] = w[c] || []).push(function() {
+		        try {
+		            w.yaCounter5566567 = new Ya.Metrika(5566567);
+		             yaCounter5566567.clickmap(true);
+		             yaCounter5566567.trackLinks(true);
+		        
+		        } catch(e) { }
+		    });
+		})(window, 'yandex_metrika_callbacks');
+		</script></div>
+		<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
+		<noscript><div><img src="//mc.yandex.ru/watch/5566567" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+	</body>
+</html>

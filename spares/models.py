@@ -1,13 +1,12 @@
 #-*- coding: utf-8 -*- 
 import re
 
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from imagekit.models import ImageModel
 from fields import AutoImageField
-from specs import SpareDisplay
 
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ['fields.AutoImageField'])
@@ -17,6 +16,12 @@ class Producer(models.Model):
 	title = models.CharField(_(u'Название'), max_length=255, blank=True)
 	date_added = models.DateTimeField(_(u'Date added'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Date updated'), auto_now=True, editable=False)
+	
+	text = models.TextField(_(u'Текст'), blank=True)
+	text_html = models.TextField(_(u'Text html'), editable=False)
+	slug = models.SlugField(_(u'Слаг'), blank=True)
+
+	split_into_categories = models.BooleanField(_(u'Делить на категории'), default=False)
 
 	page_title = models.TextField(_(u'Название страницы'), blank=True, default='',
 		help_text=_(u'то, что будет отображаться во вкладке браузера'))
@@ -34,29 +39,42 @@ class Producer(models.Model):
 		"""docstring for __unicode__"""
 		return self.title
 		
+	def save(self, force_insert=False, force_update=False):
+		self.text_html = format_text(self.text)
+		super(Producer, self).save(force_insert, force_update)
+		
 	def get_absolute_url(self):
-		return reverse('spares-producer-detail', args=(self.id,))
+		return reverse('spares-producer-detail', args=(self.slug, self.id))
 
 	def get_page_title(self):
 		return self.page_title if self.page_title else self.title
 
 
 class Spare(ImageModel):
+	CATEGORIES = (
+		(u'elevator', u'Лифт'),
+		(u'escalator', u'Эскалатор'),
+	)
+
 	title = models.CharField(_(u'Название'), max_length=255)
-	description = models.TextField(_(u'Описание'))
+	description = models.TextField(_(u'Описание'), blank=True, default='', editable=False)
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)
 	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
 	producer = models.ForeignKey(Producer, verbose_name=_(u'Производитель'))
+	in_stock = models.BooleanField(u'В наличии')
 	date_added = models.DateTimeField(_(u'Date added'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Date updated'), auto_now=True, editable=False)
+
+	category = models.CharField(_(u'Категория'), max_length=50,
+								choices=CATEGORIES, blank=True, null=True)
 	
 	class Meta:
-		ordering = ['-date_added']
+		ordering = ['title']
 		verbose_name = _(u'Запчасть')
 		verbose_name_plural = _(u'Запчасти')
 
 	class IKOptions:
-		preprocessor_spec = SpareDisplay
+		spec_module  = 'spares.specs'
 		image_field = 'photo'
 	
 	def __unicode__(self):
@@ -70,7 +88,7 @@ class Spare(ImageModel):
 		super(Spare, self).save(force_insert, force_update)
 
 	def admin_photo(self):
-		return '<img src="%s" />' % self.photo.url
+		return '<img src="%s" />' % self.thumb.url
 	admin_photo.short_description = _(u'Фото')
 	admin_photo.allow_tags = True
 

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block meta_keywords %}Новости{% endblock meta_keywords %}
+{% block meta_description %}Новости{% endblock meta_description %}
+
+{% block pagetitle %}Новости{% endblock pagetitle %}
+{% block title %}Новости{% endblock title %}
+
+{% block content %}
+	<div class="b-news-list">
+		{% for post in posts %}
+			<div class="b-news-item">
+				<div class="b-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
+				<date class="b-date">{{ post.date_added }}</date>
+				<div class="b-text">{{ post.text_html|striptags|truncatewords:30 }}</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

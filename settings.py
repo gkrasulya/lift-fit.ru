@@ -128,13 +128,13 @@ INSTALLED_APPS = (
     'debug_toolbar',
 
     # don't forget to add the dependencies!
-    'indexer',
-    'paging',
-    'sentry',
-    'sentry.client',
+    # 'indexer',
+    # 'paging',
+    # 'sentry',
+    # 'sentry.client',
 )
 
-#INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ('127.0.0.1',)
 
 ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'dashboard.CustomAppIndexDashboard'
@@ -145,8 +145,8 @@ FEEDBACK_EMAILS = ['gkrasulya@gmail.com', 'info@lift-fit.ru', 'entsodj@gmail.com
 
 EMAIL_HOST = 'localhost'
 EMAIL_POST = 1025
-EMAIL_HOST_USER = 'feedback@100yka.ru'
-EMAIL_HOST_PASSWORD = 'liftfit'
+EMAIL_HOST_USER = 'feedback@8hands.ru'
+EMAIL_HOST_PASSWORD = 'gosha123'
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'feedback@lift-fit.ru'
 

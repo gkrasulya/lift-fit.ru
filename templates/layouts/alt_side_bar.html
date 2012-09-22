@@ -1,13 +1,45 @@
 {% load spares_tags %}
 
-{% get_random_spare_list as random_spare_list %}
+{% get_last_news as posts %}
 
-<div class="b-random-spare-list">
-	{% for spare in random_spare_list %}
-			<a href="{{ spare.get_absolute_url }}" title="{{ spare.title }}" class="b-random-spare">
-				<img src="{{ spare.photo.url }}" alt="{{ spare.title }}"
-					width="{{ spare.photo.width }}" height="{{ spare.photo.height }}" />
-				<span>{{ spare.title }}</span>
-			</a>
-	{% endfor %}
-</div>
+{% if posts %}
+
+	<h3>Новости</h3>
+
+	<div class="b-last-news-list">
+		{% for post in posts %}
+			<div class="b-last-news-item">
+				<date class="b-date">{{ post.date_added }}</date>
+				<div class="b-title">
+					<a href="{{ post.get_absolute_url }}" title="{{ post.title }}" alt="{{ post.title }}">
+						{{ post.title }}</a>
+				</div>
+				<div class="b-description">
+					{{ post.text_html|striptags|truncatewords:10 }}
+				</div>
+			</div>
+		{% endfor %}
+
+	</div>
+
+	<div class="b-last-news-more">
+		<a href="/posts/">Все новости &raquo;</a>
+	</div>
+
+{% else %}
+
+	{% get_random_spare_list as random_spare_list %}
+
+	<div class="b-random-spare-list">
+		{% for spare in random_spare_list %}
+			<div class="b-random-spare">
+				<a href="{{ spare.photo.url }}" title="{{ spare.title }}" class="fancybox">
+					<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}"
+						width="{{ spare.thumb.width }}" height="{{ spare.thumb.height }}" />
+				</a>
+				<a href="{{ spare.producer.get_absolute_url }}">{{ spare.title }}</a>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endif %}

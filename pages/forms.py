@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from models import *
 
-FEEDBACK_SEND_EMAIL = getattr(settings, 'FEEDBACK_SEND_EMAIL', False)
+FEEDBACK_SEND_EMAIL = getattr(settings, 'FEEDBACK_SEND_EMAIL', True)
 FEEDBACK_EMAILS = getattr(settings, 'FEEDBACK_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 

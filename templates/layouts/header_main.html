@@ -1,0 +1,33 @@
+<a href="/" class="header-logo l" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
+<div class="r header-contacts">
+  <div class="title">контактная информация</div>
+  <div class="phone">(926) 8720011</div>
+  <div class="email">
+    <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
+  </div>
+</div> <!-- /.header-contacts -->
+
+<div class="c"></div>
+
+<nav class="page-nav">
+  <a href="{% url pages-index %}" title="Каталог">Каталог запчастей</a>
+  <a href="{% url pages-about %}" title="О нас">О компании</a>
+  <a href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
+  <a href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
+</nav>
+
+{% if main %}
+  <div class="slider-wrap">
+    <div id="slider" class="nivoSlider">
+      <img src="/static/photos/b1.jpg" alt="" />
+      <img src="/static/photos/b2.jpg" alt="" />
+    </div> <!-- /.nivoSlider -->
+  </div> <!-- /.slider-wrap -->
+
+  <nav class="category-nav">
+    <a href="">Fermator</a>
+    <a href="">Fermator</a>
+    <a href="" class="active">Fermator</a>
+    <a href="">Fermator</a>
+  </nav>
+{% endif %}

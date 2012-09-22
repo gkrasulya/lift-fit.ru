@@ -5,9 +5,10 @@ from models import *
 
 class ProducerAdmin(admin.ModelAdmin):
     list_display = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
     fieldsets = (
     	(None, {
-    		'fields': ('title',)
+    		'fields': ('title', 'slug', 'text', 'split_into_categories',)
     	}),
     	(u'Для поисковиков', {
     		'classes': ('collapse',),

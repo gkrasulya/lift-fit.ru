@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block meta_keywords %}{{ post.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ post.meta_description }}{% endblock meta_description %}
+
+{% block pagetitle %}{{ post.get_page_title }}{% endblock pagetitle %}
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+	<p>
+		{{ post.text_html|safe }}
+	</p>
+{% endblock content %}

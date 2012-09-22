@@ -6,8 +6,25 @@
 {% block pagetitle %}{{ page.get_page_title }}{% endblock pagetitle %}
 {% block title %}{{ page.title }}{% endblock title %}
 
+{% block body_class %}
+	{% if main %}main{% else %}{{ page.slug }}{% endif %}
+{% endblock %}
+
 {% block content %}
-	<p>
+	<p style="text-align: justify !important">
 		{{ page.text_html|safe }}
 	</p>
 {% endblock content %}
+
+{% if main %}
+	{% block extrajslibs %}
+		<script type="text/javascript" src="/static/js/libs/jquery.nivo.slider.pack.js"></script>
+	{% endblock %}
+{% else %}
+	{% block breadcrumbs %}
+		<div class="breadcrubms">
+			<a href="">Главная</a> /
+			<a href="">{{ page.title }}</a>
+		</div>
+	{% endblock %}
+{% endif %}

@@ -2,9 +2,11 @@ from imagekit.specs import ImageSpec
 from imagekit import processors
 
 
-class ResizeSpareDisplay(processors.Resize):
-	width = 200
+class ResizeSpareThumb(processors.Resize):
+	height = 150
+	width = 150
 	
 	
-class SpareDisplay(ImageSpec):
-	processors = [ResizeSpareDisplay]
+class SpareThumb(ImageSpec):
+	processors = [ResizeSpareThumb]
+	access_as = 'thumb'

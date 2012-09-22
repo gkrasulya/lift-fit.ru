@@ -1,20 +1,46 @@
-<div class="b-icons c" id="icons">
-  <a href="{% url pages-index %}" class="a-home l"></a>
-  <a href="{% url pages-feedback %}" class="a-email l"></a>
-  <a href="{% url pages-site-map %}" class="a-sitemap l"></a>
-</div>
+{% load spares_tags %}
 
-<a href="/" class="b-logo"></a>
+<a href="/" class="header-logo l" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
+<div class="r header-contacts">
+  <div class="title">контактная информация</div>
+  <div class="phone">(926) 8720011</div>
+  <div class="email">
+    <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
+  </div>
+</div> <!-- /.header-contacts -->
 
-<div class="b-contacts">
-  <p class="c">
-    <span class="l">тел.:</span>
-    <span class="a-phone l">
-      (495) 123-45-67<br/>
-      (495) 765-83-92
-    </span>
-  </p>
-  <p>
-    e-mail: <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
-  </p>
-</div>
+<div class="c"></div>
+
+<nav class="page-nav">
+  <a {% if slug == 'index' %}class="active"{% endif %}
+    href="{% url pages-index %}" title="Каталог">Каталог запчастей</a>
+  <a {% if slug == 'about' %}class="active"{% endif %}
+    href="{% url pages-about %}" title="О нас">О компании</a>
+  <a {% if slug == 'feedback' %}class="active"{% endif %}
+    href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
+  <a {% if slug == 'usloviya-dostavki' %}class="active"{% endif %}
+    href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
+</nav>
+
+{% if main %}
+  <div class="slider-wrap">
+    <div id="slider" class="nivoSlider">
+      <img src="/static/photos/b1.jpg" alt="" />
+      <img src="/static/photos/b2.jpg" alt="" />
+    </div> <!-- /.nivoSlider -->
+  </div> <!-- /.slider-wrap -->
+
+  {% get_producer_list as producer_list %}
+
+  <nav class="category-nav">
+    {% for producer in producer_list %}
+        <a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+          {{ producer.title }}</a>
+    {% endfor %}
+    <a href="">Fermator</a>
+    <a href="">Fermator</a>
+    <a href="" class="active">Fermator</a>
+    <a href="">Fermator</a>
+  </nav>
+{% endif %}

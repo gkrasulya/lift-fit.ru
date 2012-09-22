@@ -1,0 +1,5 @@
+User-Agent: *
+Host: www.lift-fit.ru
+Disallow: /admin
+Sitemap: http://www.lift-fit.ru/sitemap.xml
+Crawl-Delay: 1

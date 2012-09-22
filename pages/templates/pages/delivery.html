@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block meta_keywords %}{{ page.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ page.meta_description }}{% endblock meta_description %}
+
+{% block pagetitle %}{{ page.get_page_title }}{% endblock pagetitle %}
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block body_class %}
+	{% if main %}main{% else %}{{ page.slug }}{% endif %}
+{% endblock %}
+
+{% block content %}
+	<p style="text-align: justify !important">
+		{{ page.text_html|safe }}
+	</p>
+
+    <div class="c mt30">
+      <img src="/static/images/delivery.jpg" alt="" class="l mr15">
+
+      <h2>Chreh</h2>
+    </div>
+{% endblock content %}
+
+{% if main %}
+	{% block extrajslibs %}
+		<script type="text/javascript" src="/static/js/libs/jquery.nivo.slider.pack.js"></script>
+	{% endblock %}
+{% else %}
+	{% block breadcrumbs %}
+		<div class="breadcrubms">
+			<a href="">Главная</a> /
+			<a href="">{{ page.title }}</a>
+		</div>
+	{% endblock %}
+{% endif %}

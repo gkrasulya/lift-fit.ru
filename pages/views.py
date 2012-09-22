@@ -1,7 +1,7 @@
 from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,9 +13,32 @@ from models import *
 def page(request, slug):
 	"""simple text page"""
 	page = Page.objects.get(slug=slug)
+
+	template_name = 'page'
+	if slug == 'usloviya-dostavki':
+		template_name = 'delivery'
 	
-	return render(request, 'pages/page.html', {
-		'page': page
+	return render(request, 'pages/%s.html' % template_name, {
+		'page': page,
+		'main': slug == 'index',
+		'slug': slug
+	})
+
+def custom_page(request, slug):
+	page = get_object_or_404(Page, slug=slug)
+
+def post_list(request):
+	posts = Post.objects.all()
+
+	return render(request, 'pages/post_list.html', {
+		'posts': posts	
+	})
+
+def post_detail(request, slug, id):
+	post = Post.objects.get(id=id)
+
+	return render(request, 'pages/post_detail.html', {
+		'post': post
 	})
 
 def feedback(request):
@@ -46,6 +69,12 @@ def feedback_thanks(request):
 	
 def site_map(request):
 	return render(request, 'pages/site_map.html')
+	
+def site_map_xml(request):
+	return render(request, 'pages/site_map.xml')
+	
+def robots_txt(request):
+	return render(request, 'pages/robots.txt')
 
 @csrf_exempt
 def read_action(request, message_id):

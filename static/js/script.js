@@ -1,64 +1,30 @@
-/* Author: Gosha Krasulya
-	
+/* Author: Georgy Krasulya
+
 */
 
-(function(){
+;(function() {
+	var $slider = $('#slider');
 
-	var $icons = $('#icons a');
-
-	$icons.hover(function() {
-		$(this).stop().animate({
-			'top': 3
-		}, 100);
-	},
-	function() {
-		$(this).stop().animate({
-			'top': 0
-		}, 100);
+	$slider.nivoSlider({
+		directionNav: false
 	});
 
+	if(!Modernizr.input.placeholder) {
+		$('input[placeholder], textarea[placeholder]').each(function(){
+			if ($(this).val() == '' && $(this).attr('placeholder') != '') {
+				$(this).val($(this).attr('placeholder'));
+				$(this).focus(function() {
+					if ($(this).val() == $(this).attr('placeholder'))
+						$(this).val('');
+				});
 
-
-	var $sideNav = $('#sideNav');
-
-	$sideNav.find('a').hover(function() {
-		var $self = $(this);
-
-		$self.stop().animate({
-			'background-color': '#ff0',
-			'margin-left': 10
-		}, 100);
-	}, function() {
-		var $self = $(this);
-
-		$self.stop().animate({
-			'background-color': '#d9e8f1',
-			'margin-left': 0
-		}, 400);
-	});
-
-
-
-	var $content = $('#content'),
-		$mainBar = $('#mainBar'),
-		$w = $(window);
-
-	$w.resize(windowResizeHandler);
-
-	function windowResizeHandler() {
-		setContentWidth();
-		setMainBarWidth();
-	}
-
-	setContentWidth();
-	setMainBarWidth();
-
-	function setContentWidth() {
-		$content.width() < 1000 && $content.width(1000);
-	}
-
-	function setMainBarWidth() {
-		$mainBar.width($content.width() - 630);
+			$(this).blur(function() {
+				if ($(this).val() == '') {
+					$(this).val($(this).attr('placeholder'));
+				}
+			});
+			}
+		});
 	}
 
 
@@ -87,7 +53,7 @@
 		function fileChangeHandler() {
 			emptyFiles = false;
 			currentFile++;
-			var $newFileInput = $('<p class="file"><input type="file" name="attachment' + currentFile + '"</p>'),
+			var $newFileInput = $('<p class="file mt5"><input type="file" name="attachment' + currentFile + '"</p>'),
 				$p = $(this).parents('p:eq(0)');
 			! $p.next().hasClass('file') && $newFileInput.insertAfter($p);
 
@@ -114,15 +80,4 @@
 		});
 
 	}
-
-
 })();
-
-
-
-
-
-
-
-
-

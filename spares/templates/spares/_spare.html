@@ -1,12 +1,23 @@
-<div id="spare{{ spare.id }}" class="b-spare c">
-	<div class="b-spare-body l">
-		<h3>{{ spare.title }}</h3>
-		<p>
-			{{ spare.description }}
-		</p>
+<div id="spare{{ spare.id }}" class="b-spare">
+	<div class="b-spare-image">
+		<a href="{{ spare.photo.url }}" class="fancybox">
+			<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
+		</a>
 	</div>
 
-	<div class="b-spare-image l">
-		<img src="{{ spare.photo.url }}" alt="{{ spare.title }}" />
+	{#<div class="b-spare-in-stock{% if not spare.in_stock %} no{% endif %}">#}
+	<div class="b-spare-in-stock">
+		{% comment %}
+		{% if spare.in_stock %}
+			В наличии
+		{% else %}
+			На заказ
+		{% endif %}
+		{% endcomment %}
+		<a href="/feedback/" style="color: #000;" title="Купить">Купить</a>
+	</div>
+
+	<div class="b-spare-body">
+		<h3>{{ spare.title }}</h3>
 	</div>
 </div>

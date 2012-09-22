@@ -10,7 +10,24 @@
 {% endblock title %}
 
 {% block content %}
-	{% for spare in spare_list %}
-		{% include 'spares/_spare.html' %}
-	{% endfor %}
+	{% if producer.split_into_categories %}
+		<div class="b-spare-filter">
+			Показать:
+			<a {% if category == 'all' %}class="selected"{% endif %} href="?category=all">все</a>,
+			<a {% if category == 'elevator' %}class="selected"{% endif %} href="?category=elevator">запчасти для лифтов</a>,
+			<a {% if category == 'escalator' %}class="selected"{% endif %} href="?category=escalator">запчасти для эскалаторов</a>
+		</div>
+	{% endif %}
+
+	{% if producer.text %}
+		<div class="b-producer-description">
+			{{ producer.text_html|safe }}
+		</div>
+	{% endif %}
+
+	<div class="b-spare-list c" id="spareList">
+		{% for spare in spare_list %}
+			{% include 'spares/_spare.html' %}
+		{% endfor %}
+	</div>
 {% endblock content %}

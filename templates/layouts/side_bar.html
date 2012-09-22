@@ -5,8 +5,10 @@
 <ul class="b-nav-left" id="sideNav">
 	{% for producer in producer_list %}
 		<li>
-			<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}" class="png-pg">
-				{{ producer.title }}</a>
+			<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+				class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+				{{ producer.title }}
+			</a>
 		</li>
 	{% endfor %}
 </ul>

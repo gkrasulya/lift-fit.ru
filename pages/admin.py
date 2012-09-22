@@ -19,16 +19,31 @@ messages_make_unread.short_description = _(u'Отметить непрочита
 class PageAdmin(admin.ModelAdmin):
   list_display = ('name', 'title', 'date_added')
   list_filter = ['date_added']
-  #prepopulated_fields = {'slug': ('title',)}
+  prepopulated_fields = {'slug': ('title',)}
   date_hierarchy = 'date_added'
   fieldsets = (
   	(None, {
-  		'fields': ('title', 'text',)
+  		'fields': ('title', 'slug', 'name', 'text',)
   	}),
   	(u'Для поисковиков', {
   		'classes': ('collapse',),
   		'fields': ('page_title', 'meta_keywords', 'meta_description',),
   	}),
+  )
+
+class PostAdmin(admin.ModelAdmin):
+  list_display = ('title', 'date_added')
+  list_filter = ['date_added']
+  prepopulated_fields = {'slug': ('title',)}
+  date_hierarchy = 'date_added'
+  fieldsets = (
+    (None, {
+      'fields': ('title', 'slug', 'text',)
+    }),
+    (u'Для поисковиков', {
+      'classes': ('collapse',),
+      'fields': ('page_title', 'meta_keywords', 'meta_description',),
+    }),
   )
 
 class MessageAdmin(admin.ModelAdmin):
@@ -41,5 +56,6 @@ class MessageFileAdmin(admin.ModelAdmin):
   list_display = ('name', 'admin_preview', 'admin_message',)
     
 admin.site.register(Page, PageAdmin)
+admin.site.register(Post, PostAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(MessageFile, MessageFileAdmin)

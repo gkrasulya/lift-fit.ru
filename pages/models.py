@@ -3,6 +3,7 @@
 import re
 
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
@@ -11,8 +12,8 @@ class Page(models.Model):
 	title = models.CharField(_(u'Заголовок'), max_length=255)
 	text = models.TextField(_(u'Текст'), blank=True)
 	text_html = models.TextField(_(u'Text html'), editable=False)
-	name = models.CharField(_(u'Имя'), max_length=255, editable=False)
-	slug = models.SlugField(_(u'Слаг'), editable=False, blank=True)
+	name = models.CharField(_(u'Имя'), max_length=255)
+	slug = models.SlugField(_(u'Слаг'), blank=True)
 	date_added = models.DateTimeField(_(u'Дата добавления'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Дата добавления'), auto_now=True, editable=False)
 
@@ -33,6 +34,39 @@ class Page(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+	def get_page_title(self):
+		return self.page_title if self.page_title else self.title
+
+
+class Post(models.Model):
+	title = models.CharField(_(u'Заголовок'), max_length=255)
+	text = models.TextField(_(u'Текст'), blank=True)
+	text_html = models.TextField(_(u'Text html'), editable=False)
+	slug = models.SlugField(_(u'Слаг'), blank=True)
+	date_added = models.DateTimeField(_(u'Дата добавления'), auto_now_add=True, editable=False)
+	date_updated = models.DateTimeField(_(u'Дата добавления'), auto_now=True, editable=False)
+
+	page_title = models.TextField(_(u'Название страницы'), blank=True, default='',
+		help_text=_(u'то, что будет отображаться во вкладке браузера'))
+	meta_keywords = models.TextField(_(u'Ключевые слова'), blank=True, default='',
+		help_text=_(u'содержимое для &lt;meta name="keywords" /&gt;'))
+	meta_description = models.TextField(_(u'Описание'), blank=True, default='',
+		help_text=_(u'содержимое для &lt;meta name="description" /&gt;'))
+	
+	class Meta:
+		verbose_name = _(u'Новость')
+		verbose_name_plural = _(u'Новости')
+		
+	def save(self, force_insert=False, force_update=False):
+		self.text_html = format_text(self.text)
+		super(Post, self).save(force_insert, force_update)
+
+	def __unicode__(self):
+		return self.title
+		
+	def get_absolute_url(self):
+		return reverse('pages-post-detail', args=(self.slug, self.id))
 
 	def get_page_title(self):
 		return self.page_title if self.page_title else self.title
