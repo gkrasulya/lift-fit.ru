@@ -4,10 +4,31 @@
 {% block meta_description %}{{ post.meta_description }}{% endblock meta_description %}
 
 {% block pagetitle %}{{ post.get_page_title }}{% endblock pagetitle %}
-{% block title %}{{ post.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url pages-post-list %}">Новости</a> /
+		<a href="{% url pages-post-detail post.slug post.id %}">{{ post.title }}</a>
+	</div>
+{% endblock %}
 
 {% block content %}
-	<p>
-		{{ post.text_html|safe }}
-	</p>
+
+  <div class="news-detail c">
+    <div class="image l">
+      <img src="{{ post.medium.url }}" alt="{{ post.title }}">
+    </div> <!-- /.image -->
+
+    <div class="content l">
+      <h1 class="title">{{ post.title }}</h1>
+
+      <div class="text">
+        <p>
+          {{ post.text_html|safe }}
+        </p>
+      </div> <!-- /.text -->
+    </div> <!-- /.content -->
+  </div> <!-- /.news-detail -->
+
 {% endblock content %}

@@ -23,7 +23,7 @@ class PageAdmin(admin.ModelAdmin):
   date_hierarchy = 'date_added'
   fieldsets = (
   	(None, {
-  		'fields': ('title', 'slug', 'name', 'text',)
+  		'fields': ('title', 'slug', 'name', 'text')
   	}),
   	(u'Для поисковиков', {
   		'classes': ('collapse',),
@@ -38,7 +38,7 @@ class PostAdmin(admin.ModelAdmin):
   date_hierarchy = 'date_added'
   fieldsets = (
     (None, {
-      'fields': ('title', 'slug', 'text',)
+      'fields': ('title', 'photo', 'slug', 'text',)
     }),
     (u'Для поисковиков', {
       'classes': ('collapse',),

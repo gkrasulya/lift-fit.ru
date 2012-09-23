@@ -6,14 +6,35 @@
 {% block pagetitle %}Новости{% endblock pagetitle %}
 {% block title %}Новости{% endblock title %}
 
-{% block content %}
-	<div class="b-news-list">
-		{% for post in posts %}
-			<div class="b-news-item">
-				<div class="b-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
-				<date class="b-date">{{ post.date_added }}</date>
-				<div class="b-text">{{ post.text_html|striptags|truncatewords:30 }}</div>
-			</div>
-		{% endfor %}
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url pages-post-list %}">Новости</a>
 	</div>
+{% endblock %}
+
+{% block content %}
+
+  <div class="news-list">
+  	{% for post in posts %}
+	    <div class="news-item c">
+	      <div class="image l">
+	      	<a href="{{ post.get_absolute_url }}">
+	      		<img src="{{ post.thumb.url }}" alt="{{ post.title }}" /></a>
+	      </div> <!-- /.image -->
+	      <div class="content l">
+	        <time class="date">{{ post.date_added }}</time>
+	        <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+	        <div class="description">
+	          {{ post.text_html|striptags|truncatewords:30 }}
+	        </div>
+	        <div class="more">
+	          <a href="{{ post.get_absolute_url }}">подробнее</a>
+	        </div>
+	      </div> <!-- /.content -->
+	    </div> <!-- /.news-item -->
+	  </div> <!-- /.news-list -->
+	{% endfor %}
+  </div> <!-- /.news-list -->
+
 {% endblock content %}
