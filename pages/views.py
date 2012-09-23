@@ -10,6 +10,17 @@ from django.conf import settings
 from forms import *
 from models import *
 
+def index(request):
+	page = Page.objects.get(slug='index')
+	first_post = Post.objects.order_by('-date_added')[0]
+	
+	return render(request, 'pages/index.html', {
+		'page': page,
+		'main': True,
+		'first_post': first_post,
+		'slug': 'index'
+	})
+
 def page(request, slug):
 	"""simple text page"""
 	page = Page.objects.get(slug=slug)
@@ -19,6 +30,8 @@ def page(request, slug):
 		template_name = 'delivery'
 	elif slug == 'index':
 		template_name = 'index'
+	elif slug == 'service':
+		template_name = 'service'
 	
 	return render(request, 'pages/%s.html' % template_name, {
 		'page': page,

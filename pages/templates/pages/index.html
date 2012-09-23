@@ -31,15 +31,16 @@
         <div class="feature-item l news">
           <h3 class="title">Пресс-центр</h3>
           <div class="info c">
-            <img src="/static/images/news1.png" alt="" class="l">
-            <span class="date">15.15.15 &#151;</span><br>
-            <a href="">Мы все умрем</a>
+            <img src="{{ first_post.thumb.url }}" alt="" class="l">
+            <span class="date">{{ first_post.date_added}} &#151;</span><br>
+            <a href="{{ first_post.get_absolute_url }}">
+              {{ first_post.title }}</a>
           </div>
           <div class="content">
-            Современные эскалаторы и лифты представляют собой сложную систему, состоящую
+            {{ first_post.text_html|striptags|truncatewords:10 }}
           </div>
           <div class="more">
-            <a href="">остальные новости</a> 
+            <a href="{% url pages-post-list %}">остальные новости</a> 
           </div>
         </div> <!-- /.feature-item -->
       </div> <!-- /.features-wrap -->
