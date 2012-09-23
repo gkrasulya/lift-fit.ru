@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
-{% block pagetitle %}Обратная связь{% endblock pagetitle %}
-{% block title %}Спасибо за сообщение!{% endblock title %}
+{% block pagetitle %}Заказ оборудования{% endblock pagetitle %}
+{% block title %}Заказ оборудования{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrubms">
+		<a href="/">Главная</a> /
+		<a href="/feedback/">Заказ оборудования</a>
+	</div>
+{% endblock %}
 
 {% block content %}
-	<p>
-		Мы постараемся ответить в ближайшее время
-	</p>
+
+	<div class="form-message">
+		Спасибо за обратную связь!
+	</div>
+
 {% endblock content %}
 
 {% block extrajslibs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.placeholder.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
 {% endblock extrajslibs %}

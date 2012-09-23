@@ -14,7 +14,8 @@ urlpatterns = patterns('',
 	# (r'^lift_fit/', include('lift_fit.foo.urls')),
 	
 	(r'^', include('pages.urls')),
-	
+
+	url(r'^catalog/$', spares.views.index, name='spares-index'),
 	url(r'^proizvoditel/(?P<slug>[-\w\d_]+)-(?P<id>\d+)/$', spares.views.producer_detail, name='spares-producer-detail'),
 	url(r'^(proizvoditel|producer)/(None\-)?(?P<id>\d+)/$', spares.views.producer_detail_redirect),
 

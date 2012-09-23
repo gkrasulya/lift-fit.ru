@@ -213,8 +213,8 @@ body {
     background: url(../images/about_content.jpg) 100% 0 no-repeat;
     margin-top: 40px;
     padding-top: 30px;
-    width: 70%;
-    padding-right: 23%;
+    width: 60%;
+    padding-right: 30%;
   }
 
 .about-content {
@@ -222,20 +222,20 @@ body {
 }
 
 .page-footer {
-  background: #4c6356;
-  color: #fff;
+  background: url(../images/footer_bg.png);
+  color: #366b9f;
   font: 14px "Trebuchet MS";
   height: 90px;
   padding-top: 50px;
 }
   .page-footer a {
-    color: #7fb3d9;
+    color: #366b9f;
   }
   .page-footer .made-by img {
     margin-bottom: 1px;
   }
   .page-footer .made-by a {
-    color: #fff;
+    color: #366b9f;
   }
 
 /* form */
@@ -292,7 +292,7 @@ button[type=submit] {
   height: 108px;
 }
 
-.breadcrubms {
+.breadcrumbs {
   font-size: 13px;
 }
 

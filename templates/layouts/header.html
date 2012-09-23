@@ -12,8 +12,8 @@
 <div class="c"></div>
 
 <nav class="page-nav">
-  <a {% if slug == 'index' %}class="active"{% endif %}
-    href="{% url pages-index %}" title="Каталог">Каталог запчастей</a>
+  <a {% if slug == 'catalog' %}class="active"{% endif %}
+    href="{% url spares-index %}" title="Каталог">Каталог запчастей</a>
   <a {% if slug == 'about' %}class="active"{% endif %}
     href="{% url pages-about %}" title="О нас">О компании</a>
   <a {% if slug == 'feedback' %}class="active"{% endif %}
@@ -25,8 +25,10 @@
 {% if main %}
   <div class="slider-wrap">
     <div id="slider" class="nivoSlider">
-      <img src="/static/images/b1.jpg" alt="" />
-      <img src="/static/images/b2.jpg" alt="" />
+      <img src="/static/images/banner2.jpg" alt="" />
+      <img src="/static/images/banner3.jpg" alt="" />
+      <img src="/static/images/banner4.jpg" alt="" />
+      <img src="/static/images/banner1.jpg" alt="" />
     </div> <!-- /.nivoSlider -->
   </div> <!-- /.slider-wrap -->
 
@@ -38,9 +40,5 @@
             class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
           {{ producer.title }}</a>
     {% endfor %}
-    <a href="">Fermator</a>
-    <a href="">Fermator</a>
-    <a href="" class="active">Fermator</a>
-    <a href="">Fermator</a>
   </nav>
 {% endif %}

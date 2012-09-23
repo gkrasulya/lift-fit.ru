@@ -9,7 +9,111 @@
 {% block body_class %}main{% endblock %}
 
 {% block content %}
-	
+	<p>
+        Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может привести к серьезной поломке. 
+      </p>
+
+      <div class="features-wrap c">
+        <div class="feature-item l first">
+          <h3 class="title">Запасные части</h3>
+          <div class="content">
+            Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может <a href="">привести к серьезной</a> поломке. 
+          </div>
+        </div> <!-- /.feature-item -->
+
+        <div class="feature-item l service">
+          <h3 class="title">Сервис</h3>
+          <div class="content">
+            Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может <a href="">привести к серьезной</a> поломке. 
+          </div>
+        </div> <!-- /.feature-item -->
+
+        <div class="feature-item l news">
+          <h3 class="title">Пресс-центр</h3>
+          <div class="info c">
+            <img src="/static/images/news1.png" alt="" class="l">
+            <span class="date">15.15.15 &#151;</span><br>
+            <a href="">Мы все умрем</a>
+          </div>
+          <div class="content">
+            Современные эскалаторы и лифты представляют собой сложную систему, состоящую
+          </div>
+          <div class="more">
+            <a href="">остальные новости</a> 
+          </div>
+        </div> <!-- /.feature-item -->
+      </div> <!-- /.features-wrap -->
+
+      <h2>Заказать, привезти и установить</h2>
+
+      <p>
+        Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может привести к серьезной поломке. 
+      </p>
+
+      <div class="delivery-wrap c">
+        <div class="image l">
+          <img src="/static/images/map.jpg" alt="">
+        </div> <!-- /.image -->
+        <div class="content r">
+          <h3 class="mt0">Доставка</h3>
+          <p>
+          	Покупка и доставка всех запасных частей и механизмов осуществляется как при наличии товара на складе, так и под заказ. Работаем мы в несколько этапов: 
+          </p>
+          <h3>Монтаж</h3>
+          <p>
+            Покупка и доставка всех запасных частей и механизмов осуществляется как при наличии товара на складе, так и под заказ. Работаем мы в несколько этапов: 
+          </p>
+        </div> <!-- /.content -->
+      </div> <!-- /.delivery-wrap -->
+
+      <div class="feedback-wrap c">
+        <div class="content l">
+          <h2 class="mt0">Давайте поговорим</h2>
+          <p>
+            Если у Вас возникли вопросы, а мы уверенны, что возникает их очень много, выбор запчасти, это лишь часть того, о чем заботяться люди, так же мы посоветуем Вам компании, которые качествено установят поломанную запасную. Вы можете позвонить нам, а можете написать. Всегда будем рады ответить на все Ваши вопросы.
+          </p>
+        </div> <!-- /.content -->
+        <div class="form-wrap r">
+          <form action="/feedback/" method="POST" class="feedback-form c">
+            <div class="form-row c">
+              <div class="form-col l">
+                <input type="text" name="name" placeholder="Ваше имя">
+                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="phone" placeholder="Телефон">
+              </div> <!-- /.form-col -->
+              <div class="form-col r">
+                <textarea name="body" placeholder="Сообщение"></textarea>
+              </div> <!-- /.form-col -->
+            </div> <!-- /.form-row -->
+
+            <div class="form-row">
+              <button type="submit">Отправить</button>
+            </div>
+          </form> <!-- /.feedback-form -->
+        </div> <!-- /.form-wrap -->
+      </div> <!-- /.feedback-wrap -->
+
+      <div class="page-content-wrap c">
+        <div class="column counter-block l c">
+          <div class="counter l">
+            <span>26</span>
+            <span>26</span>
+          </div> <!-- /.counter -->
+          <div class="content l">
+            <h3 class="mt0">Вы наш 626 посетитель</h3>
+            <div class="text">
+              Приходите еще
+            </div>
+          </div>
+        </div> <!-- /.column -->
+        <div class="column soc-block r">
+          <h3 class="mt0">Можете отметить это</h3>
+          <div class="soc-links-wrap">
+            <a href="" class="soc-link fb"></a>
+            <a href="" class="soc-link tw"></a>
+          </div> <!-- /.soc-links-wrap -->
+        </div> <!-- /.column -->
+      </div> <!-- /.page-content-wrap -->
 {% endblock content %}
 
 {% block extrajslibs %}

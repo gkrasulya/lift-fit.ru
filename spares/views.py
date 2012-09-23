@@ -1,10 +1,15 @@
 from urllib import urlencode
 
 from django.views.generic.list_detail import object_detail, object_list
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.core.urlresolvers import reverse
 
 from models import *
+
+def index(request):
+	return render(request, 'index.html', {
+		'slug': 'catalog'
+	})
 
 def producer_detail_redirect(request, id):
 	producer = get_object_or_404(Producer, pk=id)
