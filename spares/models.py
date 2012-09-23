@@ -11,6 +11,7 @@ from fields import AutoImageField
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ['fields.AutoImageField'])
 
+
 class Producer(models.Model):
 	"""Producer"""
 	title = models.CharField(_(u'Название'), max_length=255, blank=True)

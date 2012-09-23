@@ -9,8 +9,9 @@ import views
 urlpatterns = patterns('',
   url(r'^admin/pages/message/read-action/(?P<message_id>\d+)/$', views.read_action),
 
-  url(r'^$', views.page, { 'slug': 'index' }, name='pages-index'),
+  url(r'^$', views.index, name='pages-index'),
   url(r'^about/$', views.page, { 'slug': 'about' }, name='pages-about'),
+  url(r'^service/$', views.page, { 'slug': 'service' }, name='pages-service'),
   
   url(r'^feedback/$', views.feedback, name='pages-feedback'),
 	url(r'^feedback/thanks/$', views.feedback_thanks, name='pages-feedback-thanks'),
