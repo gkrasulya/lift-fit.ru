@@ -97,11 +97,11 @@
       <div class="page-content-wrap c">
         <div class="column counter-block l c">
           <div class="counter l">
-            <span>26</span>
-            <span>26</span>
+            <span>{{ visits_count_zfill|slice:':2' }}</span>
+            <span>{{ visits_count_zfill|slice:'2:' }}</span>
           </div> <!-- /.counter -->
           <div class="content l">
-            <h3 class="mt0">Вы наш 626 посетитель</h3>
+            <h3 class="mt0">Вы наш {{ visits_count }} посетитель</h3>
             <div class="text">
               Приходите еще
             </div>
