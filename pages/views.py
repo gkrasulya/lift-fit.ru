@@ -17,6 +17,8 @@ def page(request, slug):
 	template_name = 'page'
 	if slug == 'usloviya-dostavki':
 		template_name = 'delivery'
+	elif slug == 'index':
+		template_name = 'index'
 	
 	return render(request, 'pages/%s.html' % template_name, {
 		'page': page,

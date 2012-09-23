@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block meta_keywords %}{{ page.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ page.meta_description }}{% endblock meta_description %}
+
+{% block pagetitle %}{{ page.get_page_title }}{% endblock pagetitle %}
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block body_class %}main{% endblock %}
+
+{% block content %}
+	
+{% endblock content %}
+
+{% block extrajslibs %}
+	<script type="text/javascript" src="/static/js/libs/jquery.nivo.slider.pack.js"></script>
+{% endblock %}
