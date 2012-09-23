@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.conf import settings
 
+from imagekit.models import ImageModel
+from fields import AutoImageField
+
 class Page(models.Model):
 	title = models.CharField(_(u'Заголовок'), max_length=255)
 	text = models.TextField(_(u'Текст'), blank=True)
@@ -39,8 +42,9 @@ class Page(models.Model):
 		return self.page_title if self.page_title else self.title
 
 
-class Post(models.Model):
+class Post(ImageModel):
 	title = models.CharField(_(u'Заголовок'), max_length=255)
+	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
 	text = models.TextField(_(u'Текст'), blank=True)
 	text_html = models.TextField(_(u'Text html'), editable=False)
 	slug = models.SlugField(_(u'Слаг'), blank=True)
@@ -57,6 +61,10 @@ class Post(models.Model):
 	class Meta:
 		verbose_name = _(u'Новость')
 		verbose_name_plural = _(u'Новости')
+
+	class IKOptions:
+		spec_module  = 'pages.specs'
+		image_field = 'photo'
 		
 	def save(self, force_insert=False, force_update=False):
 		self.text_html = format_text(self.text)
