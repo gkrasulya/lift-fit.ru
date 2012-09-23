@@ -118,6 +118,15 @@ class Message(models.Model):
 	admin_files.short_description = _(u'Прикрепленные файлы')
 
 
+class Visit(models.Model):
+	ip = models.IPAddressField()
+	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
+
+	class Meta:
+		verbose_name = _(u'Визит')
+		verbose_name_plural = _(u'Визиты')
+		ordering = ['-id']
+
 class MessageFile(models.Model):
 	IMAGE_EXTENSIONS = ('jpg', 'jpeg', 'png', 'gif')
 
