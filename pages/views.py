@@ -62,6 +62,7 @@ def feedback(request):
 	return render(request, 'pages/feedback.html', {
 		'form': form,
 		'page': page,
+		'slug': 'feedback'
 	})
 
 def feedback_thanks(request):

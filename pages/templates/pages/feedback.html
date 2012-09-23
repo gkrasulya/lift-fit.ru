@@ -1,38 +1,54 @@
 {% extends 'base.html' %}
 
-{% block pagetitle %}{{ page.title }}{% endblock pagetitle %}
-{% block title %}{{ page.title }}{% endblock title %}
+{% block pagetitle %}Заказ оборудования{% endblock pagetitle %}
+{% block title %}Заказ оборудования{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrubms">
+		<a href="/">Главная</a> /
+		<a href="/feedback/">Заказ оборудования</a>
+	</div>
+{% endblock %}
 
 {% block content %}
-	<p>
-		{{ page.text_html|safe }}
-	</p>
-	
-	<form action="." method="POST" id="feedbackForm" enctype="multipart/form-data">
-		{% csrf_token %}
+	<div style="width: 70%;">
+        <p>
+          Если Вас интересуют какие-либо запасные части для лифтов и эскалаторов, звоните по телефону +7 (926) 872-00-11, присылайте Ваши заявки на адрес эл.почты info@lift-fit.ru или заполните форму заказа указанную ниже.
+        </p>
 
-		{% for f in form %}
-			<p>
-				{{ f.label_tag }}:<br/>
-				{{ f }}
-				{% if f.errors %}
-					<label generated="true" class="invalid">
-						{{ f.errors|join:"" }}
-					</label>
-				{% endif %}
-			</p>
-		{% endfor %}
-		<p>
-			<label>Дополнения</label>:<br/>
-			<span class="b-help-text">вы можете прикрепить файлы к сообщению</span><br/>
-			<input type="file" name="attachment1" />
-		</p>
-		<p class="a-submit">
-			<button type="submit">Отправить</button>
-		</p>
-	</form>
+        <form action="" class="order-form c" id="feedbackForm" enctype="multipart/form-data">
+			{% csrf_token %}
+
+          <div class="form-col l">
+            <div class="form-row">
+              <input type="text" name="name" id="name" maxlength="255" placeholder="Имя" />
+            </div>
+            <div class="form-row">
+		      <input type="text" name="email" id="email" maxlength="255" placeholder="Email" />
+            </div>
+            <div class="form-row">
+              <input type="text" name="phone" id="phone" maxlength="255" placeholder="Телефон" />
+            </div>
+
+            {% comment %}<div class="form-row">
+				<span class="form-help-text">вы можете прикрепить файлы к сообщению</span><br/>
+				<input type="file" name="attachment1" />
+            </div>{% endcomment %}
+
+            <div class="form-row">
+              <button type="submit">Отправить</button>
+            </div>
+          </div> <!-- /.form-col -->
+
+          <div class="form-col r">
+            <textarea name="body" id="body" placeholder="Сообщение"></textarea>
+          </div>
+        </form>
+	</div>
+
 {% endblock content %}
 
 {% block extrajslibs %}
-<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.placeholder.min.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
 {% endblock extrajslibs %}

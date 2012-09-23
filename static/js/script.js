@@ -5,9 +5,11 @@
 ;(function() {
 	var $slider = $('#slider');
 
-	$slider.nivoSlider({
-		directionNav: false
-	});
+	if ($().nivoSlider) {
+		$slider.nivoSlider({
+			directionNav: false
+		});
+	}
 
 	if(!Modernizr.input.placeholder) {
 		$('input[placeholder], textarea[placeholder]').each(function(){
@@ -71,7 +73,7 @@
 
 				if ($self.valid()) {
 					$.post('/feedback/', $self.serialize(), function(res) {
-						$self.html('<p class="b-message">Спасибо за обратную связь!</p>');
+						$self.html('<p class="form-message">Спасибо за обратную связь!</p>');
 					});
 				}
 				return false;

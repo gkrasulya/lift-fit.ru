@@ -23,8 +23,8 @@
 {% else %}
 	{% block breadcrumbs %}
 		<div class="breadcrubms">
-			<a href="">Главная</a> /
-			<a href="">{{ page.title }}</a>
+			<a href="/">Главная</a> /
+			<a href="/{{ slug }}/">{{ page.title }}</a>
 		</div>
 	{% endblock %}
 {% endif %}
