@@ -10,10 +10,12 @@ from django.conf import settings
 from forms import *
 from models import *
 
+VISITS_COUNT_METRIKA = 2147
+
 def index(request):
 	page = Page.objects.get(slug='index')
 	first_post = Post.objects.order_by('-date_added')[0]
-	visits_count = Visit.objects.count()
+	visits_count = Visit.objects.count() + VISITS_COUNT_METRIKA
 	
 	return render(request, 'pages/index.html', {
 		'page': page,
@@ -33,6 +35,8 @@ def page(request, slug):
 		template_name = 'delivery'
 	elif slug == 'service':
 		template_name = 'service'
+	elif slug == 'about':
+		template_name = 'about'
 	
 	return render(request, 'pages/%s.html' % template_name, {
 		'page': page,

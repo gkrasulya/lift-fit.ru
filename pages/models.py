@@ -44,7 +44,7 @@ class Page(models.Model):
 
 class Post(ImageModel):
 	title = models.CharField(_(u'Заголовок'), max_length=255)
-	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
+	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'), blank=True)
 	text = models.TextField(_(u'Текст'), blank=True)
 	text_html = models.TextField(_(u'Text html'), editable=False)
 	slug = models.SlugField(_(u'Слаг'), blank=True)
