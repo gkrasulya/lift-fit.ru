@@ -13,7 +13,10 @@
 {% block content %}
 	<div style="width: 70%;">
         <p>
-          Если Вас интересуют какие-либо запасные части для лифтов и эскалаторов, звоните по телефону +7 (926) 872-00-11, присылайте Ваши заявки на адрес эл.почты info@lift-fit.ru или заполните форму заказа указанную ниже.
+        Если Вас интересуют какие-либо запасные части для лифтов и эскалаторов, звоните по телефону
+        +7 (926) 872-00-11.
+        Присылайте Ваши заявки на адрес эл.почты <a href="info@lift-fit.ru">info@lift-fit.ru</a> или заполните форму заказа указанную
+        ниже.
         </p>
 
         <form action="" class="order-form c" id="feedbackForm" enctype="multipart/form-data">
@@ -30,10 +33,10 @@
               <input type="text" name="phone" id="phone" maxlength="255" placeholder="Телефон" />
             </div>
 
-            {% comment %}<div class="form-row">
-				<span class="form-help-text">вы можете прикрепить файлы к сообщению</span><br/>
-				<input type="file" name="attachment1" />
-            </div>{% endcomment %}
+            <div class="form-row">
+      				<span class="form-help-text">вы можете прикрепить файлы к сообщению</span><br/>
+      				<input type="file" name="attachment1" class="form-file-input" />
+            </div>
 
             <div class="form-row">
               <button type="submit">Отправить</button>
