@@ -47,7 +47,9 @@
         <div class="feature-item l news">
           <h3 class="title">Пресс-центр</h3>
           <div class="info c">
-            <img src="{{ first_post.thumb.url }}" alt="" class="l">
+            {% if first_post.photo %}
+              <img src="{{ first_post.thumb.url }}" alt="" class="l">
+            {% endif %}
             <span class="date">{{ first_post.date_added}} &#151;</span><br>
             <a href="{{ first_post.get_absolute_url }}">
               {{ first_post.title }}</a>
