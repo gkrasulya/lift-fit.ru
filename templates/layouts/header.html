@@ -18,6 +18,8 @@
     href="{% url pages-about %}" title="О нас">О компании</a>
   <a {% if slug == 'feedback' %}class="active"{% endif %}
     href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
+  <a {% if slug == 'service' %}class="active"{% endif %}
+    href="{% url pages-service %}" title="Сервис">Сервис</a>
   <a {% if slug == 'usloviya-dostavki' %}class="active"{% endif %}
     href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
 </nav>
@@ -28,7 +30,7 @@
       <a href="/proizvoditel/kone-2/" ><img src="/static/images/banner2.jpg" alt="" /></a>
       <a href="/proizvoditel/sematic-lm-liftmaterial-5/" ><img src="/static/images/banner3.jpg" alt="" /></a>
       <a href="/proizvoditel/schindler-4/" ><img src="/static/images/banner4.jpg" alt="" /></a>
-      <a href="/catalog/"><img src="/static/images/banner1.jpg" alt="" /></a>
+      <a href="/proizvoditel/otis-3/"><img src="/static/images/banner1.jpg" alt="" /></a>
     </div> <!-- /.nivoSlider -->
   </div> <!-- /.slider-wrap -->
 

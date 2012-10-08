@@ -138,7 +138,7 @@ body {
 }
   .page-nav a {
     color: #000000;
-    margin: 0 2%;
+    margin: 0 1%;
     text-decoration: underline;
   }
   .page-nav a:hover {
@@ -157,7 +157,7 @@ body {
   margin: 0px;
   padding: 0;
   position: relative;
-  text-align: justify;
+  text-align: center;
 }
   .category-nav:before, .category-nav:after {
     background: url(../images/category_nav_bg.png) 0 -124px no-repeat;
@@ -179,6 +179,7 @@ body {
     background: url(../images/category_nav_custom_bg.png) 0 0 no-repeat;
     height: 229px;
     line-height: 150%;
+    text-align: left;
     padding: 15px 0;
     width: 222px;
   }
