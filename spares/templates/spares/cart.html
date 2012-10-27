@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load spares_tags %}
+
+{% block meta_keywords %}Каталог{% endblock meta_keywords %}
+{% block meta_description %}Каталог{% endblock meta_description %}
+
+{% block pagetitle %}Корзина{% endblock pagetitle %}
+{% block title %}Корзина{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url order-cart %}">Заказ</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<form action="/order/form/" method="POST" class="order-form">
+		{% csrf_token %}
+		{% for spare in spare_list %}
+			<div class="form-row c js-product" data-id="{{ spare.id }}">
+				<div class="l">
+					<input type="hidden" name="products" value="{{ spare.id }}">
+					{{ spare.title }}
+				</div>
+				<div class="r js-quantity-wrap">
+					<a href="#" class="js-quantity-minus">-</a>
+					<input name="quantities" type="text" class="quantity-input js-quantity-input" value="1">
+					<a href="#" class="js-quantity-plus">+</a><br>
+					<a href="#" class="action js-remove-product">remove</a><br>
+					<a href="#" class="action js-remove-product">to favorites</a>
+				</div>
+			</div>
+		{% endfor %}
+		
+		<div class="form-row">
+			<button type="submit">дальше &rarr;</button>
+		</div>
+	</form>
+{% endblock content %}

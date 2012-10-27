@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load spares_tags %}
+
+{% block meta_keywords %}Редактирование профиля{% endblock meta_keywords %}
+{% block meta_description %}Редактирование профиля{% endblock meta_description %}
+
+{% block pagetitle %}Редактирование профиля{% endblock pagetitle %}
+{% block title %}Редактирование профиля{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url account-edit %}">Редактирование профиля</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+	{% include 'account/_account_menu.html' %}
+
+	<form action="{% url account-edit %}" method="POST">
+		{% csrf_token %}
+		
+		{% for f in form %}
+			<div class="form-row c">
+				{{ f.label_tag }}
+				{% if f.help_text %}
+					<div class="form-help-text">{{ f.help_text }}</div>
+				{% endif %}
+				{{ f }}
+				{% if f.errors %}
+					<div class="form-error">
+						{% for error in f.errors %}
+							{{ error }}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+		
+		<div class="form-row">
+			<button type="submit">Сохранить</button>
+		</div>
+	</form>
+{% endblock content %}

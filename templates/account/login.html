@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load spares_tags %}
+
+{% block meta_keywords %}Вход{% endblock meta_keywords %}
+{% block meta_description %}Вход{% endblock meta_description %}
+
+{% block pagetitle %}Вход{% endblock pagetitle %}
+{% block title %}Вход{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url account-login %}">Вход</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+
+	<form action="{% url account-login %}" method="POST">
+		{% csrf_token %}
+		
+		{% if form.non_field_errors %}
+			<div class="form-error">
+				{% for error in form.non_field_errors %}
+					{{ error }}
+				{% endfor %}
+			</div>
+		{% endif %}
+		
+		{% for f in form %}
+			<div class="form-row c">
+				{{ f.label_tag }}
+				{% if f.help_text %}
+					<div class="form-help-text">{{ f.help_text }}</div>
+				{% endif %}
+				{{ f }}
+				{% if f.errors %}
+					<div class="form-error">
+						{% for error in f.errors %}
+							{{ error }}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+		
+		<div class="form-row">
+			<button type="submit">Войти</button>
+		</div>
+	</form>
+{% endblock content %}

@@ -26,12 +26,27 @@
 		  <ul class="category-nav custom">
 		    {% for producer in producer_list %}
 		        <li>
-		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
-		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+		        	<a href="{{ producer.get_absolute_url }}{% if current_rank %}?rank={{ current_rank }}{% endif %}" title="{{ producer.title }}"
+		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}
+		            {% if current_producer.id == producer.id  %} selected{% endif %}">
 		          {{ producer.title }}</a>
 		        </li>
 		    {% endfor %}
 		  </ul>
+
+          <ul class="category-nav custom mt30">
+          	<li>
+          		<a href="?" class="png-bg {% if current_rank == None %}selected{% endif %}" title="Все">Все</a>
+          	</li>
+            {% for rank in ranks %}
+                <li>
+                  <a href="?rank={{ rank.0 }}" title="{{ rank.1 }}"
+                    class="png-bg {% if forloop.last %}last{% endif %}
+                	{% if current_rank != None and current_rank == rank.0  %} selected{% endif %}">
+                  {{ rank.1 }}</a>
+                </li>
+            {% endfor %}
+          </ul>
         </div> <!-- /.column -->
 
         <div class="column r wide">
@@ -53,6 +68,10 @@
 	    {% include 'spares/_spare.html' %}
 	{% endfor %}
   </div> <!-- /.product-list -->
+  
+  <script type="text/javascript">
+  	
+  </script>
 
 
 	{% comment %}

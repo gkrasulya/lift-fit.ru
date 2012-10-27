@@ -178,11 +178,14 @@ body {
   .category-nav.custom {
     background: url(../images/category_nav_custom_bg.png) 0 0 no-repeat;
     height: 229px;
-    line-height: 150%;
+    line-height: 130%;
     text-align: left;
     padding: 15px 0;
     width: 222px;
   }
+    .category-nav.custom a {
+      font-size: 14px;
+    }
   .category-nav.custom:after, .category-nav.custom:before {
     display: none;
   }
@@ -195,6 +198,10 @@ body {
   /*padding-left: 15px;*/
   text-decoration: underline;
 }
+  .category-nav a.selected {
+    font-weight: bold;
+    text-decoration: none;
+  }
   .category-nav a:hover {
     text-decoration: none;
   }
@@ -531,6 +538,30 @@ h3 {
   .product-item .but-btn:hover {
     opacity: 0.9;
   }
+
+.order-form {
+  width: 50%;
+}
+.order-form input[type=checkbox] {
+  width: auto;
+}
+.order-form .quantity-input {
+  width: 25px;
+}
+
+.form-help-text {
+  color: #999;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.form-error {
+  background: #fdd;
+  color: #900;
+  font-size: 12px;
+  margin-top: 5px;
+  padding: 2px 5px;
+}
 
 /* nivo slider */
 

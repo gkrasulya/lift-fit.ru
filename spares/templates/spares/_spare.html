@@ -1,12 +1,21 @@
-<div class="product-item l" id="spare{{ spare.id }}">
+<div class="product-item l js-product" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
   <div class="image">
 	<a href="{{ spare.photo.url }}" class="fancybox">
 		<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
 	</a>
   </div> <!-- /.image -->
-  <div class="price">500 p</div> <!-- /.price -->
+  <div class="price">{{ spare.price }} p.</div> <!-- /.price -->
   <div class="title">{{ spare.title }}</div>
   <div class="buy-wrap">
-    <a href="/feedback/" class="but-btn">Купить</a>
+    <a href="/feedback/" class="but-btn js-add-to-cart">{% if spare.in_cart %}Из корзины{% else %}В корзину{% endif %}</a>
   </div> <!-- /.buy-wrap -->
+  {% if not user.is_anonymous %}
+    <div class="favorites-wrap">
+      {% if spare.in_favorites %}
+        <span>В избранном</span>
+      {% else %}
+        <a href="#" class="action js-add-to-favorites" title="Добавить в избранное">Добавить в избранное</a>
+      {% endif %}
+    </div>
+  {% endif %}
 </div> <!-- /.product-item -->

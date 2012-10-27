@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load spares_tags %}
+
+{% block meta_keywords %}Каталог{% endblock meta_keywords %}
+{% block meta_description %}Каталог{% endblock meta_description %}
+
+{% block pagetitle %}Корзина{% endblock pagetitle %}
+{% block title %}Корзина{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url order-cart %}">Заказ</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="order-products-info">
+		{% for product in order_products %}
+			<div class="order-products-info-item">
+				<strong>{{ product.spare.title }}</strong>
+				{{ product.quantity }} шт.
+			</div>
+		{% endfor %}
+	</div>
+
+	<form action="/order/form/" method="POST" class="order-form">
+		{% csrf_token %}
+		<input type="hidden" name="_order">
+		
+		{% for product in order_products %}
+			<input type="hidden" name="products" value="{{ product.spare.id }}">
+			<input name="quantities" type="hidden" value="{{ product.quantity }}">
+		{% endfor %}
+		
+		{% for f in form %}
+			<div class="form-row c">
+				{{ f.label_tag }}
+				{% if f.help_text %}
+					<div class="form-help-text">{{ f.help_text }}</div>
+				{% endif %}
+				{{ f }}
+				{% if f.errors %}
+					<div class="form-error">
+						{% for error in f.errors %}
+							{{ error }}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		{% endfor %}
+		
+		<div class="form-row">
+			<button type="submit">Оформить заказ</button>
+		</div>
+	</form>
+{% endblock content %}

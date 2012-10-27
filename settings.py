@@ -120,10 +120,13 @@ INSTALLED_APPS = (
     'pymorphy',
     'spares',
     'pages',
+    'account',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'south',
+    # 'south',
     'debug_toolbar',
+
+    # 'registration',
 
     # don't forget to add the dependencies!
     # 'indexer',
@@ -141,6 +144,9 @@ ADMIN_TOOLS_MENU = 'dashboard.CustomMenu'
 FEEDBACK_SEND_EMAIL = not DEBUG
 FEEDBACK_EMAILS = ['gkrasulya@gmail.com', 'info@lift-fit.ru', 'entsodj@gmail.com']
 
+ORDER_SEND_EMAIL = not DEBUG
+ORDER_EMAILS = ['gkrasulya@gmail.com', 'info@lift-fit.ru', 'entsodj@gmail.com']
+
 EMAIL_HOST = 'localhost'
 EMAIL_POST = 1025
 EMAIL_HOST_USER = 'feedback@8hands.ru'
@@ -155,3 +161,5 @@ PYMORPHY_DICTS = {
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
 }
+
+LOGIN_URL = '/account/login/'

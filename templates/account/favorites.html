@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load spares_tags %}
+
+{% block meta_keywords %}Личный кабинет{% endblock meta_keywords %}
+{% block meta_description %}Личный кабинет{% endblock meta_description %}
+
+{% block pagetitle %}Личный кабинет{% endblock pagetitle %}
+{% block title %}Личный кабинет{% endblock title %}
+
+{% block breadcrumbs %}
+	<div class="breadcrumbs">
+		<a href="/">Главная</a> /
+		<a href="{% url account-account %}">Личный кабинет</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+	{% include 'account/_account_menu.html' %}
+	
+	{% if favorite_list %}
+		<table class="favorite-list">
+			{% for spare in favorite_list %}
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="order-list-message">
+			В избранном ничего нет
+		</div>
+	{% endif %}
+{% endblock content %}

@@ -17,17 +17,17 @@
 {% block content %}
       <div class="page-content-wrap">
         <div class="column l narrow">
-		  {% get_producer_list as producer_list %}
+    		  {% get_producer_list as producer_list %}
 
-		  <ul class="category-nav custom">
-		    {% for producer in producer_list %}
-		        <li>
-		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
-		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
-		          {{ producer.title }}</a>
-		        </li>
-		    {% endfor %}
-		  </ul>
+    		  <ul class="category-nav custom">
+    		    {% for producer in producer_list %}
+    		        <li>
+    		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+    		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+    		          {{ producer.title }}</a>
+    		        </li>
+    		    {% endfor %}
+    		  </ul>
         </div> <!-- /.column -->
 
         <div class="column r wide">

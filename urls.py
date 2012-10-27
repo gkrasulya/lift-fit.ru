@@ -8,6 +8,7 @@ from django.conf import settings
 
 import spares.views
 import pages.views
+import account.views
 
 urlpatterns = patterns('',
 	# Example:
@@ -18,6 +19,18 @@ urlpatterns = patterns('',
 	url(r'^catalog/$', spares.views.index, name='spares-index'),
 	url(r'^proizvoditel/(?P<slug>[-\w\d_]+)-(?P<id>\d+)/$', spares.views.producer_detail, name='spares-producer-detail'),
 	url(r'^(proizvoditel|producer)/(None\-)?(?P<id>\d+)/$', spares.views.producer_detail_redirect),
+	url(r'^manage-cart/$', spares.views.manage_cart),
+	url(r'^manage-favorites/$', spares.views.manage_favorites),
+	url(r'^get-cart/$', spares.views.get_cart),
+	url(r'^order/cart/$', spares.views.cart, name='order-cart'),
+	url(r'^order/form/$', spares.views.order, name='order-form'),
+
+	url(r'^account/register/$', account.views.register, name='account-register'),
+	url(r'^account/logout/$', account.views.logout, name='account-logout'),
+	url(r'^account/login/$', account.views.login, name='account-login'),
+	url(r'^account/edit/$', account.views.edit, name='account-edit'),
+	url(r'^account/favorites/$', account.views.favorites, name='account-favorites'),
+	url(r'^account/$', account.views.account, name='account-account'),
 
 	url(r'^posts/?$', pages.views.post_list, name='pages-post-list'),
 	url(r'^posts/(?P<slug>[-\w\d_]+)-(?P<id>\d+)/$', pages.views.post_detail, name='pages-post-detail'),

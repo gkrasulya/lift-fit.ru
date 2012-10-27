@@ -3,6 +3,8 @@ import re
 
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from imagekit.models import ImageModel
@@ -57,7 +59,22 @@ class Spare(ImageModel):
 		(u'escalator', u'Эскалатор'),
 	)
 
+	RANKS = (
+		(0,  u'Станция управленя'),
+		(1,  u'Привод лифта'),
+		(2,  u'Шахта лифта'),
+		(3,  u'Кабина лифта'),
+		(4,  u'Электрооборудование'),
+		(5,  u'Гидравлика'),
+		(6,  u'Привод эскалатора'),
+		(7,  u'Балюстрада'),
+		(8,  u'Входная площадка'),
+		(9,  u'Ступени'),
+		(10, u'Прочее'),
+	)
+
 	title = models.CharField(_(u'Название'), max_length=255)
+	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, null=False)
 	description = models.TextField(_(u'Описание'), blank=True, default='', editable=False)
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)
 	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
@@ -68,6 +85,11 @@ class Spare(ImageModel):
 
 	category = models.CharField(_(u'Категория'), max_length=50,
 								choices=CATEGORIES, blank=True, null=True)
+	rank = models.CharField(_(u'Ранжировка'), max_length=50,
+								choices=RANKS, blank=True, default='', db_column='type_')
+	user_list = models.ManyToManyField(User, related_name='favorite_list')
+
+	in_cart = False
 	
 	class Meta:
 		ordering = ['title']
@@ -92,6 +114,65 @@ class Spare(ImageModel):
 		return '<img src="%s" />' % self.thumb.url
 	admin_photo.short_description = _(u'Фото')
 	admin_photo.allow_tags = True
+
+
+class Order(models.Model):
+	STATUSES = (
+		(0, u'Заказ сформирован и отправлен поставщику'),
+		(1, u'Заказ упакован и готов к отправке'),
+		(2, u'Заказ отправлен на транзитный склад в Европе'),
+		(3, u'Заказ поступил на транзитный склад'),
+		(4, u'Заказ отправлен в Россию'),
+		(5, u'Заказ поступил на таможню и проходит таможенную очистку'),
+		(6, u'Заказ поступил на склад в Москве'),
+		(7, u'Заказ отправлен в адрес Заказчика'),
+		(8, u'Заказ получен Заказчиком'),
+	)
+
+	name = models.CharField(_(u'Имя'), max_length=255, help_text=u'ФИО полностью')
+	email = models.EmailField(_(u'E-mail'), max_length=255, blank=False)
+	phone = models.CharField(_(u'Телефон'), max_length=255, blank=False)
+	address = models.TextField(_(u'Адре'), blank=False)
+	body = models.TextField(_(u'Детали'))
+	read = models.BooleanField(_(u'"прочитано"'), default=False)
+	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
+	status = models.CharField(u'Статус', choices=STATUSES, max_length=255)
+	coupon = models.CharField(u'Купон', max_length=50, blank=True, default='')
+
+	total_sum = models.IntegerField(u'Сумма', default=0)
+
+	user = models.ForeignKey(User, related_name='order_list')
+
+	class Meta:
+		verbose_name = _(u'Заказ')
+		verbose_name_plural = _(u'Заказы')
+		ordering = ['-date_added', '-id']
+
+	def get_body_html(self):
+		return self.body.replace('\n', '<br>')
+
+	def get_user(self):
+		try:
+			return self.user
+		except DoesNotExist:
+			return None
+
+	def __unicode__(self):
+		return '%s, %s' % (
+			self.date_added.strftime('%Y.%m.%d'),
+			self.name
+		)
+
+	def read_helper(self):
+		return '<a href="" class="read-action" id="readAction%s">%s</a>' % (
+			self.id, u'Отметить непрочитанным' if self.read else u'Отметить прочитанным')
+	read_helper.short_description = u'Действия'
+	read_helper.allow_tags = True
+
+
+class Coupon(models.Model):
+	coupon = models.CharField(_(u'Купон'), max_length=50, blank=False)
+	activated = models.BooleanField(_(u'Активирован'), default=False)
 
 
 def format_text(text=None):
