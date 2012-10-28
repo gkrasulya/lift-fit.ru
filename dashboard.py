@@ -61,7 +61,7 @@ class CustomIndexDashboard(Dashboard):
 
         self.children.append(PagesInfoModule(
             title_url='',
-            content='asdasdasds',
+            content='',
         ))
 
         self.children.append(modules.ModelList(

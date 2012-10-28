@@ -19,8 +19,15 @@
 	{% include 'account/_account_menu.html' %}
 	
 	{% if favorite_list %}
-		<table class="favorite-list">
+		<div class="favorite-list">
 			{% for spare in favorite_list %}
+				<div class="favorite-item js-product" data-id="{{ spare.id }}" data-in-favorites="1" data-in-cart="0">
+					<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
+					{{ spare.title }}
+					
+					<a href="#" class="action js-add-to-favorites">удалить</a>
+					<a href="#" class="action js-add-to-cart">переместить в корзину</a>
+				</div>
 			{% endfor %}
 		</div>
 	{% else %}

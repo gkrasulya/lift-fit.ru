@@ -90,6 +90,7 @@ class Spare(ImageModel):
 	user_list = models.ManyToManyField(User, related_name='favorite_list')
 
 	in_cart = False
+	in_favorites = False
 	
 	class Meta:
 		ordering = ['title']

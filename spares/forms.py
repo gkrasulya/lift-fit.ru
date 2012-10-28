@@ -18,7 +18,7 @@ EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 class OrderForm(forms.ModelForm):
 	class Meta:
 		model = Order
-		exclude = ('date_added', 'read', 'status', 'body')
+		exclude = ('date_added', 'read', 'status', 'body', 'total_sum')
 
 	def clean_coupon(self):
 		data = self.cleaned_data['coupon']

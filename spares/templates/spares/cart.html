@@ -19,8 +19,9 @@
 	<form action="/order/form/" method="POST" class="order-form">
 		{% csrf_token %}
 		{% for spare in spare_list %}
-			<div class="form-row c js-product" data-id="{{ spare.id }}">
+			<div class="form-row c js-product" data-id="{{ spare.id }}" data-in-cart="1">
 				<div class="l">
+					<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
 					<input type="hidden" name="products" value="{{ spare.id }}">
 					{{ spare.title }}
 				</div>
@@ -28,8 +29,8 @@
 					<a href="#" class="js-quantity-minus">-</a>
 					<input name="quantities" type="text" class="quantity-input js-quantity-input" value="1">
 					<a href="#" class="js-quantity-plus">+</a><br>
-					<a href="#" class="action js-remove-product">remove</a><br>
-					<a href="#" class="action js-remove-product">to favorites</a>
+					<a href="#" class="action js-remove-product">убрать</a><br>
+					<a href="#" class="action js-add-to-favorites" data-remove="1">переместить в избранное</a>
 				</div>
 			</div>
 		{% endfor %}

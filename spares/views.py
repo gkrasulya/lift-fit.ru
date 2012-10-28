@@ -46,12 +46,22 @@ def manage_favorites(request):
 		return response
 
 	spare = Spare.objects.filter(id=id)[0]
-	request.user.favorite_list.add(spare)
+	if add == 'true':
+		request.user.favorite_list.add(spare)
+	else:
+		request.user.favorite_list.remove(spare)
 	request.user.save()
 
-	return HttpResponse(json.dumps({
+	response = HttpResponse(json.dumps({
 		'ok': True	
 	}))
+
+	if add == 'true':
+		product_ids = _get_product_ids_from_cookies(request, 'cart')
+		if id in product_ids:
+			product_ids.remove(id)
+			response.set_cookie('cart_ids', json.dumps(product_ids), max_age=86400*7, path='/')
+	return response
 
 
 def _manage_products(request, name):
@@ -63,8 +73,13 @@ def _manage_products(request, name):
 		return response
 	id = int(id)
 
+	if not request.user.is_anonymous() and add == 'true':
+		spare = Spare.objects.filter(id=id)[0]
+		request.user.favorite_list.remove(spare)
+		request.user.save()
+
 	product_ids = _get_product_ids_from_cookies(request, name)
-	if add and id not in product_ids:
+	if add == 'true' and id not in product_ids:
 		product_ids.append(id)
 	elif id in product_ids:
 		product_ids.remove(id)
@@ -77,7 +92,6 @@ def producer_detail_redirect(request, id):
 	producer = get_object_or_404(Producer, pk=id)
 	query = urlencode(request.GET)
 	redirect_url = '{0}?{1}'.format(reverse('spares-producer-detail', args=[producer.slug, producer.id]), query)
-	# raise Exception, redirect_url
 	return redirect(redirect_url, permanent=True)
 
 def producer_detail(request, slug, id):
@@ -96,7 +110,12 @@ def producer_detail(request, slug, id):
 		for spare in spare_list:
 			if spare.id in cart_ids:
 				spare.in_cart = True
-	# if 
+
+	if not request.user.is_anonymous():
+		favorite_list = request.user.favorite_list.all()
+		for spare in spare_list:
+			if spare in favorite_list:
+				spare.in_favorites = True
 
 	extra_context = {
 		'spare_list': spare_list,
@@ -129,7 +148,7 @@ def order(request):
 	total_sum = 0
 	for i, spare in enumerate(spare_list):
 		body.append(u'%s - %s\n шт.' % (spare.title, quantities[i]))
-		total_sum += spare.price
+		total_sum += spare.price * quantities[i]
 		order_products.append({
 			'spare': spare,
 			'quantity': quantities[i]
@@ -141,23 +160,30 @@ def order(request):
 		data['body'] = body
 		data['total_sum'] = total_sum
 		if not request.user.is_anonymous():
-			data['user'] = request.user
+			data['user'] = request.user.id
 
 	if request.user.is_anonymous():
 		form = OrderForm(data)
 	else:
-		form = OrderForm(data, instance=request.user.profile)
+		try:
+			profile = request.user.profile
+			form = OrderForm(data, instance=profile)
+		except:
+			form = OrderForm(data)
 
 	if is_order and form.is_valid():
+		form.save()
 		response = render(request, 'spares/success.html', {
 
 		})
 		response.set_cookie('cart_ids', json.dumps([]))
+		return response
 	else:
 		return render(request, 'spares/form.html', {
 			'order_products': order_products,
 			'form': form,
 			'is_order': is_order,
+			'total_sum': total_sum
 		})
 
 def get_cart(request):

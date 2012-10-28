@@ -19,6 +19,12 @@ class ProducerAdmin(admin.ModelAdmin):
 class SpareAdmin(admin.ModelAdmin):
     list_display = ('admin_photo', 'title', 'producer')
     list_filter = ('producer',)
+
+class OrderAdmin(admin.ModelAdmin):
+    # list_display = ('admin_photo', 'title', 'producer')
+    # list_filter = ('producer',)
+    pass
     
 admin.site.register(Producer, ProducerAdmin)
 admin.site.register(Spare, SpareAdmin)
+admin.site.register(Order, OrderAdmin)
