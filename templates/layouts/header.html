@@ -26,6 +26,15 @@
     href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
 </nav>
 
+<div>
+  {% if not request.user.is_anonymous %}
+    <a href="{% url account-account %}">Личный кабинет</a>
+    <a href="{% url account-logout %}">Выход</a>
+  {% else %}
+    <a href="{% url account-login %}">Вход</a>
+  {% endif %}
+</div>
+
 {% if main %}
   <div class="slider-wrap">
     <div id="slider" class="nivoSlider">

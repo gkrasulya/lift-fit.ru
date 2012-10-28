@@ -90,7 +90,12 @@
 		var $link = $(this),
 			$product = $link.parents('.js-product'),
 			id = $product.data('id'),
-			inCart = $product.data('in-cart') == '1';
+			inCart = $product.data('in-cart') == '1',
+			inFavorites = $product.data('in-favorites') == '1';
+
+		if (inFavorites && ! confirm('Вы уверены?')) {
+			return false;
+		}
 
 		manageProduct(id, {
 			inCart: inCart,
@@ -98,8 +103,17 @@
 
 			success: function(res) {
 				if (res && res.ok) {
-					$product.data('in-cart', inCart ? '0' : '1');
-					$link.html(inCart ? 'В корзину' : 'Из корзины');
+					if (inCart) {
+						$product.data('in-cart', inCart ? '0' : '1');
+						$link.html(inCart ? 'В корзину' : 'Из корзины');						
+					} else {
+						if (inFavorites) {
+							$product.fadeOut('fast', function() {
+								$product.remove();
+							});
+						}
+						$link.replaceWith($('<a href="/order/cart/">В корзине</a>'));
+					}
 
 					refreshCart();
 				} else {
@@ -115,14 +129,26 @@
 		var $link = $(this),
 			$product = $link.parents('.js-product'),
 			id = $product.data('id'),
-			inCart = $product.data('in-cart') == '1';			
+			inFavorites = $product.data('in-favorites') == '1',
+			inCart = $product.data('in-cart') == '1';
+
+		if ((inFavorites || $link.data('remove')) && ! confirm('Вы уверены?')) {
+			return false;
+		}
 
 		manageProduct(id, {
 			url: '/manage-favorites/',
+			inCart: inFavorites,
 
 			success: function(res) {
 				if (res && res.ok) {
-					$link.remove();
+					if (inFavorites || $link.data('remove')) {
+						$product.fadeOut('fast', function() {
+							$product.remove();
+						});
+					} else {
+						$link.replaceWith($('<a href="/account/favorites/">В избранном</a>'));
+					}
 				} else {
 					alert('Ошибка');
 				}
@@ -191,8 +217,10 @@
 	$('.js-remove-product').bind('click', function() {
 		if (confirm('Sure?')) {
 			var $product = $(this).parents('.js-product');
-			manageCart($product.data('id'));
-			$product.remove();
+			manageProduct($product.data('id'));
+			$product.fadeOut('fast', function() {
+				$product.remove();
+			});
 		}
 
 		return false;

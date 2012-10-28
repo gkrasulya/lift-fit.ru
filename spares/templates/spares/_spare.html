@@ -7,12 +7,16 @@
   <div class="price">{{ spare.price }} p.</div> <!-- /.price -->
   <div class="title">{{ spare.title }}</div>
   <div class="buy-wrap">
-    <a href="/feedback/" class="but-btn js-add-to-cart">{% if spare.in_cart %}Из корзины{% else %}В корзину{% endif %}</a>
+    {% if spare.in_cart %}
+      <a href="/order/cart/">В корзине</a>
+    {% else %}
+      <a href="/feedback/" class="but-btn js-add-to-cart">Добавить в корзину</a>
+    {% endif %}
   </div> <!-- /.buy-wrap -->
   {% if not user.is_anonymous %}
     <div class="favorites-wrap">
       {% if spare.in_favorites %}
-        <span>В избранном</span>
+        <a href="/account/favorites/">В избранном</a>
       {% else %}
         <a href="#" class="action js-add-to-favorites" title="Добавить в избранное">Добавить в избранное</a>
       {% endif %}
