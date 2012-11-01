@@ -2,14 +2,22 @@
 
 <a href="/" class="header-logo l" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
 <div class="r header-contacts">
+  <div class="header-contacts-auth">
+    {% if not request.user.is_anonymous %}
+      <a href="{% url account-account %}">Личный кабинет</a>
+      <a class="ml5" href="{% url account-logout %}">Выход</a>
+    {% else %}
+      <a href="{% url account-login %}">Вход</a>
+      <a class="ml5" href="{% url account-register %}">Регистрация</a>
+    {% endif %}
+  </div> <!-- /.header-contacts-auth -->
   <div class="title">контактная информация</div>
   <div class="phone">(926) 8720011</div>
   <div class="email">
     <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
   </div>
+  <div class="page-header-cart" id="headerCart"></div>
 </div> <!-- /.header-contacts -->
-
-<div class="page-header-cart" id="headerCart"></div>
 
 <div class="c"></div>
 
@@ -27,13 +35,6 @@
 </nav>
 
 <div>
-  {% if not request.user.is_anonymous %}
-    <a href="{% url account-account %}">Личный кабинет</a>
-    <a href="{% url account-logout %}">Выход</a>
-  {% else %}
-    <a href="{% url account-login %}">Вход</a>
-    <a href="{% url account-register %}">Регистрация</a>
-  {% endif %}
 </div>
 
 {% if main %}

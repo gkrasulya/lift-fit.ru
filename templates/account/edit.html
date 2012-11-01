@@ -18,7 +18,7 @@
 {% block content %}
 	{% include 'account/_account_menu.html' %}
 
-	<form action="{% url account-edit %}" method="POST">
+	<form action="{% url account-edit %}" method="POST" class="custom-form">
 		{% csrf_token %}
 		
 		{% for f in form %}

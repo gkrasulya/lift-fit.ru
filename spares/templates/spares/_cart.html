@@ -1,7 +1,7 @@
 {% if total_count %}
-	<div class="total-count">Total count: {{ total_count }}</div>
-	<div class="total-price">Total price: {{ total_price }}</div>
-	<a href="/order/cart">В корзину</a>
+	<div class="total-count">Всего товаров: <strong>{{ total_count }}</strong></div>
+	<div class="total-price">на сумму: <strong>{{ total_price }}</strong> руб.</div>
+	<a href="/order/cart">перейти в корзину</a>
 {% else %}
 	<div class="text">Корзина пуста</div>
 {% endif %}

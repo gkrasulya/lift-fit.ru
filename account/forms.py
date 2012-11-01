@@ -15,7 +15,7 @@ from models import *
 
 class RegisterForm(forms.Form):
 	email = forms.EmailField(_(u'Email'), required=True)
-	password = forms.CharField(_(u'Пароль'), required=True, widget=forms.PasswordInput)
+	password = forms.CharField(_(u'Пароль'), label=u'Пароль', required=True, widget=forms.PasswordInput)
 
 	def clean(self):
 		data = super(RegisterForm, self).clean()
