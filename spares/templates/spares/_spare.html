@@ -6,7 +6,7 @@
   </div> <!-- /.image -->
   <div class="price">{{ spare.price }} p.</div> <!-- /.price -->
   <div class="title">{{ spare.title }}</div>
-  <div class="buy-wrap">
+  <div class="buy-wrap" style="font-size: 12px;">
     {% if spare.in_cart %}
       <a href="/order/cart/">В корзине</a>
     {% else %}
@@ -14,7 +14,7 @@
     {% endif %}
   </div> <!-- /.buy-wrap -->
   {% if not user.is_anonymous %}
-    <div class="favorites-wrap">
+    <div class="favorites-wrap mt5" style="font-size: 12px;">
       {% if spare.in_favorites %}
         <a href="/account/favorites/">В избранном</a>
       {% else %}

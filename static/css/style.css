@@ -23,7 +23,7 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 */
-a { color: #275f88; }
+a { color: #178c90; }
 a:visited {  }
 a:hover { color: #33c1f5; }
 a:focus { outline: thin dotted; }
@@ -101,6 +101,12 @@ body {
 .page-header {
   padding-top: 38px;
 }
+  .page-header-cart {
+    margin-top: 20px;
+    text-align: right;
+    position: absolute;
+    width: 100%;
+  }
 
 .header-logo {
   background: url(../images/logo.png) 0 0 no-repeat;
@@ -133,7 +139,7 @@ body {
 
 .page-nav {
   font: 14px "Trebuchet MS";
-  margin-top: -50px;
+  margin-top: -80px;
   text-align: center;
 }
   .page-nav a {
@@ -288,6 +294,11 @@ button[type=submit] {
   height: 95px;
   padding-top: 4px;
   width: 95%;
+}
+
+.order-list-message {
+  margin-top: 30px;
+  font-size: 14px;
 }
 
 .order-form input, .order-form textarea {
@@ -656,13 +667,22 @@ h3 {
   background-position: 0 0;
 }
 
+.account-menu {
+  font-size: 12px;
+}
+  .account-menu a {
+    margin: 0 3px;
+  }
+
 /* ==|== non-semantic helper classes ======================================== */
 
+.ml5 { margin-left: 5px !important; }
 .ml10 { margin-left: 10px !important; }
 .ml15 { margin-left: 15px !important; }
 .ml20 { margin-left: 20px !important; }
 
 .mt0 { margin-top: 0 !important; }
+.mt5 { margin-top: 5px !important; }
 .mt10 { margin-top: 10px !important; }
 .mt15 { margin-top: 15px !important; }
 .mt20 { margin-top: 20px !important; }
@@ -700,6 +720,58 @@ h3 {
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+}
+
+.custom-form .form-row {
+  margin-top: 15px;
+}
+.custom-form label {
+  font-size: 14px;
+  display: block;
+}
+.custom-form input[type=text],
+.custom-form input[type=password] {
+  margin-top: 3px;
+  width: 200px;
+}
+.custom-form textarea {
+  height: 100px;
+  padding: 5px;
+  width: 400px;
+}
+
+.cart-hr {
+  background: #666;
+  margin: 20px 0;
+  height: 1px;
+}
+
+.total-row {
+  font-size: 21px;
+}
+.total-row-text {
+  color: #178c90;
+}
+
+.cart-table {
+  width: 960px;
+}
+.cart-table th {
+  color: #999;
+  font-size: 13px;
+  font-weight: normal;
+  padding-bottom: 15px;
+  text-align: left;
+}
+.cart-table td {
+  padding-top: 15px;
+}
+.cart-table .actions a {
+  font-size: 12px;
+}
+.quantity-wrap  a {
+  font-weight: bold;
+  text-decoration: none;
 }
 
 /* ==|== media queries ====================================================== */

@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load spares_tags %}
 
-{% block meta_keywords %}Каталог{% endblock meta_keywords %}
-{% block meta_description %}Каталог{% endblock meta_description %}
+{% block meta_keywords %}Оформление заказа{% endblock meta_keywords %}
+{% block meta_description %}Оформление заказа{% endblock meta_description %}
 
-{% block pagetitle %}Корзина{% endblock pagetitle %}
-{% block title %}Корзина{% endblock title %}
+{% block pagetitle %}Оформление заказ{% endblock pagetitle %}
+{% block title %}Оформление заказ{% endblock title %}
 
 {% block breadcrumbs %}
 	<div class="breadcrumbs">
@@ -23,10 +23,12 @@
 				{{ product.quantity }} шт.
 			</div>
 		{% endfor %}
-		{{ total_sum }} руб.
+		<div class="total-row mt15">
+			Итого <span class="total-row-text">{{ total_sum }} руб.</span>
+		</div>
 	</div>
 
-	<form action="/order/form/" method="POST" class="order-form">
+	<form action="/order/form/" method="POST" class="order-form custom-form">
 		{% csrf_token %}
 		<input type="hidden" name="_order">
 		
