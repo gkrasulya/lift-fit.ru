@@ -42,11 +42,12 @@ def send_order(order, **kwargs):
 	if ORDER_SEND_EMAIL:
 		email_from = EMAIL_HOST_USER
 
-		body = u'%s\n\nИмя: %s\n\nEmail: %s\n\nТелефон: %s' % (
+		body = u'%s\n\nИмя: %s\nEmail: %s\nТелефон: %s\nКупон: %s' % (
 			order.body,
 			order.name,
 			order.email or u'нет',
 			order.phone or u'нет',
+			order.coupon or u'нет',
 		)
 
 		if message.email:

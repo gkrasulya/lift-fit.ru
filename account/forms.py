@@ -16,6 +16,7 @@ from models import *
 class RegisterForm(forms.Form):
 	email = forms.EmailField(_(u'Email'), required=True)
 	password = forms.CharField(_(u'Пароль'), label=u'Пароль', required=True, widget=forms.PasswordInput)
+	name = forms.CharField(_(u'Имя'), label=u'Имя', required=False)
 
 	def clean(self):
 		data = super(RegisterForm, self).clean()
@@ -25,6 +26,14 @@ class RegisterForm(forms.Form):
 			raise forms.ValidationError(u'Пользователь с таким email уже зарегистрирован')
 		except IndexError:
 			pass
+
+		return data
+
+	def clean_name(self):
+		data = self.data
+
+		if data['name'] != '':
+			raise forms.ValidationError(u'Неправильное значение')
 
 		return data
 

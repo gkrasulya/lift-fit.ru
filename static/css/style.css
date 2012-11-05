@@ -182,13 +182,29 @@ body {
   }
 
   .category-nav.custom {
-    background: url(../images/category_nav_custom_bg.png) 0 0 no-repeat;
-    height: 229px;
+    background: url(../images/custom_menu.jpg) 0 0 no-repeat;
+    height: auto;
     line-height: 130%;
     text-align: left;
     padding: 15px 0;
     width: 222px;
   }
+    .category-nav strong {
+      font-size: 14px;
+      font-weight: normal;
+      display: block;
+      margin-left: 20px;
+    }
+    .category-nav.custom > ul {
+      background: url(../images/custom_menu_inner.jpg) 0 0 repeat-y;
+      list-style: none;
+      padding: 10px 0;
+      margin: -10px 0 -10px 7px;
+      width: 210px;
+    }
+    .category-nav.custom li li a {
+      margin-left: 0;
+    }
     .category-nav.custom a {
       font-size: 14px;
     }
@@ -224,9 +240,9 @@ body {
     margin-top: 60px;
   }
   .about .page-content {
-    background: url(../images/about_content.jpg) 100% 0 no-repeat;
-    margin-top: 40px;
+    background: url(../images/about_content.jpg) 80% 0 no-repeat;
     padding-top: 30px;
+    margin-top: 52px;
     width: 60%;
     padding-right: 30%;
   }
@@ -306,6 +322,7 @@ button[type=submit] {
 }
 .order-form .form-row {
   margin-bottom: 15px;
+  position: relative;
 }
 .order-form textarea {
   height: 108px;
@@ -537,6 +554,7 @@ h3 {
     margin-top: 9px;
     padding: 0 21px;
     text-decoration: none;
+    white-space: nowrap;
     zoom: 1;
 
     background-color: #bde6e5;
@@ -724,6 +742,7 @@ h3 {
 
 .custom-form .form-row {
   margin-top: 15px;
+  position: relative;
 }
 .custom-form label {
   font-size: 14px;

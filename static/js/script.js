@@ -254,4 +254,24 @@
 		refreshCart();
 	});
 
+
+	var $nameInput = $('#registerForm input[name=name]');
+
+	if ($nameInput.length) {
+		var $nameRow = $nameInput.parents('.form-row'),
+			$overlay = $('<div id=overlay>');
+
+		$nameInput.attr('tabIndex', 99);
+
+		$overlay.css({
+			width: $nameRow.width(),
+			height: $nameRow.height(),
+			background: '#fff',
+			position: 'absolute',
+			left: 0,
+			top: 0
+		});
+		$overlay.appendTo($nameRow);
+	}
+
 })();
