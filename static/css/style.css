@@ -263,7 +263,7 @@ html, body {
 
 .page-footer {
   background: url(../images/footer_bg.png);
-  color: #366b9f;
+  color: #444;
   font: 14px "Trebuchet MS";
   height: 90px;
   padding-top: 50px;
@@ -321,6 +321,18 @@ button[type=submit] {
   height: 95px;
   padding-top: 4px;
   width: 95%;
+}
+
+.order-list {
+  font-size: 12px;
+}
+.order-list td {
+  border-top: 1px solid #e6e6e6;
+  padding: 0 5px 15px;
+  vertical-align: top;
+}
+.order-list tr:nth-child(odd) td {
+  background-color: #f3f6ff;
 }
 
 .order-list-message {
@@ -709,6 +721,11 @@ h3 {
 }
   .account-menu a {
     margin: 0 3px;
+  }
+  .account-menu a.selected {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
   }
 
 /* ==|== non-semantic helper classes ======================================== */

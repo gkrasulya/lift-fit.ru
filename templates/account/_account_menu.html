@@ -1,6 +1,6 @@
 <div class="account-menu">
-	<a href="{% url account-account %}">Заказы</a> |
-	<a href="{% url account-favorites %}">Избранное</a> |
-	<a href="{% url account-edit %}">Редактирование профиля</a> |
-	<a href="{% url account-login %}">Выход</a>
+	<a {% if current_tab == 'account' %}class="selected"{% endif %} href="{% url account-account %}">Заказы</a> |
+	<a {% if current_tab == 'favorites' %}class="selected"{% endif %} href="{% url account-favorites %}">Избранное</a> |
+	<a {% if current_tab == 'edit' %}class="selected"{% endif %} href="{% url account-edit %}">Редактирование профиля</a> |
+	<a  href="{% url account-login %}">Выход</a>
 </div>

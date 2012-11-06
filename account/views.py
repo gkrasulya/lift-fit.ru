@@ -52,7 +52,8 @@ def account(request):
 	order_list = request.user.order_list.order_by('-id').all()
 
 	return render(request, 'account/account.html', {
-		'order_list': order_list
+		'order_list': order_list,
+		'current_tab': 'account',
 	})
 
 @login_required
@@ -60,12 +61,17 @@ def favorites(request):
 	favorite_list = request.user.favorite_list.all()
 
 	return render(request, 'account/favorites.html', {
-		'favorite_list': favorite_list
+		'favorite_list': favorite_list,
+		'current_tab': 'favorites',
 	})
 
 @login_required
 def edit(request):
-	profile = request.user.profile
+	try:
+		profile = request.user.profile
+	except:
+		profile = UserProfile.objects.create(user=request.user)
+
 	form = EditForm(request.POST if request.method == 'POST' else None, instance=profile)
 
 	if request.method == 'POST':
@@ -73,5 +79,6 @@ def edit(request):
 			form.save()
 
 	return render(request, 'account/edit.html', {
-		'form': form
+		'form': form,
+		'current_tab': 'edit',
 	})

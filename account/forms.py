@@ -50,6 +50,8 @@ class RegisterForm(forms.Form):
 		user = User(email=data['email'], username=data['email'])
 		user.set_password(data['password'])
 		user.save()
+		profile = UserProfile(user=user)
+		profile.save()
 
 class AuthForm(forms.Form):
 	email = forms.EmailField(label=_(u'Email'), required=True)
