@@ -19,15 +19,17 @@
         <div class="column l narrow">
     		  {% get_producer_list as producer_list %}
 
-    		  <ul class="category-nav custom">
-    		    {% for producer in producer_list %}
-    		        <li>
-    		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
-    		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
-    		          {{ producer.title }}</a>
-    		        </li>
-    		    {% endfor %}
-    		  </ul>
+    		  <div class="category-nav custom">
+            <ul class="category-nav-inner">
+      		    {% for producer in producer_list %}
+      		        <li>
+      		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+      		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+      		          {{ producer.title }}</a>
+      		        </li>
+      		    {% endfor %}
+            </ul>   <!-- /.category-nav-inner -->
+    		  </div>
         </div> <!-- /.column -->
 
         <div class="column r wide">

@@ -15,6 +15,7 @@
 
       <div class="features-wrap c">
         <div class="feature-item l first">
+          <a href="{% url spares-index %}" class="image-link"></a>
           <h3 class="title">Запасные части</h3>
           <div class="content">
             <a href="{% url spares-index %}">Запчасти</a> в виде
@@ -28,6 +29,7 @@
         </div> <!-- /.feature-item -->
 
         <div class="feature-item l service">
+          <a href="{% url pages-service %}" class="image-link"></a>
           <h3 class="title">Сервис</h3>
           <div class="content">            
             Компания Лифт-
@@ -45,6 +47,7 @@
         </div> <!-- /.feature-item -->
 
         <div class="feature-item l news">
+          <a href="{% url pages-post-list %}" class="image-link"></a>
           <h3 class="title">Пресс-центр</h3>
           <div class="info c">
             {% if first_post.photo %}
@@ -63,17 +66,16 @@
         </div> <!-- /.feature-item -->
       </div> <!-- /.features-wrap -->
 
-      <h2>Доставка</h2>
-
       <p>
         Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может привести к серьезной поломке. 
       </p>
 
       <div class="delivery-wrap c">
-        <div class="image l">
+        <div class="image l" style="width: 43%;">
           <img src="/static/images/map.jpg" alt="">
         </div> <!-- /.image -->
-        <div class="content r">
+        <div class="content l" style="width: 57%">
+          <h2 style="margin-top: 0">Доставка</h2>
           <p>
           	«Lift-Fit» заботится о каждом клиенте, поэтому оперативно и максимально продуктивно
             обрабатывает, а также доставляет каждый заказ. Мы поставляем качественные запчасти

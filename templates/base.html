@@ -31,19 +31,23 @@
 
 	<body class="{% block body_class %}{% endblock %}">
 
-		<div class="page-wrapper">
-			<div class="page-header">
-				{% include 'layouts/header.html' %}
+		<div class="all-wrapper">
+			<div class="page-wrapper">
+				<div class="page-header">
+					{% include 'layouts/header.html' %}
+				</div>
 			</div>
-		</div>
 
-		<div class="page-content c">
-			{% block breadcrumbs %}{% endblock %}
+			<div class="page-content c">
+				{% block breadcrumbs %}{% endblock %}
 
-			<h1>{% block title %}{% endblock title %}</h1>
+				<h1>{% block title %}{% endblock title %}</h1>
 
-			{% block content %}{% endblock content %}
-		</div>
+				{% block content %}{% endblock content %}
+			</div>
+			
+			<div class="c"></div>
+		</div> <!-- /.all-wrapper -->
 
 		<footer class="page-footer c">
 		    <div class="page-footer-inner c">
