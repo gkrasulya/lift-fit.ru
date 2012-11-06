@@ -254,7 +254,6 @@
 		refreshCart();
 	});
 
-
 	var $nameInput = $('#registerForm input[name=name]');
 
 	if ($nameInput.length) {

@@ -40,7 +40,12 @@
 	          <ul class="category-nav-inner">
 	            {% for rank in ranks %}
 	            	<li>
-	            		<strong>{{ rank.0 }}</strong>
+	            		<a href="?category={% if forloop.counter == 1 %}elevator{% else %}escalator{% endif %}"
+	            			{% if category != None %}
+	            				{% if category == 'elevator' and forloop.counter == 1 %}class="selected"{% endif %}
+	            				{% if category == 'escalator' and forloop.counter == 2 %}class="selected"{% endif %}
+	            			{% endif %}>
+	            			{{ rank.0 }}</a>
 	            		<ul>
 		            		{% for item in rank.1 %}
 				                <li>

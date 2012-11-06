@@ -97,6 +97,7 @@ def producer_detail_redirect(request, id):
 def producer_detail(request, slug, id):
 	category = request.GET.get('category', 'all')
 	current_rank = request.GET.get('rank', None)
+	# category_type = request.GET.get('')
 
 	spare_list = Spare.objects.filter(producer=id)
 	if current_rank is not None:
