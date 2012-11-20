@@ -16,7 +16,7 @@
       <div class="features-wrap c">
         <div class="feature-item l first">
           <a href="{% url spares-index %}" class="image-link"></a>
-          <h3 class="title">Запасные части</h3>
+          <h3 class="title"><a href="{% url spares-index %}">Запасные части</a></h3>
           <div class="content">
             <a href="{% url spares-index %}">Запчасти</a> в виде
             интернет-магазина, где
@@ -30,7 +30,7 @@
 
         <div class="feature-item l service">
           <a href="{% url pages-service %}" class="image-link"></a>
-          <h3 class="title">Сервис</h3>
+          <h3 class="title"><a href="{% url pages-service %}">Сервис</a></h3>
           <div class="content">            
             Компания Лифт-
             Фит располагает
@@ -48,7 +48,7 @@
 
         <div class="feature-item l news">
           <a href="{% url pages-post-list %}" class="image-link"></a>
-          <h3 class="title">Пресс-центр</h3>
+          <h3 class="title"><a href="{% url pages-post-list %}">Пресс-центр</a></h3>
           <div class="info c">
             {% if first_post.photo %}
               <img src="{{ first_post.thumb.url }}" alt="" class="l">
@@ -65,10 +65,6 @@
           </div>
         </div> <!-- /.feature-item -->
       </div> <!-- /.features-wrap -->
-
-      <p>
-        Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может привести к серьезной поломке. 
-      </p>
 
       <div class="delivery-wrap c">
         <div class="image l" style="width: 43%;">
@@ -93,10 +89,6 @@
           <p>
             Мы готовы к сотрудничеству и рассчитываем, что Ваш визит на наш сайт будет полезным
             и приятным.
-          </p>
-          <h3>Монтаж</h3>
-          <p>
-            Покупка и доставка всех запасных частей и механизмов осуществляется как при наличии товара на складе, так и под заказ. Работаем мы в несколько этапов: 
           </p>
         </div> <!-- /.content -->
       </div> <!-- /.delivery-wrap -->
