@@ -21,6 +21,7 @@ def index(request):
 	})
 
 def manage_cart(request):
+	# raise Exception('Hello')
 	return _manage_products(request, 'cart')
 
 def manage_favorites(request):
@@ -28,6 +29,7 @@ def manage_favorites(request):
 		response = HttpResponse('{"ok":false}')
 		response.status_code = 400
 		return response
+
 
 	id = request.POST.get('id', None)
 	add = request.POST.get('add', True)
