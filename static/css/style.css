@@ -606,7 +606,8 @@ h3 {
   width: auto;
 }
 .order-form .quantity-input {
-  width: 25px;
+  text-align: center;
+  width: 35px;
 }
 
 .form-help-text {

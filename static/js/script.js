@@ -252,6 +252,10 @@ return cookieValue;}};
 			manageProduct($product.data('id'));
 			$product.fadeOut('fast', function() {
 				$product.remove();
+
+				try {
+					recountAllTotal();
+				} catch(e) {}
 			});
 		}
 
