@@ -5,6 +5,7 @@ from urllib import urlencode
 
 from django.http import HttpResponse
 from django.views.generic.list_detail import object_detail, object_list
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, get_object_or_404, render
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -20,10 +21,11 @@ def index(request):
 		'slug': 'catalog',
 	})
 
+@csrf_exempt
 def manage_cart(request):
-	# raise Exception('Hello')
 	return _manage_products(request, 'cart')
 
+@csrf_exempt
 def manage_favorites(request):
 	if request.user.is_anonymous():
 		response = HttpResponse('{"ok":false}')
