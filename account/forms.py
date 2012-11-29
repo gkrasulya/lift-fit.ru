@@ -20,6 +20,7 @@ EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 class RegisterForm(forms.Form):
 	email = forms.EmailField(_(u'Email'), required=True)
 	password = forms.CharField(_(u'Пароль'), label=u'Пароль', required=True, widget=forms.PasswordInput)
+	get_emails = forms.BooleanField(_(u'Получать рассылку'), label=u'Получать рассылку', initial=True, help_text=u'Возможность получения дополнительных скидок, участие в акциях, получение каталогов компании с продаваемой продукцией и прайс-листов, а также многое другое.')
 	name = forms.CharField(_(u'Имя'), label=u'Имя', required=False)
 
 	def clean(self):
@@ -55,6 +56,7 @@ class RegisterForm(forms.Form):
 		user.set_password(data['password'])
 		user.save()
 		profile = UserProfile(user=user)
+		profile.get_emails = data['get_emails']
 		profile.save()
 
 
