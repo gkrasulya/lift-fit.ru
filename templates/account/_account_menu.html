@@ -2,5 +2,6 @@
 	<a {% if current_tab == 'account' %}class="selected"{% endif %} href="{% url account-account %}">Заказы</a> |
 	<a {% if current_tab == 'favorites' %}class="selected"{% endif %} href="{% url account-favorites %}">Избранное</a> |
 	<a {% if current_tab == 'edit' %}class="selected"{% endif %} href="{% url account-edit %}">Редактирование профиля</a> |
+	<a {% if current_tab == 'change-password' %}class="selected"{% endif %} href="{% url account-change-password %}">Изменение пароля</a> |
 	<a  href="{% url account-login %}">Выход</a>
 </div>

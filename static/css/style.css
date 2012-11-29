@@ -555,13 +555,23 @@ h3 {
       margin-top: -4px;
     }
 
-.product-item {
-  height: 290px;
-  margin: 80px 0 0 4%;
-  width: 20%;
+.product-list {
+    margin-top: 50px;
 }
+
+.product-item {
+  height: 200px;
+  margin: 0 4% 0 0;
+  width: 40%;
+}
+  .product-item .content {
+    margin-left: 10%;
+      width: 60%;
+  }
+
   .product-item .image {
     text-align: center;
+    width: 30%;
   }
   .product-item .price {
     color: #4089d3;

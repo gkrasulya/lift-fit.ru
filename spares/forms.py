@@ -3,6 +3,7 @@
 import re
 
 from django import forms
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
 from django.utils.translation import ugettext_lazy as _
@@ -18,7 +19,7 @@ EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 class OrderForm(forms.ModelForm):
 	class Meta:
 		model = Order
-		exclude = ('date_added', 'read', 'status', 'body', 'total_sum', 'user')
+		# exclude = ('date_added', 'read', 'status', 'body', 'total_sum', 'user')
 
 	def clean_coupon(self):
 		data = self.cleaned_data['coupon']
@@ -34,8 +35,26 @@ class OrderForm(forms.ModelForm):
 		return data
 
 	def save(self, *args, **kwargs):
-		order = super(OrderForm, self).save(*args, **kwargs)
+		# order = super(OrderForm, self).save(*args, **kwargs)
+		data = dict([(kw, val) for kw, val in self.data.iteritems() if hasattr(Order, kw)])
+		order = Order(**data)
 		send_order(order)
+
+
+class DeliveryForm(forms.ModelForm):
+	class Meta:
+		model = Delivery
+
+	def save(self, *args, **kwargs):
+		data = super(DeliveryForm, self).clean()
+		delivery = super(DeliveryForm, self).save(*args, **kwargs)
+		send_delivery(data.get('subject'), data.get('body'))
+		return delivery
+
+
+def send_delivery(subject, body):
+	for user in User.objects.all():
+		EmailMessage(subject, body, 'info@lift-fit.ru', [user.email]).send(fail_silently=False)
 	
 
 def send_order(order, **kwargs):

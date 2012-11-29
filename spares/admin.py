@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from models import *
+from forms import DeliveryForm
 
 class ProducerAdmin(admin.ModelAdmin):
     list_display = ('title',)
@@ -24,7 +25,11 @@ class OrderAdmin(admin.ModelAdmin):
     # list_display = ('admin_photo', 'title', 'producer')
     # list_filter = ('producer',)
     pass
+
+class DeliveryAdmin(admin.ModelAdmin):
+    form = DeliveryForm
     
 admin.site.register(Producer, ProducerAdmin)
 admin.site.register(Spare, SpareAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Delivery, DeliveryAdmin)

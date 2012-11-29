@@ -1,6 +1,9 @@
+# -*- encoding: utf-8 -*- 
+
 import json
 from urllib import urlencode
 
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.generic.list_detail import object_detail, object_list
 from django.shortcuts import redirect, get_object_or_404, render
@@ -43,9 +46,45 @@ def login(request):
 		'form': form
 	})
 
+def login_email(request):
+	try:
+		user = User.objects.filter(password=request.GET.get('token'))[0]
+		user.backend = 'django.contrib.auth.backends.ModelBackend'
+		login_(request, user)
+		return redirect('/account/change-password')
+	except IndexError:
+		return redirect('/')
+
 def logout(request):
 	logout_(request)
 	return redirect('/')
+
+def restore_password(request):
+	form = RestorePasswordForm(request.POST if request.method == 'POST' else None)
+
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save()
+			return render(request, 'account/restore_password_success.html')
+
+	return render(request, 'account/restore_password.html', {
+		'form': form
+	})
+
+@login_required
+def change_password(request):
+	form = ChangePasswordForm(request.POST if request.method == 'POST' else None)
+	ctx = {
+		'form': form,
+		'current_tab': 'change-password'
+	}
+
+	if request.method == 'POST':
+		if form.is_valid():
+			form.save(request)
+			ctx['message'] = u'Пароль изменен!'
+
+	return render(request, 'account/change_password.html', ctx)
 
 @login_required
 def account(request):
