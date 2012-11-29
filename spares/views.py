@@ -165,14 +165,18 @@ def order(request):
 		data['body'] = body
 		data['total_sum'] = total_sum
 		if not request.user.is_anonymous():
-			data['user'] = request.user.id
+			data['user_id'] = request.user.id
+	else:
+		if is_order:
+			pass
+			# raise Exception('DATA IS NONE')
 
 	if request.user.is_anonymous():
 		form = OrderForm(data)
 	else:
 		try:
 			profile = request.user.profile
-			form = OrderForm(data, instance=profile)
+			form = OrderForm(data, instance=profile, initial={'email': request.user.email})
 		except:
 			form = OrderForm(data)
 

@@ -141,16 +141,16 @@ class Order(models.Model):
 	name = models.CharField(_(u'Имя'), max_length=255, help_text=u'ФИО полностью')
 	email = models.EmailField(_(u'E-mail'), max_length=255, blank=False)
 	phone = models.CharField(_(u'Телефон'), max_length=255, blank=False)
-	address = models.TextField(_(u'Адре'), blank=False)
-	body = models.TextField(_(u'Детали'))
-	read = models.BooleanField(_(u'"прочитано"'), default=False)
+	address = models.TextField(_(u'Адрес'), blank=False)
+	body = models.TextField(_(u'Детали'), editable=False)
+	read = models.BooleanField(_(u'"прочитано"'), default=False, editable=False)
 	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
-	status = models.CharField(u'Статус', choices=STATUSES, max_length=255)
+	status = models.CharField(u'Статус', choices=STATUSES, max_length=255, editable=False, default=0)
 	coupon = models.CharField(u'Купон', max_length=50, blank=True, default='')
 
-	total_sum = models.IntegerField(u'Сумма', default=0)
+	total_sum = models.IntegerField(u'Сумма', default=0, editable=False)
 
-	user = models.ForeignKey(User, related_name='order_list')
+	user = models.ForeignKey(User, related_name='order_list', editable=False)
 
 	class Meta:
 		verbose_name = _(u'Заказ')
@@ -167,10 +167,12 @@ class Order(models.Model):
 			return None
 
 	def __unicode__(self):
-		return '%s, %s' % (
-			self.date_added.strftime('%Y.%m.%d'),
-			self.name
-		)
+		if self.date_added:
+			return '%s, %s' % (
+				self.date_added.strftime('%Y.%m.%d'),
+				self.name
+			)
+		return ''
 
 	def read_helper(self):
 		return '<a href="" class="read-action" id="readAction%s">%s</a>' % (
@@ -182,6 +184,21 @@ class Order(models.Model):
 class Coupon(models.Model):
 	coupon = models.CharField(_(u'Купон'), max_length=50, blank=False)
 	activated = models.BooleanField(_(u'Активирован'), default=False)
+
+
+class Delivery(models.Model):
+	subject = models.CharField(_(u'Тема письма'), max_length=255)
+	body = models.TextField(_(u'Текст письма'))
+	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
+
+	class Meta:
+		verbose_name = _(u'Рассылка')
+		verbose_name_plural = _(u'Рассылки')
+		ordering = ['-date_added', '-id']
+
+
+	def __unicode__(self):
+		return self.subject
 
 
 def format_text(text=None):

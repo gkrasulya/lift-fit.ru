@@ -65,11 +65,13 @@
         <div class="column r wide">
           <h1 class="mt0">Каталог запчастей</h1>
 
-			{% if producer.text %}
-				<p>
-					{{ producer.text_html|safe }}
-				</p>
-			{% endif %}
+          	{% comment %}
+				{% if producer.text %}
+					<p>
+						{{ producer.text_html|safe }}
+					</p>
+				{% endif %}
+			{% endcomment %}
 
 			<div class="product-list c">
 				{% for spare in spare_list %}

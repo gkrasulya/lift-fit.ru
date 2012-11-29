@@ -1,25 +1,27 @@
-<div class="product-item l js-product" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
-  <div class="image">
-	<a href="{{ spare.photo.url }}" class="fancybox">
-		<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
-	</a>
-  </div> <!-- /.image -->
-  <div class="price">{{ spare.price }} p.</div> <!-- /.price -->
-  <div class="title">{{ spare.title }}</div>
-  <div class="buy-wrap" style="font-size: 12px;">
-    {% if spare.in_cart %}
-      <a href="/order/cart/">В корзине</a>
-    {% else %}
-      <a href="/feedback/" class="but-btn js-add-to-cart">Добавить в корзину</a>
-    {% endif %}
-  </div> <!-- /.buy-wrap -->
-  {% if not user.is_anonymous %}
-    <div class="favorites-wrap mt5" style="font-size: 12px;">
-      {% if spare.in_favorites %}
-        <a href="/account/favorites/">В избранном</a>
-      {% else %}
-        <a href="#" class="action js-add-to-favorites" title="Добавить в избранное">Добавить в избранное</a>
-      {% endif %}
-    </div>
-  {% endif %}
+<div class="product-item c l js-product" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
+	<div class="image l">
+		<!-- <a href="{{ spare.photo.url }}" class="fancybox"> -->
+			<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
+		<!-- </a> -->
+	</div> <!-- /.image -->
+	<div class="content l">
+		<div class="title">{{ spare.title }}</div>
+		<div class="price">{{ spare.price }} p.</div> <!-- /.price -->
+		<div class="buy-wrap" style="font-size: 12px;">
+			{% if spare.in_cart %}
+				<a href="/order/cart/">В корзине</a>
+			{% else %}
+				<a href="/feedback/" class="but-btn js-add-to-cart">Добавить в корзину</a>
+			{% endif %}
+		</div> <!-- /.buy-wrap -->
+		{% if not user.is_anonymous %}
+			<div class="favorites-wrap mt5" style="font-size: 12px;">
+				{% if spare.in_favorites %}
+					<a href="/account/favorites/">В избранном</a>
+				{% else %}
+					<a href="#" class="action js-add-to-favorites" title="Добавить в избранное">Добавить в избранное</a>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div> <!-- /.content -->
 </div> <!-- /.product-item -->
