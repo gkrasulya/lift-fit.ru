@@ -53,7 +53,7 @@ class DeliveryForm(forms.ModelForm):
 
 
 def send_delivery(subject, body):
-	for user in User.objects.all():
+	for user in User.objects.filter(get_emails=True):
 		EmailMessage(subject, body, 'info@lift-fit.ru', [user.email]).send(fail_silently=False)
 	
 
