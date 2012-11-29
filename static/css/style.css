@@ -396,7 +396,7 @@ h3 {
     background-image: url(../images/feature2.png);
   }
   .feature-item.news {
-    background-image: url(../images/feature3.png);
+    background-image: url(../images/feature3.png?3);
   }
 
   .feature-item .title {
