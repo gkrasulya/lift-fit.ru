@@ -15,4 +15,5 @@ class UserProfile(models.Model):
 	name = models.CharField(u'Имя', help_text=u'ФИО полностью', max_length=255, blank=True)
 	phone = models.CharField(u'Телефон', max_length=50, blank=True)
 	address = models.TextField(u'Адрес', blank=True)
+	get_emails = models.BooleanField(u'Получить рассылку', default=True)
 	user = models.OneToOneField(User, related_name='profile')

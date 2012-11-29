@@ -27,6 +27,8 @@ def register(request):
 	if request.method == 'POST':
 		if form.is_valid():
 			form.save()
+			user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+			login_(request, user)
 			return redirect('/account/edit/')
 	
 	return render(request, 'account/register.html', {
