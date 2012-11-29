@@ -573,6 +573,9 @@ h3 {
     text-align: center;
     width: 35%;
   }
+    .product-item .image img {
+        max-width: 100%;
+    }
   .product-item .price {
     color: #4089d3;
     font: 26px "Trebuchet MS";
