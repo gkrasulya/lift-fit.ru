@@ -98,17 +98,22 @@ def producer_detail_redirect(request, id):
 	redirect_url = '{0}?{1}'.format(reverse('spares-producer-detail', args=[producer.slug, producer.id]), query)
 	return redirect(redirect_url, permanent=True)
 
-def producer_detail(request, slug, id):
+def producer_detail(request, slug=None, id=None):
 	category = request.GET.get('category', 'all')
 	current_rank = request.GET.get('rank', None)
 	# category_type = request.GET.get('')
 
-	spare_list = Spare.objects.filter(producer=id)
+	if id:
+		spare_list = Spare.objects.filter(producer=id)
+		producer = Producer.objects.get(pk=id)
+	else:
+		spare_list = Spare.objects.all()
+		producer = None
+
 	if current_rank is not None:
-		spare_list = spare_list.filter(rank__in=(current_rank, ''))
+		spare_list = spare_list.filter(rank__in=(current_rank,))
 	if category != 'all':
 		spare_list = spare_list.filter(category=category)
-	producer = Producer.objects.get(pk=id)
 
 	cart_ids = _get_product_ids_from_cookies(request, 'cart')
 	if cart_ids:
@@ -131,8 +136,10 @@ def producer_detail(request, slug, id):
 		'ranks': Spare.RANKS,
 		'current_rank': int(current_rank) if current_rank is not None else None,
 	}
-	return object_detail(request, Producer.objects.all(), object_id=id,
-		extra_context=extra_context, template_object_name='producer')
+	return render(request, 'spares/producer_detail.html', extra_context)
+
+	# return object_detail(request, Producer.objects.all(), object_id=id,
+	# 	extra_context=extra_context, template_object_name='producer')
 
 def cart(request):
 	cart_ids = _get_product_ids_from_cookies(request, 'cart')

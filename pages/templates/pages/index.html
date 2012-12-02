@@ -105,6 +105,7 @@
         </div> <!-- /.content -->
         <div class="form-wrap r">
           <form action="/feedback/" method="POST" class="feedback-form c">
+            {% csrf_token %}
             <div class="form-row c">
               <div class="form-col l">
                 <input type="text" name="name" placeholder="Ваше имя">
