@@ -166,6 +166,31 @@ return cookieValue;}};
 		return false;
 	});
 
+	$('.js-favorites-to-cart').bind('click', function() {
+		var $link = $(this),
+			$product = $link.parents('.js-product'),
+			id = $product.data('id'),
+			inFavorites = $product.data('in-favorites') == '1',
+			inCart = $product.data('in-cart') == '1';
+
+		manageProduct(id, {
+			inCart: 0,
+			url: '/manage-cart/',
+
+			success: function(res) {
+				if (res && res.ok) {
+					$product.fadeOut();
+
+					refreshCart();
+				} else {
+					alert('Ошибка');
+				}
+			}
+		});
+
+		return false;
+	})
+
 	function manageProduct(id, opts) {
 		opts = $.extend({
 			success: function() {},
@@ -173,6 +198,7 @@ return cookieValue;}};
 				alert('Ошибка');
 			},
 			inCart: '1',
+			inFavorites: 0,
 			url: '/manage-cart/'
 		}, opts || {});
 
@@ -248,10 +274,13 @@ return cookieValue;}};
 
 	$('.js-remove-product').bind('click', function() {
 		if (confirm('Вы уверены?')) {
-			var $product = $(this).parents('.js-product');
+			var $product = $(this).parents('.js-product'),
+				inCart = $product.data('in-cart') || 1,
+				inFavorites = $product.data('in-favorites') || 0;
 			manageProduct($product.data('id'));
 			$product.fadeOut('fast', function() {
 				$product.remove();
+				refreshCart();
 
 				try {
 					recountAllTotal();

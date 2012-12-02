@@ -6,12 +6,13 @@
 	</div> <!-- /.image -->
 	<div class="content l">
 		<div class="title">{{ spare.title }}</div>
+		<div class="description">{{ spare.description }}</div>
 		<div class="price">{{ spare.price }} p.</div> <!-- /.price -->
 		<div class="buy-wrap" style="font-size: 12px;">
 			{% if spare.in_cart %}
 				<a href="/order/cart/">В корзине</a>
 			{% else %}
-				<a href="/feedback/" class="but-btn js-add-to-cart">Добавить в корзину</a>
+				<a href="/feedback/" class="but-btn js-add-to-cart">В корзину</a>
 			{% endif %}
 		</div> <!-- /.buy-wrap -->
 		{% if not user.is_anonymous %}
@@ -19,7 +20,7 @@
 				{% if spare.in_favorites %}
 					<a href="/account/favorites/">В избранном</a>
 				{% else %}
-					<a href="#" class="action js-add-to-favorites" title="Добавить в избранное">Добавить в избранное</a>
+					<a href="#" class="action js-add-to-favorites" title="Добавить в избранное">В избранное</a>
 				{% endif %}
 			</div>
 		{% endif %}

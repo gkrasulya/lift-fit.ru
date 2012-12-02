@@ -3,8 +3,8 @@ from imagekit import processors
 
 
 class ResizeSpareThumb(processors.Resize):
-	height = 200
-	width = 200
+	height = 300
+	width = 300
 	
 	
 class SpareThumb(ImageSpec):

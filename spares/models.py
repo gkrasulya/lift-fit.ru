@@ -83,7 +83,7 @@ class Spare(ImageModel):
 
 	title = models.CharField(_(u'Название'), max_length=255)
 	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, null=False)
-	description = models.TextField(_(u'Описание'), blank=True, default='', editable=False)
+	description = models.TextField(_(u'Описание'), blank=True, default='')
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)
 	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
 	producer = models.ForeignKey(Producer, verbose_name=_(u'Производитель'))
@@ -95,7 +95,7 @@ class Spare(ImageModel):
 								choices=CATEGORIES, blank=True, null=True)
 	rank = models.CharField(_(u'Ранжировка'), max_length=50,
 								choices=RANKS, blank=True, default='', db_column='type_')
-	user_list = models.ManyToManyField(User, related_name='favorite_list')
+	user_list = models.ManyToManyField(User, related_name='favorite_list', blank=True, editable=False)
 
 	in_cart = False
 	in_favorites = False

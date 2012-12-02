@@ -58,6 +58,7 @@ class RegisterForm(forms.Form):
 		profile = UserProfile(user=user)
 		profile.get_emails = data['get_emails']
 		profile.save()
+		return user
 
 
 class AuthForm(forms.Form):
