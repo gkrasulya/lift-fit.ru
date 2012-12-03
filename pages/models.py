@@ -93,7 +93,7 @@ class Message(models.Model):
 		help_text=_(u'Нужно для ответа на письмо'))
 	phone = models.CharField(_(u'Телефон'), max_length=255, blank=True)
 	body = models.TextField(_(u'Сообщение'))
-	category = models.СрфкField(_(u'Категория'), choices=CATEGORIES, max_length=255, blank=False)
+	category = models.CharField(_(u'Категория'), choices=CATEGORIES, max_length=255, blank=False)
 	read = models.BooleanField(_(u'"прочитано"'), default=False)
 	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
 
