@@ -12,6 +12,8 @@ from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.template.loader import get_template
 from django.views.decorators.http import require_POST
+from django.db.models import Q
+from django.db import connection
 
 from models import *
 from forms import OrderForm
@@ -98,20 +100,48 @@ def producer_detail_redirect(request, id):
 	redirect_url = '{0}?{1}'.format(reverse('spares-producer-detail', args=[producer.slug, producer.id]), query)
 	return redirect(redirect_url, permanent=True)
 
+def search(request):
+	query = request.GET.get('query')
+	if not query.strip():
+		spare_list = []
+	else:
+		search_query, created = SearchQuery.objects.get_or_create(query=query.lower())
+		search_query.count += 1
+		search_query.save()
+		spare_list = Spare.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+	extra_context = {
+		'spare_list': spare_list,
+		'catalog': True,
+		'producer': None,
+		'category': None,
+		'current_producer': None,
+		'ranks': Spare.RANKS,
+		'current_rank': None,
+		'query': query,
+	}
+	return render(request, 'spares/producer_detail.html', extra_context)
+
 def producer_detail(request, slug=None, id=None):
 	category = request.GET.get('category', 'all')
 	current_rank = request.GET.get('rank', None)
 	# category_type = request.GET.get('')
+
+	spare_list = None
+	producer_list = None
+	producer = None
 
 	if id:
 		spare_list = Spare.objects.filter(producer=id)
 		producer = Producer.objects.get(pk=id)
 	else:
 		spare_list = Spare.objects.all()
-		producer = None
 
 	if current_rank is not None:
-		spare_list = spare_list.filter(rank__in=(current_rank,))
+		if id:
+			spare_list = spare_list.filter(rank__in=(current_rank,))
+		else:
+			producer_list = Producer.objects.filter(spare_list__rank__in=(current_rank,))
 	if category != 'all':
 		spare_list = spare_list.filter(category=category)
 

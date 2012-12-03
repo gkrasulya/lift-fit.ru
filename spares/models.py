@@ -196,9 +196,21 @@ class Delivery(models.Model):
 		verbose_name_plural = _(u'Рассылки')
 		ordering = ['-date_added', '-id']
 
-
 	def __unicode__(self):
 		return self.subject
+
+
+class SearchQuery(models.Model):
+	query = models.TextField(_(u'Запрос'), max_length=255)
+	count = models.IntegerField(_(u'Количество'), default=0, null=False, blank=False)
+
+	class Meta:
+		verbose_name = _(u'Поисковый запрос')
+		verbose_name_plural = _(u'Поисковые запросы')
+		ordering = ['-count']
+
+	def __unicode__(self):
+		return '%s, %s' % (self.query, self.count)
 
 
 def format_text(text=None):

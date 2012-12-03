@@ -73,11 +73,13 @@
 				{% endif %}
 			{% endcomment %}
 
-			<div class="product-list c">
-				{% for spare in spare_list %}
-					{% include 'spares/_spare.html' %}
-				{% endfor %}
-			</div> <!-- /.product-list -->
+			{% if spare_list %}
+				<div class="product-list c">
+					{% for spare in spare_list %}
+						{% include 'spares/_spare.html' %}
+					{% endfor %}
+				</div> <!-- /.product-list -->
+			{% endif %}
 			
 			<div class="product-list-message">
 				Не нашли нужную Вам запчасть? Не отчаивайтесь, <a href="{% url pages-feedback %}">зайдите сюда</a> и мы доставим ее Вам в кратчайшие сроки.
