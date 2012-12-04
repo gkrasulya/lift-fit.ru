@@ -19,8 +19,11 @@ from models import *
 from forms import OrderForm
 
 def index(request):
+	spare_list = Spare.objects.filter(is_special=True)
 	return render(request, 'index.html', {
 		'slug': 'catalog',
+		'spare_list': spare_list,
+		'ranks': Spare.RANKS,
 	})
 
 @csrf_exempt
