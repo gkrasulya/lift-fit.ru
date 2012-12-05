@@ -131,7 +131,8 @@ def producer_detail(request, slug=None, id=None):
 	# category_type = request.GET.get('')
 
 	spare_list = None
-	producer_list = None
+	spare_lists = []
+	producers = None
 	producer = None
 
 	if id:
@@ -144,9 +145,23 @@ def producer_detail(request, slug=None, id=None):
 		if id:
 			spare_list = spare_list.filter(rank__in=(current_rank,))
 		else:
-			producer_list = Producer.objects.filter(spare_list__rank__in=(current_rank,))
+			producers = Producer.objects.filter(spare_list__rank__in=(current_rank,)).select_related('spare_list')
+			for producer in producers:
+				spare_lists.append({
+					'list': producer.spare_list.filter(rank__in=(current_rank,)).all(),
+					'producer': producer
+				})
+
 	if category != 'all':
-		spare_list = spare_list.filter(category=category)
+		if id:
+			spare_list = spare_list.filter(category=category)
+		else:
+			producers = Producer.objects.filter(spare_list__category__in=(category,)).select_related('spare_list')
+			for producer in producers:
+				spare_lists.append({
+					'list': producer.spare_list.filter(category__in=(category,)).all(),
+					'producer': producer
+				})
 
 	cart_ids = _get_product_ids_from_cookies(request, 'cart')
 	if cart_ids:
@@ -162,6 +177,8 @@ def producer_detail(request, slug=None, id=None):
 
 	extra_context = {
 		'spare_list': spare_list,
+		'spare_lists': spare_lists,
+		'producers': producers,
 		'catalog': True,
 		'producer': producer,
 		'category': category,
