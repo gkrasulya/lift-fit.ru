@@ -118,6 +118,7 @@ html, body {
 
 .header-logo {
   background: url(../images/logo.png) 0 0 no-repeat;
+  display: block;
   height: 45px;
   width: 174px;
 }
@@ -149,9 +150,20 @@ html, body {
     display: inline;
 }
 .search-form input {
+    background: #eee;
     border: 1px solid #ccc;
-    background: #fff;
+    margin-top: 5px;
+    outline: none;
+    width: 70px;
+    
+    transition: width 0.2s, background-color 0.2s;
+    -webkit-transition: width 0.2s, background-color 0.2s;
+    -moz-transition: width 0.2s, background-color 0.2s;
 }
+  .search-form input:focus {
+      background: #fff;
+      width: 170px;
+  }
 
 .page-nav {
   font: 13px "Trebuchet MS";
