@@ -79,7 +79,51 @@
           
           <div class="c"></div>
         </div>
+        
+        
+
+        <form action="" class="order-form c" id="feedbackForm" enctype="multipart/form-data" style="margin-top: 50px;" method="POST">
+          {% csrf_token %}
+
+          <div class="form-col l">
+            <div class="form-row">
+              <input type="text" name="name" id="name" maxlength="255" placeholder="Имя" />
+            </div>
+            <div class="form-row">
+          <input type="text" name="email" id="email" maxlength="255" placeholder="Email" />
+            </div>
+            <div class="form-row">
+              <input type="text" name="phone" id="phone" maxlength="255" placeholder="Телефон" />
+            </div>
+            <div class="form-row">
+              <select id="category" name="category">
+                <option value="order">Заказ запчастей</option>
+                <option value="delivery">Запрос на поставку оборудования</option>
+                <option value="service">Запрос на техническое  обслуживание</option>
+                <option value="installation">Запрос на монтаж оборудования</option>
+              </select>
+            </div>
+
+            <div class="form-row" style="width: 500px">
+              <span class="form-help-text">вы можете прикрепить файлы к сообщению (фотографию , заявку...)</span><br/>
+              <input type="file" name="attachment1" class="form-file-input" />
+            </div>
+
+            <div class="form-row">
+              <button type="submit">Отправить</button>
+            </div>
+          </div> <!-- /.form-col -->
+
+          <div class="form-col r">
+            <textarea name="body" id="body" placeholder="Сообщение"></textarea>
+          </div>
+        </form>
 
 	</div>
 
 {% endblock content %}
+
+{% block extrajslibs %}
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.placeholder.min.js"></script>
+  <script type="text/javascript" src="{{ MEDIA_URL }}js/libs/jquery.validate.min.js"></script>
+{% endblock extrajslibs %}

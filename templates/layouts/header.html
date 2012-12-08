@@ -51,10 +51,10 @@
     </div> <!-- /.nivoSlider -->
   </div> <!-- /.slider-wrap -->
 
-  {% get_producer_list as producer_list %}
+  {% get_producer_list as nav_producer_list %}
 
   <nav class="category-nav">
-    {% for producer in producer_list %}
+    {% for producer in nav_producer_list %}
         <a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
             class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
           {{ producer.title }}</a>

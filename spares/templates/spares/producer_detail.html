@@ -40,10 +40,10 @@
 	          <ul class="category-nav-inner">
 	            {% for rank in ranks %}
 	            	<li>
-	            		<a href="?category={% if forloop.counter == 1 %}elevator{% else %}escalator{% endif %}"
+	            		<a href="?category={% if forloop.counter == 1 %}0{% else %}1{% endif %}"
 	            			{% if category != None %}
-	            				{% if category == 'elevator' and forloop.counter == 1 %}class="selected"{% endif %}
-	            				{% if category == 'escalator' and forloop.counter == 2 %}class="selected"{% endif %}
+	            				{% if category == '0' and forloop.counter == 1 %}class="selected"{% endif %}
+	            				{% if category == '1' and forloop.counter == 2 %}class="selected"{% endif %}
 	            			{% endif %}>
 	            			{{ rank.0 }}</a>
 	            		<ul>
@@ -72,13 +72,24 @@
 					</p>
 				{% endif %}
 			{% endcomment %}
-
-			{% if spare_list %}
+			
+			{% if producer_list %}
+				{% for spare_list in spare_lists %}
+					<h2 style="margin-top: 35px;">{{ spare_list.producer.title }}</h2>
+					
+					<div class="product-list c">
+						{% for spare in spare_list.list %}
+							{% include 'spares/_spare.html' %}
+						{% endfor %}
+					</div> <!-- /.product-list -->
+				{% endfor %}
+			{% else %}
 				<div class="product-list c">
-					{% for spare in spare_list %}
+					{% for spare in producer.spare_list %}
 						{% include 'spares/_spare.html' %}
 					{% endfor %}
 				</div> <!-- /.product-list -->
+
 			{% endif %}
 			
 			<div class="product-list-message">

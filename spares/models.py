@@ -55,8 +55,8 @@ class Producer(models.Model):
 
 class Spare(ImageModel):
 	CATEGORIES = (
-		(u'elevator', u'Лифт'),
-		(u'escalator', u'Эскалатор'),
+		(0, u'Лифт'),
+		(1, u'Эскалатор'),
 	)
 
 	RANKS = (
@@ -92,18 +92,18 @@ class Spare(ImageModel):
 	description = models.TextField(_(u'Описание'), blank=True, default='')
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)
 	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
-	producer = models.ForeignKey(Producer, verbose_name=_(u'Производитель'))
+	producer = models.ForeignKey(Producer, verbose_name=_(u'Производитель'), related_name='spare_list')
 	in_stock = models.BooleanField(u'В наличии')
 	date_added = models.DateTimeField(_(u'Date added'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Date updated'), auto_now=True, editable=False)
 
-	special_types = models.CharField(_(u'Тип специального предложения'), choices=SPECIAL_TYPES, max_length=255)
+	special_types = models.CharField(_(u'Тип специального предложения'), choices=SPECIAL_TYPES, max_length=255, blank=True)
 	is_special = models.BooleanField(_(u'Выводить на главной каталога'))
 
-	category = models.CharField(_(u'Категория'), max_length=50,
+	category = models.IntegerField(_(u'Категория'), max_length=50,
 								choices=CATEGORIES, blank=True, null=True)
-	rank = models.CharField(_(u'Ранжировка'), max_length=50,
-								choices=RANKS, blank=True, default='', db_column='type_')
+	rank = models.IntegerField(_(u'Ранжировка'), max_length=50,
+								choices=RANKS, blank=True, default=0, db_column='type_')
 	user_list = models.ManyToManyField(User, related_name='favorite_list', blank=True, editable=False)
 
 
