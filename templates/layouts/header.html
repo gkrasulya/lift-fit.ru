@@ -1,6 +1,12 @@
 {% load spares_tags %}
 
-<a href="/" class="header-logo l" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
+<div class="l">
+  <a href="/" class="header-logo" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
+    
+  <form method="GET" action="{% url spares-search %}" class="search-form">
+    <input type="text" name="query" placeholder="Поиск..." value="{{ query }}">
+  </form>
+</div>
 <div class="r header-contacts">
   <div class="header-contacts-auth">
     {% if not request.user.is_anonymous %}
@@ -32,10 +38,6 @@
     href="{% url pages-service %}" title="Сервис">Сервис</a>
   <a {% if slug == 'usloviya-dostavki' %}class="active"{% endif %}
     href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
-    
-  <form method="GET" action="{% url spares-search %}" class="search-form">
-    <input type="text" name="query" placeholder="Поиск..." value="{{ query }}">
-  </form>
 </nav>
 
 <div>
