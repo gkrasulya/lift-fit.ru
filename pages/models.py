@@ -86,6 +86,7 @@ class Message(models.Model):
 		('delivery', u'Запрос на поставку оборудования'),
 		('service', u'Запрос на техническое  обслуживание'),
 		('installation', u'Запрос на монтаж оборудования'),
+		('advice', u'Пожелания и предложения'),
 	)
 
 	name = models.CharField(_(u'Ваше имя'), max_length=255)

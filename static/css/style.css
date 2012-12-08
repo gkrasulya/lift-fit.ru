@@ -293,7 +293,7 @@ html, body {
   width: 45%;
 }
 
-input, textarea {
+input, textarea, select {
   background: #d7d7d7;
   border: none;
   border-bottom: 1px solid #d8d8c6;
