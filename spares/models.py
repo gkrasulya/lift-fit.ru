@@ -81,6 +81,12 @@ class Spare(ImageModel):
 		),
 	)
 
+	SPECIAL_TYPES = (
+		('action', u'Акция'),
+		('recommend', u'Рекомендуем'),
+		('special', u'Специальное предложение'),
+	)
+
 	title = models.CharField(_(u'Название'), max_length=255)
 	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, null=False)
 	description = models.TextField(_(u'Описание'), blank=True, default='')
@@ -91,17 +97,21 @@ class Spare(ImageModel):
 	date_added = models.DateTimeField(_(u'Date added'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Date updated'), auto_now=True, editable=False)
 
+	special_types = models.CharField(_(u'Тип специального предложения'), choices=SPECIAL_TYPES, max_length=255)
+	is_special = models.BooleanField(_(u'Выводить на главной каталога'))
+
 	category = models.CharField(_(u'Категория'), max_length=50,
 								choices=CATEGORIES, blank=True, null=True)
 	rank = models.CharField(_(u'Ранжировка'), max_length=50,
 								choices=RANKS, blank=True, default='', db_column='type_')
 	user_list = models.ManyToManyField(User, related_name='favorite_list', blank=True, editable=False)
 
+
 	in_cart = False
 	in_favorites = False
 	
 	class Meta:
-		ordering = ['title']
+		ordering = ['-is_special', '-date_added']
 		verbose_name = _(u'Запчасть')
 		verbose_name_plural = _(u'Запчасти')
 
@@ -196,9 +206,21 @@ class Delivery(models.Model):
 		verbose_name_plural = _(u'Рассылки')
 		ordering = ['-date_added', '-id']
 
-
 	def __unicode__(self):
 		return self.subject
+
+
+class SearchQuery(models.Model):
+	query = models.TextField(_(u'Запрос'), max_length=255)
+	count = models.IntegerField(_(u'Количество'), default=0, null=False, blank=False)
+
+	class Meta:
+		verbose_name = _(u'Поисковый запрос')
+		verbose_name_plural = _(u'Поисковые запросы')
+		ordering = ['-count']
+
+	def __unicode__(self):
+		return '%s, %s' % (self.query, self.count)
 
 
 def format_text(text=None):

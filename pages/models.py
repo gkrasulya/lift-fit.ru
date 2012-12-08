@@ -81,11 +81,19 @@ class Post(ImageModel):
 
 
 class Message(models.Model):
+	CATEGORIES = (
+		('order', u'Заказ запчастей'),
+		('delivery', u'Запрос на поставку оборудования'),
+		('service', u'Запрос на техническое  обслуживание'),
+		('installation', u'Запрос на монтаж оборудования'),
+	)
+
 	name = models.CharField(_(u'Ваше имя'), max_length=255)
 	email = models.EmailField(_(u'E-mail'), max_length=255, blank=True,
 		help_text=_(u'Нужно для ответа на письмо'))
 	phone = models.CharField(_(u'Телефон'), max_length=255, blank=True)
 	body = models.TextField(_(u'Сообщение'))
+	category = models.CharField(_(u'Категория'), choices=CATEGORIES, max_length=255, blank=False)
 	read = models.BooleanField(_(u'"прочитано"'), default=False)
 	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
 
