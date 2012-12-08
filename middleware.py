@@ -1,6 +1,11 @@
+from django.core.exceptions import MultipleObjectsReturned
+
 from pages.models import Visit
 
 class CountUserMiddleware(object):
 
 	def process_request(self, request):
-		Visit.objects.get_or_create(ip=request.META['REMOTE_ADDR'])
+		try:
+			Visit.objects.get_or_create(ip=request.META['REMOTE_ADDR'])
+		except MultipleObjectsReturned:
+			pass
