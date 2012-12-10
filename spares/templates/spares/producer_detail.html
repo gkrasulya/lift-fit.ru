@@ -73,6 +73,14 @@
 				{% endif %}
 			{% endcomment %}
 			
+			{% if spare_list %}
+				<div class="product-list c">
+					{% for spare in spare_list %}
+						{% include 'spares/_spare.html' %}
+					{% endfor %}
+				</div> <!-- /.product-list -->
+			{% endif %}
+			
 			{% if producer_list %}
 				{% for spare_list in spare_lists %}
 					<h2 style="margin-top: 35px;">{{ spare_list.producer.title }}</h2>
@@ -84,16 +92,11 @@
 					</div> <!-- /.product-list -->
 				{% endfor %}
 			{% else %}
-				<div class="product-list c">
-					{% for spare in producer.spare_list %}
-						{% include 'spares/_spare.html' %}
-					{% endfor %}
-				</div> <!-- /.product-list -->
 
 			{% endif %}
 			
 			<div class="product-list-message">
-				Не нашли нужную Вам запчасть? Не отчаивайтесь, <a href="{% url pages-feedback %}">зайдите сюда</a> и мы доставим ее Вам в кратчайшие сроки.
+				Если необходимой запчасти Вы не обнаружили на нашем сайте? &#151; <a href="{% url pages-feedback %}">Разместите заказ</a> и мы доставим ее в кротчайшие сроки.
 			</div>
           
         </div> <!-- /.column -->

@@ -37,6 +37,8 @@ urlpatterns = patterns('',
 	url(r'^account/change-password/$', account.views.change_password, name='account-change-password'),
 	url(r'^account/$', account.views.account, name='account-account'),
 
+	url(r'^english/$', pages.views.english, name='pages-english'),
+
 	url(r'^posts/?$', pages.views.post_list, name='pages-post-list'),
 	url(r'^posts/(?P<slug>[-\w\d_]+)-(?P<id>\d+)/$', pages.views.post_detail, name='pages-post-detail'),
 	

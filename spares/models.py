@@ -155,7 +155,7 @@ class Order(models.Model):
 	body = models.TextField(_(u'Детали'), editable=False)
 	read = models.BooleanField(_(u'"прочитано"'), default=False, editable=False)
 	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
-	status = models.CharField(u'Статус', choices=STATUSES, max_length=255, editable=False, default=0)
+	status = models.IntegerField(u'Статус', choices=STATUSES, max_length=255, editable=False, default=0)
 	coupon = models.CharField(u'Купон', max_length=50, blank=True, default='')
 
 	total_sum = models.IntegerField(u'Сумма', default=0, editable=False)
@@ -166,6 +166,9 @@ class Order(models.Model):
 		verbose_name = _(u'Заказ')
 		verbose_name_plural = _(u'Заказы')
 		ordering = ['-date_added', '-id']
+
+	def get_readable_status(self):
+		return dict(self.STATUSES)[int(self.status)]
 
 	def get_body_html(self):
 		return self.body.replace('\n', '<br>')

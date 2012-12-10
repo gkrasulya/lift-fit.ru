@@ -7,7 +7,7 @@
 {% block title %}{% endblock title %}
 
 {% block breadcrumbs %}
-	<div class="breadcrubms">
+	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
 		<a href="{% url pages-service %}">{{ page.title }}</a>
 	</div>
@@ -82,7 +82,7 @@
         
         
 
-        <form action="" class="order-form c" id="feedbackForm" enctype="multipart/form-data" style="margin-top: 50px;" method="POST">
+        <form action="" class="order-form c" id="feedbackForm" enctype="multipart/form-data" style="margin-top: 50px; width: 504px;" method="POST">
           {% csrf_token %}
 
           <div class="form-col l">
@@ -96,11 +96,13 @@
               <input type="text" name="phone" id="phone" maxlength="255" placeholder="Телефон" />
             </div>
             <div class="form-row">
+              <label style="font-size: 14px" for="">Категория</label>
               <select id="category" name="category">
                 <option value="order">Заказ запчастей</option>
                 <option value="delivery">Запрос на поставку оборудования</option>
                 <option value="service">Запрос на техническое  обслуживание</option>
                 <option value="installation">Запрос на монтаж оборудования</option>
+                <option value="advice">Пожелания и предложения</option>
               </select>
             </div>
 
@@ -115,7 +117,7 @@
           </div> <!-- /.form-col -->
 
           <div class="form-col r">
-            <textarea name="body" id="body" placeholder="Сообщение"></textarea>
+            <textarea name="body" id="body" style="padding-top: 4px;" placeholder="Сообщение"></textarea>
           </div>
         </form>
 

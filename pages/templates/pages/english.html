@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block meta_keywords %}{{ page.meta_keywords }}{% endblock meta_keywords %}
+{% block meta_description %}{{ page.meta_description }}{% endblock meta_description %}
+
+{% block pagetitle %}{{ page.get_page_title }}About{% endblock pagetitle %}
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <a href="/">Главная</a> /
+    <a href="{% url pages-english %}">English</a>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+<div style="width: 60%;">
+  
+  <h1>About us</h1>
+  
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati beatae accusantium molestiae porro deserunt fugiat cumque itaque dignissimos debitis modi neque nihil hic facilis repudiandae est ad enim quod unde.
+  </p><p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati beatae accusantium molestiae porro deserunt fugiat cumque itaque dignissimos debitis modi neque nihil hic facilis repudiandae est ad enim quod unde.
+  </p>
+  
+</div> <!-- /w60% -->
+
+      <div class="page-content-wrap c">
+        <div class="column counter-block l c">
+          <div class="counter l">
+            <span>{{ visits_count_zfill|slice:':2' }}</span>
+            <span>{{ visits_count_zfill|slice:'2:' }}</span>
+          </div> <!-- /.counter -->
+          <div class="content l">
+            <h3 class="mt0">{{ visits_count }} total visitors</h3>
+            <div class="text">
+              Come again
+            </div>
+          </div>
+        </div> <!-- /.column -->
+        {% comment %}
+        <div class="column soc-block r">
+          <h3 class="mt0">Можете отметить это</h3>
+          <div class="soc-links-wrap">
+            <a href="" class="soc-link fb"></a>
+            <a href="" class="soc-link tw"></a>
+          </div> <!-- /.soc-links-wrap -->
+        </div> <!-- /.column -->
+        {% endcomment %}
+      </div> <!-- /.page-content-wrap -->
+{% endblock content %}
+
+{% block extrajslibs %}
+	<script type="text/javascript" src="/static/js/libs/jquery.nivo.slider.pack.js"></script>
+{% endblock %}

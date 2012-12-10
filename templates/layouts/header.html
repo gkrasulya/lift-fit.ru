@@ -1,11 +1,13 @@
 {% load spares_tags %}
 
-<div class="l">
+<div class="l" style="margin-top: -20px;">
   <a href="/" class="header-logo" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
     
   <form method="GET" action="{% url spares-search %}" class="search-form">
     <input type="text" name="query" placeholder="Поиск..." value="{{ query }}">
-  </form>
+  </form><br>
+  
+  <a href="/english" class="header-left-link">English</a>
 </div>
 <div class="r header-contacts">
   <div class="header-contacts-auth">
@@ -45,7 +47,7 @@
 
 {% if main %}
   <div class="slider-wrap">
-    <div id="slider" class="nivoSlider" style="left: 65px;">
+    <div id="slider" class="nivoSlider">
       <a href="/proizvoditel/kone-2/" ><img src="/static/images/banner2.jpg?2" alt="" /></a>
       <a href="/proizvoditel/sematic-lm-liftmaterial-5/" ><img src="/static/images/banner3.jpg?2" alt="" /></a>
       <a href="/proizvoditel/schindler-4/" ><img src="/static/images/banner4.jpg" alt="" /></a>

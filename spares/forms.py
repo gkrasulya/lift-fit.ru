@@ -35,10 +35,11 @@ class OrderForm(forms.ModelForm):
 		return data
 
 	def save(self, *args, **kwargs):
-		# order = super(OrderForm, self).save(*args, **kwargs)
-		data = dict([(kw, val) for kw, val in self.data.iteritems() if hasattr(Order, kw)])
-		order = Order(**data)
+		order = super(OrderForm, self).save(*args, **kwargs)
+		# data = dict([(kw, val) for kw, val in self.data.iteritems() if hasattr(Order, kw)])
+		# order = Order(**data)
 		send_order(order)
+		return order
 
 
 class DeliveryForm(forms.ModelForm):

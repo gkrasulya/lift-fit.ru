@@ -175,6 +175,7 @@ def producer_detail(request, slug=None, id=None):
 			if spare in favorite_list:
 				spare.in_favorites = True
 
+	# raise Exception(len(spare_list))
 	extra_context = {
 		'spare_list': spare_list,
 		'spare_lists': spare_lists,
@@ -238,10 +239,15 @@ def order(request):
 			form = OrderForm(data)
 
 	if is_order and form.is_valid():
-		form.save()
-		response = render(request, 'spares/success.html', {
+		order = form.save(commit=False)
+		order.total_sum = total_sum
+		order.body = body
+		order.status = 0
+		if not request.user.is_anonymous():
+			order.user = request.user
+		order.save()
 
-		})
+		response = render(request, 'spares/success.html', {})
 		response.set_cookie('cart_ids', json.dumps([]))
 		return response
 	else:

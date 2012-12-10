@@ -26,6 +26,14 @@ def index(request):
 		'visits_count_zfill': str(visits_count).zfill(4)
 	})
 
+def english(request):
+	visits_count = Visit.objects.count() + VISITS_COUNT_METRIKA
+
+	return render(request, 'pages/english.html', {
+		'visits_count': visits_count,
+		'visits_count_zfill': str(visits_count).zfill(4),
+	})
+
 def page(request, slug):
 	"""simple text page"""
 	page = Page.objects.get(slug=slug)

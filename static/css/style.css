@@ -123,6 +123,15 @@ html, body {
   width: 174px;
 }
 
+.header-left-link {
+  color: #343f4a;
+  display: block;
+  font: italic 12px 'Trebuchet MS';
+  font-style: italic;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
 .header-contacts {
   color: #7c7c7c;
   font-size: 12px;
@@ -166,7 +175,7 @@ html, body {
   }
 
 .page-nav {
-  font: 13px "Trebuchet MS";
+  font: 14px "Trebuchet MS";
   margin-top: -80px;
   text-align: center;
 }
@@ -372,7 +381,10 @@ button[type=submit] {
 }
 
 .breadcrumbs {
-  font-size: 13px;
+  font-size: 13px !important;
+}
+.breadcrumbs a {
+    font-size: 13px !important;
 }
 
 h1, h2, h3, h4 {
@@ -380,7 +392,7 @@ h1, h2, h3, h4 {
   font-weight: normal;
 }
 
-wh1, h2 {
+h1, h2 {
   font-size: 34px;
   margin-bottom: 15px;
   margin-top: 30px;
