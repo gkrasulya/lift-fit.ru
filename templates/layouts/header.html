@@ -25,9 +25,9 @@
   <div class="page-header-cart" id="headerCart"></div>
 </div> <!-- /.header-contacts -->
 
-<div class="c"></div>
+<div class="c clear" style="height: 1px;"></div>
 
-<nav class="page-nav">
+<nav class="page-nav" style="margin-top: 10px;">
   <a {% if slug == 'catalog' %}class="active"{% endif %}
     href="{% url spares-index %}" title="Каталог">Каталог запчастей</a>
   <a {% if slug == 'feedback' %}class="active"{% endif %}
@@ -45,7 +45,7 @@
 <div class="c"></div>
 
 {% if main %}
-  <div class="slider-wrap" style="position: relative; top: -50px;">
+  <div class="slider-wrap">
     <div id="slider" class="nivoSlider">
       <a href="/proizvoditel/kone-2/" ><img src="/static/images/banner2.jpg?2" alt="" /></a>
       <a href="/proizvoditel/sematic-lm-liftmaterial-5/" ><img src="/static/images/banner3.jpg?2" alt="" /></a>
