@@ -6,8 +6,6 @@
   <form method="GET" action="{% url spares-search %}" class="search-form">
     <input type="text" name="query" placeholder="Поиск..." value="{{ query }}">
   </form><br>
-  
-  <a href="/english" class="header-left-link">English</a>
 </div>
 <div class="r header-contacts">
   <div class="header-contacts-auth">
@@ -32,21 +30,22 @@
 <nav class="page-nav">
   <a {% if slug == 'catalog' %}class="active"{% endif %}
     href="{% url spares-index %}" title="Каталог">Каталог запчастей</a>
-  <a {% if slug == 'about' %}class="active"{% endif %}
-    href="{% url pages-about %}" title="О нас">О компании</a>
   <a {% if slug == 'feedback' %}class="active"{% endif %}
     href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
   <a {% if slug == 'service' %}class="active"{% endif %}
     href="{% url pages-service %}" title="Сервис">Сервис</a>
   <a {% if slug == 'usloviya-dostavki' %}class="active"{% endif %}
     href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
+  <a {% if slug == 'about' %}class="active"{% endif %}
+    href="{% url pages-about %}" title="О нас">О компании</a>
+  <a {% if slug == 'english' %}class="active"{% endif %} href="/english">
+    About</a>
 </nav>
 
-<div>
-</div>
+<div class="c"></div>
 
 {% if main %}
-  <div class="slider-wrap">
+  <div class="slider-wrap" style="position: relative; top: -50px;">
     <div id="slider" class="nivoSlider">
       <a href="/proizvoditel/kone-2/" ><img src="/static/images/banner2.jpg?2" alt="" /></a>
       <a href="/proizvoditel/sematic-lm-liftmaterial-5/" ><img src="/static/images/banner3.jpg?2" alt="" /></a>

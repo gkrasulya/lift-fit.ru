@@ -32,6 +32,7 @@ def english(request):
 	return render(request, 'pages/english.html', {
 		'visits_count': visits_count,
 		'visits_count_zfill': str(visits_count).zfill(4),
+		'slug': 'english'
 	})
 
 def page(request, slug):
