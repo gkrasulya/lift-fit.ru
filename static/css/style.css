@@ -178,6 +178,8 @@ html, body {
   font: 14px "Trebuchet MS";
   margin-top: -80px;
   text-align: center;
+  position: relative;
+  left: -20px;
 }
   .page-nav a {
     color: #000000;
