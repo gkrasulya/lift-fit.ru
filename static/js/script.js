@@ -314,4 +314,23 @@ return cookieValue;}};
 		$overlay.appendTo($nameRow);
 	}
 
+	var $pageSideNav = $('#pageSideNav');
+
+	if ($pageSideNav.length) {
+		var $links = $pageSideNav.find('.js-link'),
+			$pages = $('.js-page');
+
+		$links.each(function(i) {
+			var $link = $(this);
+			$link.click(function(e) {
+				e.preventDefault();
+
+				$links.removeClass('selected');
+				$link.addClass('selected');
+				$pages.hide();
+				$pages.eq(i).show();
+			});
+		});
+	}
+
 })(jQuery);

@@ -5,6 +5,7 @@ from imagekit import processors
 class ResizeSpareThumb(processors.Resize):
 	height = 300
 	width = 300
+	crop = True
 	
 	
 class SpareThumb(ImageSpec):

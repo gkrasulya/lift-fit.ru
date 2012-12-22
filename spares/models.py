@@ -60,52 +60,53 @@ class Spare(ImageModel):
 	)
 
 	RANKS = (
+		(0, u'Нет'),
 		(u'Запчасти для лифтов', (
-				(0,  u'Машинное помещение'),
-				(1,  u'Привод дверей'),
-				(2,  u'Шахта лифта'),
-				(3,  u'Кабина лифта'),
-				(4,  u'Электрооборудование'),
-				(5,  u'Гидравлика'),
-				(6, u'Прочее'),
+				(1,  u'Машинное помещение'),
+				(2,  u'Привод дверей'),
+				(3,  u'Шахта лифта'),
+				(4,  u'Кабина лифта'),
+				(5,  u'Электрооборудование'),
+				(6,  u'Гидравлика'),
+				(7, u'Прочее'),
 			),
 		),
 		(u'Запчасти для эскалаторов', (
-				(7,  u'Станция управления'),
-				(8,  u'Привод эскалатора'),
-				(9,  u'Балюстрада'),
-				(10,  u'Входная площадка'),
-				(11,  u'Ступени'),
-				(12, u'Прочее'),
+				(8,  u'Станция управления'),
+				(9,  u'Привод эскалатора'),
+				(10,  u'Балюстрада'),
+				(11,  u'Входная площадка'),
+				(12,  u'Ступени'),
+				(13, u'Прочее'),
 			),
 		),
 	)
 
 	SPECIAL_TYPES = (
 		('action', u'Акция'),
-		('recommend', u'Рекомендуем'),
+		('discount', u'Скидка'),
 		('special', u'Специальное предложение'),
 	)
 
 	title = models.CharField(_(u'Название'), max_length=255)
 	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, null=False)
+	new_price = models.IntegerField(_(u'Цена'), blank=True, max_length=25, default=0, null=False)
 	description = models.TextField(_(u'Описание'), blank=True, default='')
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)
 	photo = AutoImageField(upload_to='photos', verbose_name=_(u'Фото'))
 	producer = models.ForeignKey(Producer, verbose_name=_(u'Производитель'), related_name='spare_list')
-	in_stock = models.BooleanField(u'В наличии')
+	in_stock = models.BooleanField(u'В наличии', default=0)
 	date_added = models.DateTimeField(_(u'Date added'), auto_now_add=True, editable=False)
 	date_updated = models.DateTimeField(_(u'Date updated'), auto_now=True, editable=False)
 
 	special_types = models.CharField(_(u'Тип специального предложения'), choices=SPECIAL_TYPES, max_length=255, blank=True)
-	is_special = models.BooleanField(_(u'Выводить на главной каталога'))
+	is_special = models.BooleanField(_(u'Выводить на главной каталога'), default=False)
 
 	category = models.IntegerField(_(u'Категория'), max_length=50,
-								choices=CATEGORIES, blank=True, null=True)
+								choices=CATEGORIES, null=True, default=0)
 	rank = models.IntegerField(_(u'Ранжировка'), max_length=50,
-								choices=RANKS, blank=True, default=0, db_column='type_')
+								choices=RANKS, default=0, db_column='type_')
 	user_list = models.ManyToManyField(User, related_name='favorite_list', blank=True, editable=False)
-
 
 	in_cart = False
 	in_favorites = False

@@ -1,5 +1,8 @@
-<div class="product-item c l js-product" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
-	<div class="image l">
+<div class="product-item c l js-product {% if spare.special_types %}special special-{{ spare.special_types }}{% endif %}" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
+	{% if spare.special_types %}
+		<div class="overlay {{ spare.special_types }}"></div>
+	{% endif %}
+	<div class="image l" style="background-image: url({{ spare.thumb.url }})">
 		<!-- <a href="{{ spare.photo.url }}" class="fancybox"> -->
 			<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
 		<!-- </a> -->
@@ -7,7 +10,12 @@
 	<div class="content l">
 		<div class="title">{{ spare.title }}</div>
 		<div class="description">{{ spare.description }}</div>
-		<div class="price">{{ spare.price }} p.</div> <!-- /.price -->
+		<div class="price">
+			<span class="price-price">{{ spare.price }} p.</span>
+			{% if spare.special_types %}
+				<span class="new-price {{ spare.special_types }}">{{ spare.new_price }} р.</span>
+			{% endif %}
+		</div> <!-- /.price -->
 		<div class="buy-wrap" style="font-size: 12px;">
 			{% if spare.in_cart %}
 				<a href="/order/cart/">В корзине</a>

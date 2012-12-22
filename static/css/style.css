@@ -593,8 +593,9 @@ h3 {
 
 .product-item {
   height: 200px;
-  margin: 0 10% 0 0;
+  margin: 25px 10% 0 0;
   text-align: left;
+  position: relative;
   width: 40%;
 }
   .product-item .content {
@@ -602,17 +603,68 @@ h3 {
       width: 45%;
   }
 
+  .product-item .overlay {
+    background: url(../images/sprite.png) 0 0 no-repeat;
+    height: 108px;
+    left: -30px;
+    position: absolute;
+    top: -25px;
+    width: 117px;
+    z-index: 5;
+  }
+  .product-item .overlay.discount {
+    background-position: 0 -224px;
+  }
+  .product-item .overlay.special {
+    background-position: 0 -111px;
+  }
+
+  .product-item.special .image {
+    border: 2px solid #fbe600;
+    overflow: hidden;
+    -webkit-border-radius: 10px;
+            border-radius: 10px;
+  }
+  .product-item.special.special-discount .image {
+    border-color: #ec3915;
+  }
+  .product-item.special.special-special .image {
+    border-color: #3295c9;
+  }
+
   .product-item .image {
+    background-size: 100%;
     text-align: center;
     width: 45%;
   }
     .product-item .image img {
-        max-width: 100%;
+      max-width: 100%;
+      visibility: hidden;
     }
   .product-item .price {
-    color: #4089d3;
-    font: 26px "Trebuchet MS";
+    color: #212121;
+    font: bold 18px "Trebuchet MS";
     margin-top: 5px;
+  }
+  .product-item.special .price-price {
+    text-decoration: line-through;
+  }
+  .product-item .new-price {
+    background: url(../images/new_price.png);
+    border: 1px solid #fbe600;
+    color: #212121;
+    font: 24px "Trebuchet MS";
+    margin-left: 5px;
+    padding: 0 5px;
+    text-decoration: none !important;
+    -webkit-border-radius: 10px;
+            border-radius: 10px;
+  }
+  .product-item.special.special-discount .new-price {
+    border-color: #ec3915;
+  }
+  .product-item.special.special-special .new-price {
+    border-color: #3295c9;
   }
   .product-item .title {
     color: #178c90;
@@ -651,6 +703,34 @@ h3 {
   .product-item .but-btn:hover {
     opacity: 0.9;
   }
+
+.page-side-nav {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  list-style: none;
+  margin-left: 0;
+  padding: 10px;
+  position: fixed;
+  z-index: 5;
+}
+.page-side-nav a {
+  border-bottom: 1px dashed;
+  text-decoration: none;
+}
+.page-side-nav a.selected {
+  color: #333;
+}
+
+.page-page {
+  display: none;
+}
+
+.page-left {
+  width: 20%;
+}
+.page-right {
+  width: 75%;
+}
 
 .order-form {
   width: 50%;
