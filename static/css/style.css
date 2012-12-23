@@ -272,7 +272,7 @@ html, body {
   }
 
 .page-content {
-  margin-top: 60px;
+  margin-top: 30px;
   padding-bottom: 50px;
   text-align: justify !important;
   padding-bottom: 190px;
@@ -770,6 +770,8 @@ h3 {
 
 .slider-wrap {
   background: url(../images/slider_shadow.png) 50% 298px no-repeat;
+  position: relative;
+  top: -20px;
 }
 
 .nivoSlider {
@@ -841,7 +843,7 @@ h3 {
 /* Control nav styles (e.g. 1,2,3...) */
 .nivo-controlNav {
   text-align:center;
-  padding: 15px 0;
+  padding: 30px 0 10px;
 }
 .nivo-controlNav a {
   background: url(../images/nivo_control.png) 0 -13px no-repeat;
