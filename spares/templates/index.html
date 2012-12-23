@@ -34,24 +34,26 @@
           <div class="category-nav custom mt30">
                 <ul class="category-nav-inner">
                   {% for rank in ranks %}
-                    <li>
-                      <a href="/proizvoditel/?category={% if forloop.counter == 1 %}0{% else %}1{% endif %}"
-                        {% if category != None %}
-                          {% if category == '0' and forloop.counter == 1 %}class="selected"{% endif %}
-                          {% if category == '1' and forloop.counter == 2 %}class="selected"{% endif %}
-                        {% endif %}>
-                        {{ rank.0 }}</a>
-                      <ul>
-                        {% for item in rank.1 %}
-                            <li>
-                              <a href="/proizvoditel/?rank={{ item.0 }}" title="{{ item.1 }}"
-                                class="png-bg {% if forloop.last %}last{% endif %}
-                              {% if current_rank != None and current_rank == item.0  %} selected{% endif %}">
-                              {{ item.1 }}</a>
-                            </li>
-                        {% endfor %}
-                      </ul>
-                    </li>
+                    {% if rank.0 != 0 %}
+                      <li>
+                        <a href="?category={% if forloop.counter == 1 %}0{% else %}1{% endif %}"
+                          {% if category != None %}
+                            {% if category == '0' and forloop.counter == 1 %}class="selected"{% endif %}
+                            {% if category == '1' and forloop.counter == 2 %}class="selected"{% endif %}
+                          {% endif %}>
+                          {{ rank.0 }}</a>
+                        <ul>
+                          {% for item in rank.1 %}
+                              <li>
+                                <a href="?rank={{ item.0 }}" title="{{ item.1 }}"
+                                  class="png-bg {% if forloop.last %}last{% endif %}
+                                {% if current_rank != None and current_rank == item.0  %} selected{% endif %}">
+                                {{ item.1 }}</a>
+                              </li>
+                          {% endfor %}
+                        </ul>
+                      </li>
+                    {% endif %}
                   {% endfor %}
                 </ul> <!-- /.category-nav -->
           </div> <!-- /.category-nav custom -->
