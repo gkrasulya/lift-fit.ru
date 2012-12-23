@@ -650,6 +650,9 @@ h3 {
     color: #212121;
     font: bold 18px "Trebuchet MS";
     margin-top: 5px;
+    position: relative;
+    z-index: 5;
+    white-space: nowrap;
   }
   .product-item.special .price-price {
     text-decoration: line-through;
@@ -659,7 +662,7 @@ h3 {
     border: 1px solid #fbe600;
     color: #212121;
     font: 24px "Trebuchet MS";
-    margin-left: 5px;
+    margin: 0 5px;
     padding: 0 5px;
     text-decoration: none !important;
     -webkit-border-radius: 10px;
