@@ -318,7 +318,8 @@ return cookieValue;}};
 
 	if ($pageSideNav.length) {
 		var $links = $pageSideNav.find('.js-link'),
-			$pages = $('.js-page');
+			$pages = $('.js-page'),
+			$pageTitle = $('#pageTitle');
 
 		$links.each(function(i) {
 			var $link = $(this);
@@ -329,6 +330,7 @@ return cookieValue;}};
 				$link.addClass('selected');
 				$pages.hide();
 				$pages.eq(i).show();
+				$pageTitle.html($link.html());
 			});
 		});
 	}
