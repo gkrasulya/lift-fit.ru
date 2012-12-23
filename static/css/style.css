@@ -621,11 +621,14 @@ h3 {
     background-position: 0 -111px;
   }
 
-  .product-item.special .image {
-    border: 2px solid #fbe600;
+  .product-item .image {
+    border: 2px solid #ddd;
     overflow: hidden;
     -webkit-border-radius: 10px;
             border-radius: 10px;
+  }
+  .product-item.special .image {
+    border: 2px solid #fbe600;
   }
   .product-item.special.special-discount .image {
     border-color: #ec3915;

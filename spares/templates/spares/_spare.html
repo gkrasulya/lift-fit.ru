@@ -11,9 +11,11 @@
 		<div class="title">{{ spare.title }}</div>
 		<div class="description">{{ spare.description }}</div>
 		<div class="price">
-			<span class="price-price">{{ spare.price }} p.</span>
+			<span class="price-price">{{ spare.price }}
+				<img src="/static/images/ruble_icon.png"></span>
 			{% if spare.special_types %}
-				<span class="new-price {{ spare.special_types }}">{{ spare.new_price }} р.</span>
+				<span class="new-price {{ spare.special_types }}">{{ spare.new_price }}
+					<img src="/static/images/ruble_icon_big.png"></span>
 			{% endif %}
 		</div> <!-- /.price -->
 		<div class="buy-wrap" style="font-size: 12px;">
