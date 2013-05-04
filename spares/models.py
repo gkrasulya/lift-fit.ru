@@ -147,6 +147,8 @@ class Order(models.Model):
 		(6, u'Заказ поступил на склад в Москве'),
 		(7, u'Заказ отправлен в адрес Заказчика'),
 		(8, u'Заказ получен Заказчиком'),
+
+		(33, u'Заказ принят и отправлен на обработку'),
 	)
 
 	name = models.CharField(_(u'Имя'), max_length=255, help_text=u'ФИО полностью')
@@ -156,7 +158,7 @@ class Order(models.Model):
 	body = models.TextField(_(u'Детали'), editable=False)
 	read = models.BooleanField(_(u'"прочитано"'), default=False, editable=False)
 	date_added = models.DateTimeField(_(u'"добавлено"'), auto_now_add=True, editable=False)
-	status = models.IntegerField(u'Статус', choices=STATUSES, max_length=255, editable=False, default=0)
+	status = models.IntegerField(u'Статус', choices=STATUSES, max_length=255, editable=False, default=33)
 	coupon = models.CharField(u'Купон', max_length=50, blank=True, default='')
 
 	total_sum = models.IntegerField(u'Сумма', default=0, editable=False)
