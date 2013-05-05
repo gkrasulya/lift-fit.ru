@@ -7,18 +7,17 @@
 
 {% block pagetitle %}{{ producer.get_page_title }}{% endblock pagetitle %}
 
-
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
 		<a href="{% url spares-index %}">Каталог</a> /
-		<a href="/proizvoditel/{{ producer.slug }}-{{ producer.id }}">{{ producer.title }}</a>
+		<span>{{ producer.title }}</span>
 	</div>
-{% endblock %}
+	
+	<section class="page-section page-section_rubber">
+		
+	</section>
 
-{{ producer.title }}
-
-{% block content %}
       <div class="page-content-wrap">
         <div class="column l narrow">
 		  {% get_producer_list as producer_list %}

@@ -18,12 +18,54 @@ from django.db import connection
 from models import *
 from forms import OrderForm
 
-def index(request):
-	spare_list = Spare.objects.filter(is_special=True)
+def index(request, slug=None, id=None):
+	category = request.GET.get('category', 'all')
+	current_rank = request.GET.get('rank', None)
+	special_types = request.GET.get('special_types', None)
+	# category_type = request.GET.get('')
+
+	spare_list = None
+	spare_lists = []
+	producers = None
+	producer = None
+	favorite_ids = []
+
+	if id:
+		spare_list = Spare.objects.filter(producer=id)
+		producer = Producer.objects.get(pk=id)
+	else:
+		spare_list = Spare.objects.all()
+
+	if current_rank is not None:
+		spare_list = spare_list.filter(rank__in=(current_rank,)).all()
+
+	if special_types is not None:
+		spare_list = spare_list.filter(special_types=special_types)
+
+	if category != 'all':
+		category = int(category)
+		spare_list = spare_list.filter(category=category)
+
+	cart_ids = _get_product_ids_from_cookies(request, 'cart')
+
+	if not request.user.is_anonymous():
+		favorite_list = request.user.favorite_list.all()
+		favorite_ids = [spare.id for spare in favorite_list]
+
+	spare_list = spare_list.all()
+
 	return render(request, 'index.html', {
-		'slug': 'catalog',
 		'spare_list': spare_list,
+		'cart_ids': cart_ids,
+		'favorite_ids': favorite_ids,
+		'spare_lists': spare_lists,
+		'producers': producers,
+		'catalog': True,
+		'producer': producer,
+		'category': category,
+		'current_producer': producer,
 		'ranks': Spare.RANKS,
+		'current_rank': int(current_rank) if current_rank is not None else None,
 	})
 
 @csrf_exempt
@@ -123,7 +165,7 @@ def search(request):
 		'current_rank': None,
 		'query': query,
 	}
-	return render(request, 'spares/producer_detail.html', extra_context)
+	return render(request, 'index.html', extra_context)
 
 def producer_detail(request, slug=None, id=None):
 	category = request.GET.get('category', 'all')
@@ -260,15 +302,16 @@ def order(request):
 
 def get_cart(request):
 	cart_ids = _get_product_ids_from_cookies(request, 'cart')
-	spare_list = Spare.objects.filter(id__in=cart_ids).all()
+	total_count = Spare.objects.filter(id__in=cart_ids).count()
 
-	total_price = 0
-	for spare in spare_list:
-		total_price += spare.price
+	if not request.user.is_anonymous():
+		favorites_count = request.user.favorite_list.count()
+	else:
+		favorites_count = 0
 
 	ctx = Context({
-		'total_count': len(spare_list),
-		'total_price': total_price
+		'total_count': total_count,
+		'favorites_count': favorites_count
 	})
 	t = get_template('spares/_cart.html').render(ctx)
 

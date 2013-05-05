@@ -1,10 +1,6 @@
-{% if total_count %}
-	<div class="total-count">Всего товаров: <strong>{{ total_count }}</strong></div>
-	<div class="total-price">на сумму: <strong>{{ total_price }}</strong> руб.</div>
-	<a href="/order/cart">перейти в корзину</a>
-{% else %}
-	<div class="text">Корзина пуста</div>
+<a href="/order/cart/" class="page-header__bookmarks__cart {% if total_count %}page-header__bookmarks__cart_filled{% endif %} l">
+	{% if total_count %}({{ total_count }}){% endif %}</a>
+{% if not request.user.is_anonymous %}
+	<a href="/account/favorites/" class="page-header__bookmarks__favorites {% if favorites_count %}page-header__bookmarks__favorites_filled{% endif %} l">
+		{% if favorites_count %}({{ favorites_count }}){% endif %}</a>
 {% endif %}
-<div class="" style="margin-top: 7px; padding-top: 5px; border-top: 1px solid #ddd; width: 105px; margin-left: 35px;">
-	<a href="{% url account-favorites %}">Избранное</a>
-</div>

@@ -47,7 +47,7 @@ class Producer(models.Model):
 		super(Producer, self).save(force_insert, force_update)
 		
 	def get_absolute_url(self):
-		return reverse('spares-producer-detail', args=(self.slug, self.id))
+		return reverse('spares-index-producer', args=(self.slug, self.id))
 
 	def get_page_title(self):
 		return self.page_title if self.page_title else self.title

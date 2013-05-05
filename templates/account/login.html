@@ -8,46 +8,48 @@
 {% block pagetitle %}Вход{% endblock pagetitle %}
 {% block title %}Вход{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url account-login %}">Вход</a>
+		<span>Вход</span>
 	</div>
-{% endblock %}
 
-{% block content %}
+	<section class="page-section">
+	
+		<form action="{% url account-login %}" method="POST" class="custom-form">
+			
+			{% if form.non_field_errors %}
+				<div class="form-error">
+					{% for error in form.non_field_errors %}
+						{{ error }}
+					{% endfor %}
+				</div>
+			{% endif %}
+			
+			{% for f in form %}
+				<div class="form-row c">
+					{{ f.label_tag }}
+					{% if f.help_text %}
+						<div class="form-help-text">{{ f.help_text }}</div>
+					{% endif %}
+					{{ f }}
+					{% if f.errors %}
+						<div class="form-error">
+							{% for error in f.errors %}
+								{{ error }}
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+			
+			<div class="form-row">
+				<button type="submit">Войти</button>
+				<a href="{% url account-restore-password %}" style="font-size: 12px; margin-left: 10px;">Забыли пароль?</a>
+			</div>
+			{% csrf_token %}
+		</form>
+		
+	</section>
 
-	<form action="{% url account-login %}" method="POST" class="custom-form">
-		{% csrf_token %}
-		
-		{% if form.non_field_errors %}
-			<div class="form-error">
-				{% for error in form.non_field_errors %}
-					{{ error }}
-				{% endfor %}
-			</div>
-		{% endif %}
-		
-		{% for f in form %}
-			<div class="form-row c">
-				{{ f.label_tag }}
-				{% if f.help_text %}
-					<div class="form-help-text">{{ f.help_text }}</div>
-				{% endif %}
-				{{ f }}
-				{% if f.errors %}
-					<div class="form-error">
-						{% for error in f.errors %}
-							{{ error }}
-						{% endfor %}
-					</div>
-				{% endif %}
-			</div>
-		{% endfor %}
-		
-		<div class="form-row">
-			<button type="submit">Войти</button>
-			<a href="{% url account-restore-password %}" style="font-size: 12px; margin-left: 10px;">Забыли пароль?</a>
-		</div>
-	</form>
 {% endblock content %}

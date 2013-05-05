@@ -1,66 +1,33 @@
-{% load spares_tags %}
+<div class="page-header__inner">
 
-<div class="l" style="margin-top: -20px;">
-  <a href="/" class="header-logo" alt="Запчасти к лифтам" title="Запчасти к лифтам"></a>
+  <a href="/" class="page-header__logo l"></a>
+  <div class="page-header__title l">Запасные части к лифтам и эскалаторам</div>
+  
+  <div class="page-header__right r">
+  
+    <div class="page-header__right__top c">
+      <div class="page-header__auth-links l">
+        {% if not request.user.is_anonymous %}
+          <a href="{% url account-account %}">Личный кабинет</a> |
+          <a class="ml5" href="{% url account-logout %}">Выход</a>
+        {% else %}
+          <a href="{% url account-login %}">Вход</a> |
+          <a class="ml5" href="{% url account-register %}">Регистрация</a>
+        {% endif %}
+      </div> <!-- /.page-header__auth-links -->
+      <div class="page-header__bookmarks l c" id="bookmarks"></div> <!-- /.page-header__bookmarks -->
+      <div class="page-header__search r"></div>
+    </div> <!-- /.page-header__right__top -->
     
-  <form method="GET" action="{% url spares-search %}" class="search-form">
-    <input type="text" name="query" placeholder="Поиск..." value="{{ query }}">
-  </form><br>
-</div>
-<div class="r header-contacts">
-  <div class="header-contacts-auth">
-    {% if not request.user.is_anonymous %}
-      <a href="{% url account-account %}">Личный кабинет</a>
-      <a class="ml5" href="{% url account-logout %}">Выход</a>
-    {% else %}
-      <a href="{% url account-login %}">Вход</a>
-      <a class="ml5" href="{% url account-register %}">Регистрация</a>
-    {% endif %}
-  </div> <!-- /.header-contacts-auth -->
-  <div class="title">контактная информация</div>
-  <div class="phone">(926) 8720011</div>
-  <div class="email">
-    <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
-  </div>
-  <div class="page-header-cart" id="headerCart"></div>
-</div> <!-- /.header-contacts -->
-
-<div class="c clear" style="height: 1px;"></div>
-
-<nav class="page-nav" style="margin-top: 10px;">
-  <a {% if slug == 'catalog' %}class="active"{% endif %}
-    href="{% url spares-index %}" title="Каталог">Каталог запчастей</a>
-  <a {% if slug == 'feedback' %}class="active"{% endif %}
-    href="{% url pages-feedback %}" title="Обратная связь">Заказ оборудования</a>
-  <a {% if slug == 'service' %}class="active"{% endif %}
-    href="{% url pages-service %}" title="Сервис">Сервис</a>
-  <a {% if slug == 'usloviya-dostavki' %}class="active"{% endif %}
-    href="{% url pages-custom-page slug='usloviya-dostavki' %}" title="Условия доставки">Условия доставки</a>
-  <a {% if slug == 'about' %}class="active"{% endif %}
-    href="{% url pages-about %}" title="О нас">О компании</a>
-  <a {% if slug == 'english' %}class="active"{% endif %} href="/english">
-    About</a>
-</nav>
-
-<div class="c"></div>
-
-{% if main %}
-  <div class="slider-wrap">
-    <div id="slider" class="nivoSlider">
-      <a href="/proizvoditel/kone-2/" ><img src="/static/images/banner2.jpg?2" alt="" /></a>
-      <a href="/proizvoditel/sematic-lm-liftmaterial-5/" ><img src="/static/images/banner3.jpg?2" alt="" /></a>
-      <a href="/proizvoditel/schindler-4/" ><img src="/static/images/banner4.jpg" alt="" /></a>
-      <a href="/proizvoditel/otis-3/"><img src="/static/images/banner1.jpg" alt="" /></a>
-    </div> <!-- /.nivoSlider -->
-  </div> <!-- /.slider-wrap -->
-
-  {% get_producer_list as nav_producer_list %}
-
-  <nav class="category-nav">
-    {% for producer in nav_producer_list %}
-        <a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
-            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
-          {{ producer.title }}</a>
-    {% endfor %}
-  </nav>
-{% endif %}
+    <div class="page-header__right__bottom c">
+      <div class="page-header__contacts">
+        <i class="icon icon_phone"></i>
+        8-926-872-00-11
+        <i class="icon icon_email ml10"></i>
+        <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a>
+      </div>
+    </div> <!-- /.page-header__right__bottom -->
+    
+  </div> <!-- /.page-header__right -->
+  
+</div> <!-- /.page-header__inner -->

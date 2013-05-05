@@ -9,6 +9,7 @@ from django.conf import settings
 
 from forms import *
 from models import *
+from spares.models import *
 
 VISITS_COUNT_METRIKA = 2147
 
@@ -16,10 +17,12 @@ def index(request):
 	page = Page.objects.get(slug='index')
 	first_post = Post.objects.order_by('-date_added')[0]
 	visits_count = Visit.objects.count() + VISITS_COUNT_METRIKA
+	action_spares = Spare.objects.filter(special_types='action')
 	
 	return render(request, 'pages/index.html', {
 		'page': page,
 		'main': True,
+		'action_spares': action_spares,
 		'first_post': first_post,
 		'slug': 'index',
 		'visits_count': visits_count,

@@ -8,38 +8,40 @@
 {% block pagetitle %}Личный кабинет{% endblock pagetitle %}
 {% block title %}Личный кабинет{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url account-account %}">Личный кабинет</a>
+		<span>Личный кабинет</span>
 	</div>
-{% endblock %}
 
-{% block content %}
-	{% include 'account/_account_menu.html' %}
+	<section class="page-section">
 	
-	{% if order_list %}
-		<table class="order-list cart-table mt30">
-			<thead>
-				<th>Детали</th>
-				<th>Сумма</th>
-				<th>Статус</th>
-				<th>Дата заказа</th>
-			</thead>
-			<tbody>
-				{% for order in order_list %}
-					<tr class="order-item">
-						<td style="width: 35%">{{ order.get_body_html|safe }}</td>
-						<td>{{ order.total_sum }}</td>
-						<td>{{ order.get_readable_status }}</td>
-						<td>{{ order.date_added }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	{% else %}
-		<div class="order-list-message">
-			Вы пока не делали заказы
-		</div>
-	{% endif %}
+		{% include 'account/_account_menu.html' %}
+		{% if order_list %}
+			<table class="order-list cart-table mt30">
+				<thead>
+					<th>Детали</th>
+					<th>Сумма</th>
+					<th>Статус</th>
+					<th>Дата заказа</th>
+				</thead>
+				<tbody>
+					{% for order in order_list %}
+						<tr class="order-item">
+							<td style="width: 35%">{{ order.get_body_html|safe }}</td>
+							<td>{{ order.total_sum }}</td>
+							<td>{{ order.get_readable_status }}</td>
+							<td>{{ order.date_added }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<div class="message">
+				Вы пока не делали заказы
+			</div>
+		{% endif %}
+		
+	</section>
+	
 {% endblock content %}

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load spares_tags %}
+
 {% block meta_keywords %}{{ page.meta_keywords }}{% endblock meta_keywords %}
 {% block meta_description %}{{ page.meta_description }}{% endblock meta_description %}
 
@@ -9,157 +11,205 @@
 {% block body_class %}main{% endblock %}
 
 {% block content %}
-	<p>
-        Современные эскалаторы и лифты представляют собой сложную систему, состоящую из множества разнообразных деталей. Ежедневная эксплуатация в жестких условиях неминуемо снижает ресурс основных механизмов, что может привести к серьезной поломке. 
+
+    <section class="page-section page-section_catalog" id="catalog">
+      
+      <div class="title-group">
+        <div class="title title_first title_arrow l">Для лифта</div>
+        <div class="title title_second title_arrow r">Для эскалатора</div>
+      </div> <!-- /.title-group -->
+      
+      <div class="catalog-front-images c mt30">
+        <a href="/catalog/?category=1"><img src="{{ MEDIA_URL }}images/front_1.jpg" class="l" alt=""></a>
+        <a href="/catalog/?category=2"><img src="{{ MEDIA_URL }}images/front_2.jpg" class="r" alt=""></a>
+      </div> <!-- /.catalog-front-images -->
+      
+      {% get_producer_list as nav_producer_list %}
+  
+      <nav class="brands-nav">
+        {% for producer in nav_producer_list %}
+          <a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+              class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+            {{ producer.title }}</a>
+        {% endfor %}
+      </nav> <!-- /.brands-nav -->
+      
+      <div class="carousel-wrap">
+        <div class="marker marker_discount marker_big"></div>
+      
+        <div class="carousel" id="carousel">
+          <div class="carousel__inner c js-inner">
+            {% for spare in action_spares %}
+              <div class="carousel-item js-item">
+                <a href="{{ spare.get_absolute_url }}"><img src="{{ spare.thumb_carousel.url }}" alt="{{ spare.title }}" class="carousel-item__image"></a>
+                <div class="carousel-item__title"><a href="{{ spare.get_absolute_url }}">{{ spare.title }}</a></div>
+                <div class="carousel-item__price">от {{ spare.price }} Р</div>
+              </div> <!-- /.carousel-item -->
+            {% endfor %}
+          </div> <!-- /.carousel-inner -->
+          
+          <a href="" data-direction="left" class="js-arrow carousel__arrow carousel__arrow_left"></a>
+          <a href="" data-direction="right" class="js-arrow carousel__arrow carousel__arrow_right"></a>
+          
+          <div class="carousel__mask carousel__mask_left"></div>
+          <div class="carousel__mask carousel__mask_right"></div>
+        </div> <!-- /.catalog-carousel -->
+        
+      </div> <!-- /.carousel-wrap -->
+      
+    </section> <!-- /.page-section_catalog -->
+    
+    <section class="page-section page-section_about" id="about">
+      <div class="title title_underline"><span>О компании</span></div>
+      
+      <div class="page-section__content_about page-section__content">
+        <div class="subtitle">Лифт-Фит – ориентируемся на приоритеты!</div>
+        
+        <p>
+          Современные эскалаторы и лифты представляют собой сложную систему,
+          состоящую из множества разнообразных деталей. Ежедневная эксплуатация в
+          жестких условиях неминуемо снижает ресурс основных механизмов, что может
+          привести к серьезной поломке. 
+        </p>
+        
+        <p>
+          К счастью, регулярное техническое обслуживание и качественные лифтовые запчасти 
+          значительно продлевают работу и уменьшаютзатраты на использование оборудования.
+        </p>
+        
+        <p>
+          Наша компания занимается реализацией и установкой запасных частей и
+          комплектующих для лифтов и эскалаторов. Благодаря прямым поставкам
+          запасных частей с заводов производителей, мы можем обеспечивать Вас вкротчайшие 
+          сроки всем необходимым для ремонта и технического обслуживаниявашего оборудования. 
+          Благодаря богатому опыту и слаженной работе, наши сотрудники в течение одного дня 
+          обработают Ваш заказ, а также организуют максимально быструю поставку запасных частей, 
+          в случае их отсутствия наскладе компании.
+        </p>
+        
+        <p>
+          <a href="/about">Читать все</a>
+        </p>
+      </div> <!-- /.page-section__content -->
+    </section> <!-- /.page-section_about -->
+    
+    <div class="page-section page-section_howto" id="howto">
+      <div class="title title_underline">
+        <span>Как получить нужный товар?</span>
+      </div> <!-- /.title -->
+      
+      <div class="page-section__content_howto page-section__content">
+        <ul class="list">
+          <li>
+            <i class="list__marker">1</i>
+            Добавьте товар в корзину.</li>
+          <li>
+            <i class="list__marker">2</i>
+            Зарегистрируйтесь (по желанию).</li>
+          <li>
+            <i class="list__marker">3</i>
+            Оформите заказ.</li>
+          <li>
+            <i class="list__marker">4</i>
+            В течении одного рабочего дня вы получите договор и счет.</li>
+          <li>
+            <i class="list__marker">5</i>
+            Оплатите заказ.
+          </li>
+          <li>
+            <i class="list__marker">6</i>
+            Получите товар в тот же день*<br>
+            <span class="list__hint">*Только для товаров в наличие. Срок поставки запчастей под заказ в среднем составляет 4 недели.</span>
+          </li>
+        </ul>
+        
+        <p class="mt30">
+          Если вам требуется время, чтобы принять решение о покупке, <br>
+          добавьте нужный товар в {% if request.user.is_anonymous %}<a href="/account/register/">зарегистрируйтесь</a> и добавьте товар в избранное{% else %}<a href="account/favorites/">избранное</a>{% endif %}. <br>
+          Теперь вы сможете быстро найти запчасть, как только она вам понадобится.
+        </p>
+      </div> <!-- /.page-section__content -->
+      
+      <div class="title title_underline title_underline-grey">
+        <span>НЕ НАШЛИ ЗАПЧАСТЬ?</span>
+      </div>
+      
+      <p>
+        Мы сделаем это за вас! <a href="#feedbackForm" class="fancybox action">Оставьте заявку</a> или напишите на <a href="mailto: info@lift-fit.ru">info@lift-fit.ru</a>
       </p>
-
-      <div class="features-wrap c">
-        <div class="feature-item l first">
-          <a href="{% url spares-index %}" class="image-link"></a>
-          <h3 class="title"><a href="{% url spares-index %}">Запасные части</a></h3>
-          <div class="content">
-            <a href="{% url spares-index %}">Запчасти</a> в виде
-            интернет-магазина, где
-            представлены лучшие
-            лифтовые запчасти,
-            позволит быстро и легко
-            подобрать необходимую
-              деталь.
-          </div>
-        </div> <!-- /.feature-item -->
-
-        <div class="feature-item l service">
-          <a href="{% url pages-service %}" class="image-link"></a>
-          <h3 class="title"><a href="{% url pages-service %}">Сервис</a></h3>
-          <div class="content">            
-            Компания Лифт-
-            Фит располагает
-            квалифицированными
-            специалистами и готова
-            предложить лучший
-            сервис по монтажу,
-            наладке и техническому
-            обслуживанию Вашего
-            оборудования. Мы
-            готовы предложить Вам
-            <a href="{% url pages-service %}">лучший сервис в России</a>
-          </div>
-        </div> <!-- /.feature-item -->
-
-        <div class="feature-item l news">
-          <a href="{% url pages-post-list %}" class="image-link"></a>
-          <h3 class="title"><a href="{% url pages-post-list %}">Пресс-центр</a></h3>
-          <div class="info c">
-            {% if first_post.photo %}
-              <img src="{{ first_post.thumb.url }}" alt="" class="l">
-            {% endif %}
-            <span class="date">{{ first_post.date_added}} &#151;</span><br>
-            <a href="{{ first_post.get_absolute_url }}">
-              {{ first_post.title }}</a>
-          </div>
-          <div class="content">
-            {{ first_post.text_html|striptags|truncatewords:10 }}
-          </div>
-          <div class="more">
-            <a href="{% url pages-post-list %}">остальные новости</a> 
-          </div>
-        </div> <!-- /.feature-item -->
-      </div> <!-- /.features-wrap -->
-
-      <div class="delivery-wrap c">
-        <div class="image l" style="width: 43%;">
-          <img src="/static/images/map.jpg" alt="">
-        </div> <!-- /.image -->
-        <div class="content l" style="width: 57%">
-          <h2 style="margin-top: 0">Доставка</h2>
-          <p>
-          	«Lift-Fit» заботится о каждом клиенте, поэтому оперативно и максимально продуктивно
-            обрабатывает, а также доставляет каждый заказ. Мы поставляем качественные запчасти
-            для лифтов по всей России с соблюдением всех Ваших требований.
-            Благодаря богатому опыту и четкой организации работы, наши сотрудники оперативно, в
-            течение одного дня, обработают, и при наличии запасных частей на складе, укомплектуют
-            поступивший заказ.
-          </p>
-          <p>
-            Благодаря прямым договорам с поставщиками, мы предлагаем низцие цены и
-            кратчайшие сроки поставки. Доставка по Москве выполняется автотранспортом
-            компании. Доставка грузов во все регионы России и страны СНГ может быть организована
-            любым транспортным средством по желанию заказчика.
-          </p>
-          <p>
-            Мы готовы к сотрудничеству и рассчитываем, что Ваш визит на наш сайт будет полезным
-            и приятным.
-          </p>
-        </div> <!-- /.content -->
-      </div> <!-- /.delivery-wrap -->
-
-      <div class="feedback-wrap c">
-        <div class="content l">
-          <h2 class="mt0">Давайте поговорим</h2>
-          <p>
-            Если у Вас возникли вопросы касательно установки запасных частей, выбора
-            обслуживающей или монтажной организации, или у Вас есть любой другой вопрос, не
-            стесняйтесь, пишите или звоните нам. Мы всегда будем рады помочь Вам и ответим на
-            все Ваши вопросы.
-          </p>
-        </div> <!-- /.content -->
-        <div class="form-wrap r">
-          <form action="/feedback/" method="POST" class="feedback-form c">
-            {% csrf_token %}
-            <div class="form-row c">
-              <div class="form-col l">
-                <input type="text" name="name" placeholder="Ваше имя">
-                <input type="text" name="email" placeholder="Email">
-                <input type="text" name="phone" placeholder="Телефон">
-                <label style="font-size: 12px" for="">Категория</label>
-                <select id="category" name="category">
-                  <option value="order">Заказ запчастей</option>
-                  <option value="delivery">Запрос на поставку оборудования</option>
-                  <option value="service">Запрос на техническое  обслуживание</option>
-                  <option value="installation">Запрос на монтаж оборудования</option>
-                  <option value="advice">Пожелания и предложения</option>
-                </select>
-              </div> <!-- /.form-col -->
-              <div class="form-col r">
-                <textarea name="body" placeholder="Сообщение"></textarea>
-              </div> <!-- /.form-col -->
-            </div> <!-- /.form-row --><br>
-            
-            <div class="form-row">
-              <span class="form-help-text">вы можете прикрепить файлы к сообщению (фотографию , заявку...)</span><br/>
-              <input type="file" name="attachment1" class="form-file-input" />
+    </div> <!-- /.page-section -->
+    
+    <div class="page-section page-section_delivery" id="delivery">
+      <div class="title title_underline">
+        <span>Доставка заказа по всей россии</span>
+      </div> <!-- /.title -->
+      
+      <div class="page-section__content page-section__content_delivery">
+        <ul class="list list_delivery">
+          <li>
+            <i class="list__marker"></i>
+            <div class="list__li__title">Отгрузка товара при наличии на складе:</div>
+            <div class="list__li__text">
+              После согласования условий договора и полной оплаты <br>
+              со стороны заказчика, отгрузка товара и все необходимые <br>
+              документы отправляются в адрес заказчика в тот же день.
             </div>
-
-            <div class="form-row">
-              <button type="submit">Отправить</button>
+          </li>
+          <li>
+            <i class="list__marker"></i>
+            <div class="list__li__title">Товар под заказ:</div>
+            <div class="list__li__text">
+              В случае отсутствия необходимых запчастей на складе, <br>
+              оборудование заказывается на условиях полной или <br>
+              частичной оплаты. 
             </div>
-          </form> <!-- /.feedback-form -->
-        </div> <!-- /.form-wrap -->
-      </div> <!-- /.feedback-wrap -->
-
-      <div class="page-content-wrap c">
-        <div class="column counter-block l c">
-          <div class="counter l">
-            <span>{{ visits_count_zfill|slice:':2' }}</span>
-            <span>{{ visits_count_zfill|slice:'2:' }}</span>
-          </div> <!-- /.counter -->
-          <div class="content l">
-            <h3 class="mt0">Вы наш {{ visits_count }} посетитель</h3>
-            <div class="text">
-              Приходите еще
+          </li>
+          <li>
+            <i class="list__marker"></i>
+            <div class="list__li__title">Отслеживание заказа:</div>
+            <div class="list__li__text">
+              В процессе доставки Вы всегда сможете отследить ваш заказ <br>
+              и узнать его статус в любое время. Срок поставки оборудования <br>
+              до г. Москва в большинстве случаев составляет 3-4 недели.
             </div>
-          </div>
-        </div> <!-- /.column -->
-        {% comment %}
-        <div class="column soc-block r">
-          <h3 class="mt0">Можете отметить это</h3>
-          <div class="soc-links-wrap">
-            <a href="" class="soc-link fb"></a>
-            <a href="" class="soc-link tw"></a>
-          </div> <!-- /.soc-links-wrap -->
-        </div> <!-- /.column -->
-        {% endcomment %}
-      </div> <!-- /.page-content-wrap -->
+          </li>
+        </ul> <!-- /.list -->
+      </div> <!-- /.page-section__content_delivery -->
+      
+      <p class="mt30">
+        Компания «Lift-Fit» сотрудничает с лучшими транспортными компаниями и рада предложить вам БЕСПЛАТНУЮ доставку <br>
+        в любой регион России. Доставка в страны  Европы и СНГ оговаривается отдельно.
+      </p>
+    </div> <!-- /.page-section_delivery -->
+    
+    <div class="page-section page-section_service" id="service">
+      <div class="title title_underline">
+        <span>Сервис лифтового и эскалаторного оборудования</span>
+      </div> <!-- /.title -->
+    
+      <div class="page-section__content page-section__content_service">
+        <p>
+          Благодаря успешному опыту работы в лифтовом бизнесе, мы можем предложить Вам полный список услуг необходимых для безопасной и безопаснойотказной работы Вашего оборудования, который включает в себя:
+        </p>
+        
+        <ul class="list list_text mt30 ml20">
+          <li><i class="list__marker"></i><a target="_blank" href="">техническое обслуживание лифтового и эскалаторного оборудования;</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">ремонт и модернизация лифтовых систем;</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">диагностика технического состояния Вашего оборудования;</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">установка автоматической системы аварийной эвакуации;</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">установка системы контроля доступа (СКД);</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">установка различных мультимедиа в кабину лифта;</a></li>
+          <li><i class="list__marker"></i><a target="_blank" href="">новый дизайн кабины лифта;</a></li>
+        </ul>
+        
+        <a href="#feedbackForm" class="fancybox btn btn_big mt30">Заказать услугу</a>
+      </div>
+    </div> <!-- /.page-section_service -->
+    
+  <script>
+    window.PAGE = 'MAIN';
+  </script>
+
 {% endblock content %}
 
 {% block extrajslibs %}

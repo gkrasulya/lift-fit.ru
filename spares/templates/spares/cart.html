@@ -8,59 +8,70 @@
 {% block pagetitle %}Корзина{% endblock pagetitle %}
 {% block title %}Корзина{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url order-cart %}">Заказ</a>
-	</div>
-{% endblock %}
-
-{% block content %}
-	<form action="/order/form/" method="POST" class="order-form" style="width: 960px">
-		{% csrf_token %}
-		<table class="cart-table" id="cartTable">
-			<thead>
-				<th></th>
-				<th>Товар</th>
-				<th>Количество</th>
-				<th>Цена</th>
-				<th>Итого</th>
-				<th></th>
-			</thead>
-			{% for spare in spare_list %}
-				<tr class="js-product" data-price="{{ spare.price }}" data-id="{{ spare.id }}" data-in-cart="1">
-					<td>
-						<input type="hidden" name="products" value="{{ spare.id }}">
-						<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
-					</td>
-					<td style="width: 25%">{{ spare.title }}</td>
-					<td>
-						<div class="js-quantity-wrap quantity-wrap">
-							<a href="#" class="js-quantity-minus">-</a>
-							<input name="quantities" type="text" class="quantity-input js-quantity-input" value="1">
-							<a href="#" class="js-quantity-plus">+</a><br>
-						</div>
-					</td>
-					<td class="js-price">{{ spare.price }} руб.</td>
-					<td class="js-total">{{ spare.price }} руб.</td>
-					<td class="actions">
-						<a href="#" class="action js-remove-product">убрать</a><br>
-						<a href="#" class="action js-add-to-favorites" data-remove="1">переместить в избранное</a>
-					</td>
-				</tr>
-			{% endfor %}
-		</table>
+		<span>Заказ</span>
+	</div> <!-- /.breadcrumbs -->
+	
+	<section class="page-section page-section_rubber">
+	
+		{% if spare_list %}
 		
-		<div class="cart-hr"></div>
-		
-		<div class="form-row total-row r">
-			Итого: <span id="totalText" class="total-row-text">5000 руб.</span>
-		</div>
-		
-		<div class="c"></div>
-		
-		<div class="form-row r" style="margin-top: 10px;">
-			<button type="submit">дальше &rarr;</button>
-		</div>
-	</form>
+			<form action="/order/form/" method="POST" class="order-form" style="width: 960px">
+				{% csrf_token %}
+				<table class="cart-table" id="cartTable">
+					<thead>
+						<th></th>
+						<th>Товар</th>
+						<th>Количество</th>
+						<th>Цена</th>
+						<th>Итого</th>
+						<th></th>
+					</thead>
+					{% for spare in spare_list %}
+						<tr class="js-product" data-price="{{ spare.price }}" data-id="{{ spare.id }}" data-in-cart="1">
+							<td>
+								<input type="hidden" name="products" value="{{ spare.id }}">
+								<img src="{{ spare.thumb_catalog.url }}" alt="{{ spare.title }}" />
+							</td>
+							<td style="width: 25%">{{ spare.title }}</td>
+							<td>
+								<div class="js-quantity-wrap quantity-wrap">
+									<a href="#" class="js-quantity-minus">-</a>
+									<input name="quantities" type="text" class="quantity-input js-quantity-input" value="1">
+									<a href="#" class="js-quantity-plus">+</a><br>
+								</div>
+							</td>
+							<td class="js-price">{{ spare.price }} руб.</td>
+							<td class="js-total">{{ spare.price }} руб.</td>
+							<td class="actions">
+								<a href="#" class="action js-remove-product">убрать</a><br>
+								<a href="#" class="action js-add-to-favorites" data-remove="1">переместить в избранное</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+				
+				<div class="cart-hr"></div>
+				
+				<div class="form-row total-row r">
+					Итого: <span id="totalText" class="total-row-text">5000 руб.</span>
+				</div>
+				
+				<div class="c"></div>
+				
+				<div class="form-row r" style="margin-top: 10px;">
+					<button type="submit">дальше &rarr;</button>
+				</div>
+			</form>
+			
+		{% else %}
+			
+			<div class="message">
+				В вашей корзине пусто. <a href="/catalog/">Выберите товары в каталоге</a>
+			</div>
+			
+		{% endif %}
+	</section>
 {% endblock content %}

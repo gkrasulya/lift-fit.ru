@@ -8,42 +8,44 @@
 {% block pagetitle %}Избранное{% endblock pagetitle %}
 {% block title %}Избранное{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url account-account %}">Личный кабинет</a>
+		<span>Личный кабинет</span>
 	</div>
-{% endblock %}
-
-{% block content %}
-	{% include 'account/_account_menu.html' %}
 	
-	{% if favorite_list %}
-		<table class="cart-table mt30" id="cartTable">
-			<thead>
-				<th></th>
-				<th>Товар</th>
-				<th>Цена</th>
-				<th></th>
-			</thead>
-			{% for spare in favorite_list %}
-				<tr class="js-product" data-price="{{ spare.price }}" data-id="{{ spare.id }}" data-in-cart="0" data-in-favorites="1">
-					<td>
-						<input type="hidden" name="products" value="{{ spare.id }}">
-						<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
-					</td>
-					<td>{{ spare.title }}</td>
-					<td class="js-price">{{ spare.price }} руб.</td>
-					<td class="actions">
-						<a href="#" class="action js-add-to-favorites" data-remove="1">удалить</a><br>
-						<a href="#" class="action js-favorites-to-cart">переместить в корзину</a><br>
-					</td>
-				</tr>
-			{% endfor %}
-		</table>
-	{% else %}
-		<div class="order-list-message">
-			В избранном ничего нет
-		</div>
-	{% endif %}
+	<section class="page-section">
+	
+		{% include 'account/_account_menu.html' %}
+		
+		{% if favorite_list %}
+			<table class="cart-table mt30" id="cartTable">
+				<thead>
+					<th></th>
+					<th>Товар</th>
+					<th>Цена</th>
+					<th></th>
+				</thead>
+				{% for spare in favorite_list %}
+					<tr class="js-product" data-price="{{ spare.price }}" data-id="{{ spare.id }}" data-in-cart="0" data-in-favorites="1">
+						<td>
+							<input type="hidden" name="products" value="{{ spare.id }}">
+							<img src="{{ spare.thumb_catalog.url }}" alt="{{ spare.title }}" />
+						</td>
+						<td>{{ spare.title }}</td>
+						<td class="js-price">{{ spare.price }} руб.</td>
+						<td class="actions">
+							<a href="#" class="action js-add-to-favorites" data-remove="1">удалить</a><br>
+							<a href="#" class="action js-favorites-to-cart">переместить в корзину</a><br>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<div class="message">
+				В избранном ничего нет
+			</div>
+		{% endif %}
+		
+	</section> <!-- /.page-section -->
 {% endblock content %}

@@ -8,65 +8,67 @@
 {% block pagetitle %}Регистрация{% endblock pagetitle %}
 {% block title %}Регистрация{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url account-register %}">Регистрация</a>
+		<span>Регистрация</span>
 	</div>
-{% endblock %}
+	
+	<section class="page-section page-section_rubber">
+	
+		<div class="form-help-text">
 
-{% block content %}
-
-	<div class="form-help-text">
-
-	 <p>Регистрироваться на нашем сайте или нет, это сугубо Ваш личный выбор, но прежде
-		всего мы бы хотели рассказать о преимуществах нашей компании, которые Вы можете
-		получить зарегистрировавшись у нас:</p>
-		
-	<ul>
-		<li>Персональные условия обслуживания</li>
-		<li>Возможность резервировать запчасти на складе</li>
-		<li>Участвовать в рассылке специальных предложений</li>
-		<li>Получение скидочных купонов от Ваших покупок</li>
-		<li>Сохранение истории Ваших заказов</li>
-		<li>Отслеживание заказа в режиме онлайн</li>
-		<li>Накопительная система скидок от заказов</li>
-		<li>Срочная доставка Ваших заказов</li>
-		<li>Обработка заказа вне очереди</li>
-		<li>И многое другое...</li>
-	</ul>
-	</div>
-
-	<form action="{% url account-register %}" method="POST" class="custom-form" id="registerForm">
-		{% csrf_token %}
-		
-		{% if form.non_field_errors %}
-			<div class="form-error">
-				{% for error in form.non_field_errors %}
-					{{ error }}
-				{% endfor %}
-			</div> <!-- /.form-error -->
-		{% endif %}
-		
-		{% for f in form %}
-			<div class="form-row c">
-				{{ f.label_tag }}
-				{% if f.help_text %}
-					<div class="form-help-text">{{ f.help_text }}</div>
-				{% endif %}
-				{{ f }}
-				{% if f.errors %}
-					<div class="form-error">
-						{% for error in f.errors %}
-							{{ error }}
-						{% endfor %}
-					</div>
-				{% endif %}
-			</div>
-		{% endfor %}
-		
-		<div class="form-row" style="margin-top: -35px">
-			<button type="submit">Зарегистрироваться</button>
+		 <p>Регистрироваться на нашем сайте или нет, это сугубо Ваш личный выбор, но прежде
+			всего мы бы хотели рассказать о преимуществах нашей компании, которые Вы можете
+			получить зарегистрировавшись у нас:</p>
+			
+		<ul>
+			<li>Персональные условия обслуживания</li>
+			<li>Возможность резервировать запчасти на складе</li>
+			<li>Участвовать в рассылке специальных предложений</li>
+			<li>Получение скидочных купонов от Ваших покупок</li>
+			<li>Сохранение истории Ваших заказов</li>
+			<li>Отслеживание заказа в режиме онлайн</li>
+			<li>Накопительная система скидок от заказов</li>
+			<li>Срочная доставка Ваших заказов</li>
+			<li>Обработка заказа вне очереди</li>
+			<li>И многое другое...</li>
+		</ul>
 		</div>
-	</form>
+
+		<form action="{% url account-register %}" method="POST" class="custom-form" id="registerForm">
+			{% csrf_token %}
+			
+			{% if form.non_field_errors %}
+				<div class="form-error">
+					{% for error in form.non_field_errors %}
+						{{ error }}
+					{% endfor %}
+				</div> <!-- /.form-error -->
+			{% endif %}
+			
+			{% for f in form %}
+				<div class="form-row c">
+					{{ f.label_tag }}
+					{% if f.help_text %}
+						<div class="form-help-text">{{ f.help_text }}</div>
+					{% endif %}
+					{{ f }}
+					{% if f.errors %}
+						<div class="form-error">
+							{% for error in f.errors %}
+								{{ error }}
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+			
+			<div class="form-row" style="margin-top: -35px">
+				<button type="submit">Зарегистрироваться</button>
+			</div>
+		</form>
+		
+	</section>
+
 {% endblock content %}

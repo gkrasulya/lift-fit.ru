@@ -7,67 +7,93 @@
 
 {% block pagetitle %}Каталог{% endblock pagetitle %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url spares-index %}">Каталог</a>
+		<span>Каталог</span>
 	</div>
-{% endblock %}
-
-{% block content %}
-      <div class="page-content-wrap">
-        <div class="column l narrow">
-    		  {% get_producer_list as producer_list %}
-
-    		  <div class="category-nav custom">
-            <ul class="category-nav-inner">
-      		    {% for producer in producer_list %}
-      		        <li>
-      		        	<a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
-      		            class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
-      		          {{ producer.title }}</a>
-      		        </li>
-      		    {% endfor %}
-            </ul>   <!-- /.category-nav-inner -->
-    		  </div>
-
-          <div class="category-nav custom mt30">
-                <ul class="category-nav-inner">
-                  {% for rank in ranks %}
-                    {% if rank.0 != 0 %}
-                      <li>
-                        <a href="?category={% if forloop.counter == 1 %}0{% else %}1{% endif %}"
-                          {% if category != None %}
-                            {% if category == '0' and forloop.counter == 1 %}class="selected"{% endif %}
-                            {% if category == '1' and forloop.counter == 2 %}class="selected"{% endif %}
-                          {% endif %}>
-                          {{ rank.0 }}</a>
-                        <ul>
-                          {% for item in rank.1 %}
-                              <li>
-                                <a href="?rank={{ item.0 }}" title="{{ item.1 }}"
-                                  class="png-bg {% if forloop.last %}last{% endif %}
-                                {% if current_rank != None and current_rank == item.0  %} selected{% endif %}">
-                                {{ item.1 }}</a>
-                              </li>
-                          {% endfor %}
-                        </ul>
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                </ul> <!-- /.category-nav -->
-          </div> <!-- /.category-nav custom -->
-        </div> <!-- /.column -->
-
-        <div class="column r wide">
-
+  
+  <section class="page-section page-section_rubber">
+  
+    <div class="page-section__top c">
+      <div class="title title_underline l">
+        <span>Каталог запчастей</span>
+      </div>  
+      
+      <form action="/search/" class="r search-form">
+        <input type="text" placeholder="Поиск товаров" name="query" value="{{ query }}">
+        <button type="submit"><i class="icon icon_search"></i></button>
+      </form>
+    </div> <!-- /.page-section__top -->
+      
+    <div class="catalog-wrap c">
+      <nav class="catalog-nav l">
+        
+          <div class="catalog-nav__subtitle catalog-nav__subtitle_red"><a href="/catalog/?special_types=discount">распродажа %</a></div>
+          <div class="catalog-nav__subtitle catalog-nav__subtitle_yellow"><a href="/catalog/?special_types=action">Акции</a></div>
+          
+          <div class="catalog-nav__subtitle mt25"><span>Бренд</span></div>
+          <ul class="mt10">
+            {% get_producer_list as producer_list %}
+            {% for producer in producer_list %}
+                <li>
+                  <a href="{{ producer.get_absolute_url }}" title="{{ producer.title }}"
+                    class="png-pg {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %}">
+                  {{ producer.title }}</a>
+                </li>
+            {% endfor %}
+          </ul>
+          
+          <div class="catalog-nav__subtitle mt25"><span>Категория</span></div>
+          
+          {% for rank in ranks %}
+            {% if rank.0 != 0 %}
+              <div class="catalog-nav__list-title mt10">
+                <a href="?category={{ forloop.counter0 }}"
+                    {% if category != None %}
+                      {% if category == '0' and forloop.counter == 1 %}class="selected"{% endif %}
+                      {% if category == '1' and forloop.counter == 2 %}class="selected"{% endif %}
+                    {% endif %}>
+                    {{ rank.0 }}</a>
+              </div>
+              <ul>
+                {% for item in rank.1 %}
+                    <li>
+                      <a href="?rank={{ item.0 }}" title="{{ item.1 }}"
+                        class="png-bg {% if forloop.last %}last{% endif %}
+                      {% if current_rank != None and current_rank == item.0  %} selected{% endif %}">
+                      {{ item.1 }}</a>
+                    </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endfor %}
+        
+        </nav> <!-- /.catalog-nav -->
+        
+        <div class="catalog-list r">
+        
           {% if spare_list %}
-            <div class="product-list c">
-              {% for spare in spare_list %}
-                {% include 'spares/_spare.html' %}
-              {% endfor %}
-            </div> <!-- /.product-list -->
+          
+            {% for spare in spare_list %}
+              {% include 'spares/_spare.html' %}
+            {% endfor %}
+            
+          {% else %}
+          
+            <div class="message">
+              {% if query %}
+                По вашему запросу ничего не найдено
+              {% else %}
+                В этой категории пусто
+              {% endif %}
+            </div>
+          
           {% endif %}
-        </div> <!-- /.column -->
-      </div> <!-- /.page-content-wrap -->
+            
+        </div> <!-- /.catalog-list -->
+        
+      </div> <!-- /.catalog-wrap -->
+    
+  </section> <!-- /.page-section -->
 {% endblock content %}

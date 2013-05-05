@@ -1,38 +1,39 @@
-<div class="product-item c l js-product {% if spare.special_types %}special special-{{ spare.special_types }}{% endif %}" id="spare{{ spare.id }}" data-id="{{ spare.id }}" data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
-	{% if spare.special_types %}
-		<div class="overlay {{ spare.special_types }}"></div>
+<div class="catalog-item js-product {% if spare.special_types %}special catalog-item_{{ spare.special_types }}{% endif %}"
+		id="spare{{ spare.id }}"
+		data-id="{{ spare.id }}"
+		data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
+  <div class="catalog-item__title">{{ spare.title }}</div> <!-- /.catalog-item__title -->
+  <div class="catalog-item__description">{{ spare.description }}</div>
+  <a href="{{ spare.photo.url }}" class="fancybox">
+  	<img src="{{ spare.thumb_catalog.url }}" alt="" class="catalog-item__image">
+  </a>
+  
+  <div class="catalog-item__price">
+    <span class="catalog-item__price__label">Цена:</span>
+    <span class="catalog-item__price__value">{{ spare.price }} Р</span>
+    <span class="catalog-item__price__new">{{ spare.new_price }} Р</span>
+  </div> <!-- /.catalog-item__price -->
+  
+  <div class="catalog-item__buttons">
+	{% if spare.id in cart_ids %}
+		<a href="/order/cart/">В корзине</a>
+	{% else %}
+		<a href="/feedback/" class="btn btn_cart js-add-to-cart">В корзину</a>
 	{% endif %}
-	<div class="image l" style="background-image: url({{ spare.thumb.url }})">
-		<!-- <a href="{{ spare.photo.url }}" class="fancybox"> -->
-			<img src="{{ spare.thumb.url }}" alt="{{ spare.title }}" />
-		<!-- </a> -->
-	</div> <!-- /.image -->
-	<div class="content l">
-		<div class="title">{{ spare.title }}</div>
-		<div class="description">{{ spare.description }}</div>
-		<div class="price">
-			<span class="price-price">{{ spare.price }}
-				<img src="/static/images/ruble_icon.png"></span>
-			{% if spare.special_types %}
-				<span class="new-price {{ spare.special_types }}">{{ spare.new_price }}
-					<img src="/static/images/ruble_icon_big.png"></span>
-			{% endif %}
-		</div> <!-- /.price -->
-		<div class="buy-wrap" style="font-size: 12px;">
-			{% if spare.in_cart %}
-				<a href="/order/cart/">В корзине</a>
-			{% else %}
-				<a href="/feedback/" class="but-btn js-add-to-cart">В корзину</a>
-			{% endif %}
-		</div> <!-- /.buy-wrap -->
-		{% if not user.is_anonymous %}
-			<div class="favorites-wrap mt5" style="font-size: 12px;">
-				{% if spare.in_favorites %}
-					<a href="/account/favorites/">В избранном</a>
-				{% else %}
-					<a href="#" class="action js-add-to-favorites" title="Добавить в избранное">В избранное</a>
-				{% endif %}
-			</div>
+	
+	
+	{% if not user.is_anonymous %}
+		{% if spare.id in favorite_ids %}
+			<a href="/account/favorites/">В избранном</a>
+		{% else %}
+			<a href="#" class="btn btn_favorites js-add-to-favorites" title="Добавить в избранное">В избранное</a>
 		{% endif %}
-	</div> <!-- /.content -->
-</div> <!-- /.product-item -->
+	{% endif %}
+	
+  </div> <!-- /.catalog-item__buttons -->
+  
+	{% if spare.special_types %}
+		<div class="marker marker_{{ spare.special_types }}"></div>
+	{% endif %}
+  
+</div> <!-- /.catalog-item -->

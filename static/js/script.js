@@ -15,12 +15,6 @@ return cookieValue;}};
 		$b = $('body'),
 		$slider = $('#slider');
 
-	if ($().nivoSlider) {
-		$slider.nivoSlider({
-			directionNav: false
-		});
-	}
-
 	if(! Modernizr.input.placeholder) {
 		$('input[placeholder], textarea[placeholder]').each(function(){
 			var $this = $(this);
@@ -157,6 +151,7 @@ return cookieValue;}};
 					} else {
 						$link.replaceWith($('<a href="/account/favorites/">В избранном</a>'));
 					}
+					refreshCart();
 				} else {
 					alert('Ошибка');
 				}
@@ -229,7 +224,7 @@ return cookieValue;}};
 			url: '/get-cart/',
 			success: function(res) {
 				if (res && res.ok) {
-					$('#headerCart').html(res.html)
+					$('#bookmarks').html(res.html)
 				}
 			}
 		});
@@ -306,7 +301,7 @@ return cookieValue;}};
 		$overlay.css({
 			width: $nameRow.width(),
 			height: $nameRow.height(),
-			background: '#fff',
+			background: 'url(/static/images/body.jpg)',
 			position: 'absolute',
 			left: 0,
 			top: 0
@@ -314,25 +309,110 @@ return cookieValue;}};
 		$overlay.appendTo($nameRow);
 	}
 
-	var $pageSideNav = $('#pageSideNav');
 
-	if ($pageSideNav.length) {
-		var $links = $pageSideNav.find('.js-link'),
-			$pages = $('.js-page'),
-			$pageTitle = $('#pageTitle');
+	var $scrollBody = $('html, body');
 
-		$links.each(function(i) {
-			var $link = $(this);
-			$link.click(function(e) {
-				e.preventDefault();
+	var Navigation = {
+		init: function() {
+			if (window.PAGE !== 'MAIN') {
+				return;
+			}
 
-				$links.removeClass('selected');
-				$link.addClass('selected');
-				$pages.hide();
-				$pages.eq(i).show();
-				$pageTitle.html($link.html());
-			});
-		});
-	}
+			this.$nav = $('#nav');
+			this.$links = $('a', this.$nav);
+
+			this.$nav.on('click', 'a', $.proxy(this._onClick, this));
+
+			this._checkSection();
+		},
+
+		_onClick: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var $link = $(e.currentTarget),
+				section = $link.data('section');
+
+			if ($link.hasClass('selected')) {
+				return;
+			}
+
+			this.$links.removeClass('selected');
+			$link.addClass('selected');
+
+			this._scrollToSection(section);
+			document.location.hash = 'section=' + section;
+
+			return false;
+		},
+
+		_getLinkBySection: function(section) {
+			return this.$links.filter('[data-section=' + section + ']');
+		},
+
+		_scrollToSection: function(section) {
+			var $section = $('#' + section);
+
+			$scrollBody.animate({
+				scrollTop: $section.offset().top
+			}, 250);
+		},
+
+		_checkSection: function() {
+			var m = document.location.hash.match(/section=(about|catalog|delivery|howto|service)/),
+				section = m ? m[1] : 'catalog';
+
+			this.$links.removeClass('selected');
+			this._getLinkBySection(section).addClass('selected');
+		}
+	};
+
+	Navigation.init();
+
+	var Carousel = {
+		init: function() {
+			this.$carousel = $('#carousel');
+			this.$inner = $('.js-inner', this.$carousel);
+			this.$items = $('.js-item', this.$carousel);
+
+			this._length = this.$items.length;
+			this._itemWidth = this.$items.outerWidth();
+			this._maxLeft = 0;
+			this._minLeft = -((this._length - 4) * this._itemWidth);
+			this._currentLeft = 0;
+
+			this.$carousel.on('click', '.js-arrow', $.proxy(this._onArrowClick, this));
+		},
+
+		_onArrowClick: function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var $arrow = $(e.currentTarget),
+				direction = $arrow.data('direction');
+
+			this._move(direction);
+		},
+
+		_move: function(direction) {
+			var left = this._currentLeft + this._itemWidth * (direction === 'left' ? 1 : -1);
+
+			if (left > this._maxLeft) {
+				left = this._maxLeft;
+			}
+			if (left < this._minLeft) {
+				left = this._minLeft;
+			}
+
+			this._currentLeft = left;
+			this.$inner.stop().animate({
+				marginLeft: left
+			}, 200);
+		}
+	};
+
+	Carousel.init();
+
+	$('.fancybox').fancybox();
 
 })(jQuery);
