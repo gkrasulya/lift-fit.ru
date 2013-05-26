@@ -252,7 +252,7 @@ def order(request):
 	body = []
 	total_sum = 0
 	for i, spare in enumerate(spare_list):
-		body.append(u'%s - %s\n шт.' % (spare.title, quantities[i]))
+		body.append(u'* %s - %s шт.' % (spare.title, quantities[i]))
 		total_sum += spare.price * quantities[i]
 		order_products.append({
 			'spare': spare,
