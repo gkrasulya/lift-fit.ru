@@ -161,7 +161,7 @@ ORDER_EMAILS = ['gkrasulya@gmail.com', 'info@lift-fit.ru', 'entsodj@gmail.com']
 
 EMAIL_HOST = 'localhost'
 EMAIL_POST = 1025
-EMAIL_HOST_USER = 'info@lift-fit.ru'
+EMAIL_HOST_USER = 'feedback@8hands.ru'
 EMAIL_HOST_PASSWORD = 'gosha123'
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = 'info@lift-fit.ru'
