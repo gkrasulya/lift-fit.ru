@@ -17,12 +17,15 @@
 	<section class="page-section page-section_rubber">
 	
 		<div class="order-products-info">
-			{% for product in order_products %}
-				<div class="order-products-info-item">
+	        <ul class="list list_text mt30 ml20">
+			  {% for product in order_products %}
+	            <li>
+	              <i class="list__marker"></i>
 					<strong>{{ product.spare.title }}</strong>
 					{{ product.quantity }} шт.
-				</div>
-			{% endfor %}
+	            </li>
+	          {% endfor %}
+	        </ul>
 			<div class="total-row mt15">
 				Итого <span class="total-row-text">{{ total_sum }} руб.</span>
 			</div>
