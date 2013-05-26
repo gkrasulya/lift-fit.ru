@@ -17,7 +17,7 @@ ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 
 class OrderForm(forms.ModelForm):
-	self.body = ''
+	body = ''
 
 	class Meta:
 		model = Order
