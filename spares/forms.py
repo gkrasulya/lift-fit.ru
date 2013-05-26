@@ -17,6 +17,8 @@ ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 
 class OrderForm(forms.ModelForm):
+	self.body = ''
+
 	class Meta:
 		model = Order
 		exclude = ('date_added', 'read', 'status', 'body', 'total_sum', 'user')
@@ -62,7 +64,7 @@ def send_order(order, **kwargs):
 	if ORDER_SEND_EMAIL:
 		email_from = EMAIL_HOST_USER
 
-		body = u'%s\n\nИмя: %s\nEmail: %s\nТелефон: %s\nКупон: %s' % (
+		body = u'%s\n\nИмя: %s\nEmail: %s\nТелефон: %s\nКупон: %s\n\nВы' % (
 			order.body,
 			order.name,
 			order.email or u'нет',
@@ -76,7 +78,14 @@ def send_order(order, **kwargs):
 		ctx = Context({
 			'body': body
 		})
-		body = get_template('spares/order_email.eml').render(ctx)
+		# body = get_template('spares/order_email.eml').render(ctx)
 
 		email = EmailMessage(_(u'Обратная связь'), body, 'info@lift-fit.ru', FEEDBACK_EMAILS)
+		email.send(fail_silently=False)
+
+		customer_body = get_template('spares/order_email.eml').render(Context({
+			'body': order.body	
+		}))
+
+		email = EmailMessage(_(u'Заказ на lift-fit.ru'), customer_body, 'info@lift-fit.ru', [order.email])
 		email.send(fail_silently=False)
