@@ -3,7 +3,7 @@ def rel(path):
 	"""returns relative path"""
 	return os.path.join(os.path.dirname(__file__), path)
 
-DEBUG = 'PRODUCTION' not in os.environ
+DEBUG = 'DEV' in os.environ
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
