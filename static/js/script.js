@@ -356,12 +356,12 @@ return cookieValue;}};
 				section = $link.data('section'),
 				href = $link.attr('href');
 
-			if ($link.hasClass('selected')) {
+			if ($link.data('link')) {
+				document.location.href = href;
 				return;
 			}
 
-			if ($link.data('link')) {
-				document.location.href = href;
+			if ($link.hasClass('selected')) {
 				return;
 			}
 

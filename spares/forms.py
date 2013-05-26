@@ -15,6 +15,7 @@ from models import *
 ORDER_SEND_EMAIL = getattr(settings, 'ORDER_SEND_EMAIL', True)
 ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
+FEEDBACK_EMAILS = getattr(settings, 'FEEDBACK_EMAILS', 'feedback@lift-fit.ru')
 
 class OrderForm(forms.ModelForm):
 	body = ''
@@ -61,19 +62,16 @@ def send_delivery(subject, body):
 	
 
 def send_order(order, customer_body, **kwargs):
-	if ORDER_SEND_EMAIL:
+	if ORDER_SEND_EMAIL or True:
 		email_from = EMAIL_HOST_USER
 
 		body = u'%s\n\nИмя: %s\nEmail: %s\nТелефон: %s\nКупон: %s\n\nВы' % (
-			order.body,
+			customer_body,
 			order.name,
 			order.email or u'нет',
 			order.phone or u'нет',
 			order.coupon or u'нет',
 		)
-
-		if message.email:
-			email_from = message.email
 
 		ctx = Context({
 			'body': body
