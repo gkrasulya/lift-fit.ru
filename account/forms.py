@@ -58,6 +58,7 @@ class RegisterForm(forms.Form):
 		profile = UserProfile(user=user)
 		profile.get_emails = data['get_emails']
 		profile.save()
+		send_register_email(data['email'], data['password'])
 		return user
 
 
@@ -126,3 +127,14 @@ def send_restore_email(email, token):
 
 	email = EmailMessage(_(u'Обратная связь'), body, email_from, [email])
 	email.send(fail_silently=False)
+
+def send_register_email(email, password):
+	email_from = EMAIL_HOST_USER
+	ctx = Context({
+		'email': email,
+		'password': password
+	})
+	body = get_template('spares/register_email.eml').render(ctx)
+
+	email = EmailMessage(_(u'Регистрация на lift-fit.ru'), body, email_from, [email])
+	email.send(fail_silently=True)
