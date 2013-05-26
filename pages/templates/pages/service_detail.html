@@ -6,10 +6,6 @@
 {% block pagetitle %}{{ page.get_page_title }}{% endblock pagetitle %}
 {% block title %}{{ page.title }}{% endblock title %}
 
-{% block body_class %}
-	{% if main %}main{% else %}{{ page.slug }}{% endif %}
-{% endblock %}
-
 {% block content %}
 
 	<section class="page-section page-section_rubber">
@@ -23,6 +19,15 @@
 		<div style="text-align: justify !important;" class="mt30">
 			{{ page.text_html|safe }}
 		</div>
+        
+        <ul class="list list_text mt30 ml20">
+          {% for service_page in service_pages %}
+            <li>
+              <i class="list__marker"></i>
+              <a href="/service/{{ service_page.slug }}">{{ service_page.title }}</a>;
+            </li>
+          {% endfor %}
+        </ul>
 	</section>
 	
 {% endblock content %}

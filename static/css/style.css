@@ -202,17 +202,25 @@ body {
         }
 
       .page-header__contacts {
-        font-size: 14px;
+        font-size: 18px;
       }
     .page-header__right__bottom {
       margin-top: 5px;
+    }
+
+    .page-header__lang {
+      line-height: 18px;
+      text-align: right;
+      position: relative;
+      top: -11px;
+      width: 45px;
     }
 
 .page-vl {
   background: #b2b2b2;
   bottom: 0;
   left: 50%;
-  margin-left: -530px;
+  margin-left: -512px;
   position: fixed;
   top: 0;
   width: 1px;
@@ -771,6 +779,22 @@ body {
     background-position: -33px -72px;
     height: 19px;
     width: 17px;
+  }
+  .icon_flag {
+    height: 16px;
+    width: 25px;
+  }
+  .icon_flag_ru {
+    background-position: -240px -2px;
+  }
+  .icon_flag_en {
+    background-position: -272px -2px;
+  }
+  .icon_flag_ru.icon_selected {
+    background-position: -240px -18px;
+  }
+  .icon_flag_en.icon_selected {
+    background-position: -272px -18px;
   }
 
 label.invalid {

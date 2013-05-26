@@ -11,7 +11,9 @@ urlpatterns = patterns('',
 
   url(r'^$', views.index, name='pages-index'),
   url(r'^about/$', views.page, { 'slug': 'about' }, name='pages-about'),
+  url(r'^english/$', views.page, { 'slug': 'english' }, name='pages-english'),
   url(r'^service/$', views.page, { 'slug': 'service' }, name='pages-service'),
+  url(r'^service/(?P<slug>[\w_-]+)/$', views.service_detail, name='pages-service-detail'),
   
   url(r'^callback/$', views.callback, name='pages-callback'),
   url(r'^feedback/$', views.feedback, name='pages-feedback'),

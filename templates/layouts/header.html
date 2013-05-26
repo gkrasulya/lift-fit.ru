@@ -17,6 +17,11 @@
       </div> <!-- /.page-header__auth-links -->
       <div class="page-header__bookmarks l c" id="bookmarks"></div> <!-- /.page-header__bookmarks -->
       <div class="page-header__search r"></div>
+      
+      <div class="page-header__lang r">
+        <a title="Русский" href="/"><i class="icon {% if not is_english %}icon_selected{% endif %} icon_flag icon_flag_ru"></i></a><br>
+        <a title="English" href="/english"><i class="icon {% if is_english %}icon_selected{% endif %} icon_flag icon_flag_en"></i></a>
+      </div>
     </div> <!-- /.page-header__right__top -->
     
     <div class="page-header__right__bottom c">
@@ -24,12 +29,12 @@
         <div class="page-header__contacts__left l">
           <i class="icon icon_phone"></i>
           8-926-872-00-11<br>
-          <a href="#callbackForm" class="action fancybox">Заказать обратный звонок</a>
+          {#<a href="#callbackForm" class="action fancybox">Заказать обратный звонок</a>#}
         </div> <!-- /.page-header__contacts__left -->
         <div class="page-header__contacts__right l ml10">
           <i class="icon icon_email"></i>
           <a href="mailto:info@lift-fit.ru">info@lift-fit.ru</a><br>
-          <a href="skype:entsodj">entsodj</a>
+          {#<a href="skype:entsodj">entsodj</a>#}
         </div> <!-- /.page-header__contacts__right -->
       </div>
     </div> <!-- /.page-header__right__bottom -->

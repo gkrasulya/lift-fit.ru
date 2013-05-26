@@ -189,20 +189,17 @@
     
       <div class="page-section__content page-section__content_service">
         <p>
-          Благодаря успешному опыту работы в лифтовом бизнесе, мы можем предложить Вам полный список услуг необходимых для безопасной и безопаснойотказной работы Вашего оборудования, который включает в себя:
+          Благодаря успешному опыту работы в лифтовом бизнесе, мы можем предложить Вам <a href="/service">полный список услуг</a> необходимых для безопасной и безопаснойотказной работы Вашего оборудования, который включает в себя:
         </p>
         
         <ul class="list list_text mt30 ml20">
-          <li><i class="list__marker"></i><a target="_blank" href="">техническое обслуживание лифтового и эскалаторного оборудования;</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li><i class="list__marker"></i><a target="_blank" href="">ремонт и модернизация лифтовых систем;</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li><i class="list__marker"></i><a target="_blank" href="">диагностика технического состояния Вашего оборудования;</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li><i class="list__marker"></i><a target="_blank" href="">установка автоматической системы аварийной эвакуации;</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li><i class="list__marker"></i><a target="_blank" href="">установка системы контроля доступа (СКД);</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li><i class="list__marker"></i><a target="_blank" href="">установка различных мультимедиа в кабину лифта;</a> <a href="#feedbackForm" class="action fancybox">Оформить заявку</a></li>
-          <li>
-            <i class="list__marker"></i><a target="_blank" href="">новый дизайн кабины лифта;</a>
-            <a href="#feedbackForm" class="action fancybox">Оформить заявку</a>
-          </li>
+          {% for service_page in service_pages %}
+            <li>
+              <i class="list__marker"></i>
+              <a href="/service/{{ service_page.slug }}">{{ service_page.title }}</a>;
+              <small><a href="#feedbackForm" class="action fancybox">Оформить заявку</a></small>
+            </li>
+          {% endfor %}
         </ul>
       </div>
     </div> <!-- /.page-section_service -->

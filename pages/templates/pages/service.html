@@ -6,14 +6,40 @@
 {% block pagetitle %}Сервис{% endblock pagetitle %}
 {% block title %}{% endblock title %}
 
-{% block breadcrumbs %}
+{% block content %}
 	<div class="breadcrumbs">
 		<a href="/">Главная</a> /
-		<a href="{% url pages-service %}">Сервис</a>
+		<span>Сервис</span>
 	</div>
-{% endblock %}
+        
+  <section class="page-section page-section_rubber">
+  
+    <div class="page-section__top c">
+      <div class="title title_underline l">
+        <span>Сервис</span>
+      </div>  
+    </div> <!-- /.page-section__top -->
+        
+    <p>
+    Приоритетом нашей компании является гарантия качества поставляемой продукции и услуг по
+    техническому обслуживанию лифтов и эскалаторов.</p>
+    <p>
+    Наши заказчики высоко ценят надежность и комфортность поездок, а также высокий уровень
+    состояния лифтового и эскалаторного оборудования. Благодаря гибкому подходу к каждому
+    клиенту, мы можем заключить индивидуальный договор на техобслуживание. Только регулярное
+    и качественное техническое обслуживание гарантирует 100% надежность вашего оборудования.</p>
 
-{% block content %}
+    <ul class="list list_text mt30 ml20">
+      {% for service_page in service_pages %}
+        <li>
+          <i class="list__marker"></i>
+          <a href="/service/{{ service_page.slug }}">{{ service_page.title }}</a>;
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+        
+    {% comment %}
   <div class="page">
     <div class="page-left l">
       <h2 id="pageTitle" class="page-page-title">Техническое обслуживание</h2>
@@ -172,6 +198,8 @@
     
     <div class="c"></div>
   </div> <!-- /.page -->
+  
+  {% endcomment %}
 
 {% endblock content %}
 

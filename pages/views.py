@@ -24,6 +24,7 @@ def index(request):
 	first_post = Post.objects.order_by('-date_added')[0]
 	visits_count = Visit.objects.count() + VISITS_COUNT_METRIKA
 	action_spares = Spare.objects.filter(special_types='action')
+	service_pages = Page.objects.filter(name='service')
 	
 	return render(request, 'pages/index.html', {
 		'page': page,
@@ -32,7 +33,8 @@ def index(request):
 		'first_post': first_post,
 		'slug': 'index',
 		'visits_count': visits_count,
-		'visits_count_zfill': str(visits_count).zfill(4)
+		'visits_count_zfill': str(visits_count).zfill(4),
+		'service_pages': service_pages,
 	})
 
 def english(request):
@@ -44,14 +46,31 @@ def english(request):
 		'slug': 'english'
 	})
 
+def service_detail(request, slug):
+	"""simple text page"""
+	page = Page.objects.get(slug=slug)
+
+	template_name = 'service_detail'
+	service_pages = Page.objects.filter(name='service')
+	
+	return render(request, 'pages/%s.html' % template_name, {
+		'page': page,
+		'slug': slug,
+		'service_pages': service_pages,
+	})
+
 def page(request, slug):
 	"""simple text page"""
 	page = Page.objects.get(slug=slug)
+
+	service_pages = None
+	is_english = slug == 'english'
 
 	template_name = 'page'
 	if slug == 'usloviya-dostavki':
 		template_name = 'delivery'
 	elif slug == 'service':
+		service_pages = Page.objects.filter(name='service')
 		template_name = 'service'
 	elif slug == 'about':
 		template_name = 'about'
@@ -59,7 +78,9 @@ def page(request, slug):
 	return render(request, 'pages/%s.html' % template_name, {
 		'page': page,
 		'main': slug == 'index',
-		'slug': slug
+		'slug': slug,
+		'service_pages': service_pages,
+		'is_english': is_english
 	})
 
 def custom_page(request, slug):
