@@ -281,9 +281,9 @@ def order(request):
 			form = OrderForm(data)
 
 	if is_order and form.is_valid():
+		form.body = body
 		order = form.save(commit=False)
 		order.total_sum = total_sum
-		order.body = body
 		order.status = 0
 		if not request.user.is_anonymous():
 			order.user = request.user
