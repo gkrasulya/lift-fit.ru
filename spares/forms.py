@@ -40,7 +40,7 @@ class OrderForm(forms.ModelForm):
 		order = super(OrderForm, self).save(*args, **kwargs)
 		# data = dict([(kw, val) for kw, val in self.data.iteritems() if hasattr(Order, kw)])
 		# order = Order(**data)
-		send_order(order)
+		send_order(order, customer_body=self.body)
 		return order
 
 
@@ -60,7 +60,7 @@ def send_delivery(subject, body):
 		EmailMessage(subject, body, 'info@lift-fit.ru', [user.email]).send(fail_silently=False)
 	
 
-def send_order(order, **kwargs):
+def send_order(order, customer_body, **kwargs):
 	if ORDER_SEND_EMAIL:
 		email_from = EMAIL_HOST_USER
 
@@ -84,7 +84,7 @@ def send_order(order, **kwargs):
 		email.send(fail_silently=False)
 
 		customer_body = get_template('spares/order_email.eml').render(Context({
-			'body': order.body	
+			'body': customer_body
 		}))
 
 		email = EmailMessage(_(u'Заказ на lift-fit.ru'), customer_body, 'info@lift-fit.ru', [order.email])
