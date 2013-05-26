@@ -353,9 +353,15 @@ return cookieValue;}};
 			e.preventDefault();
 
 			var $link = $(e.currentTarget),
-				section = $link.data('section');
+				section = $link.data('section'),
+				href = $link.attr('href');
 
 			if ($link.hasClass('selected')) {
+				return;
+			}
+
+			if ($link.data('link')) {
+				document.location.href = href;
 				return;
 			}
 
