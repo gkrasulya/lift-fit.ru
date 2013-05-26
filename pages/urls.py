@@ -13,6 +13,7 @@ urlpatterns = patterns('',
   url(r'^about/$', views.page, { 'slug': 'about' }, name='pages-about'),
   url(r'^service/$', views.page, { 'slug': 'service' }, name='pages-service'),
   
+  url(r'^callback/$', views.callback, name='pages-callback'),
   url(r'^feedback/$', views.feedback, name='pages-feedback'),
 	url(r'^feedback/thanks/$', views.feedback_thanks, name='pages-feedback-thanks'),
 

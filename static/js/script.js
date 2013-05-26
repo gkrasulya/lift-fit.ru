@@ -36,6 +36,28 @@ return cookieValue;}};
 	}
 
 
+	var $callbackForm = $('#callbackForm');
+
+	if ($callbackForm) {
+		$callbackForm.submit(function() {
+			var $self = $(this);
+			
+			$self.find('button').html('Отправляется...').attr('disabled', true);
+
+			if (emptyFiles) {
+
+				if ($self.valid()) {
+					$.post('/callback/', $self.serialize(), function(res) {
+						$self.html('<p class="form-message">Мы перезвоним в ближайшее время!</p>');
+					});
+				}
+				return false;
+
+			}
+		});
+	}
+
+
 	var $feedbackForm = $('#feedbackForm');
 
 	if ($feedbackForm.length) {

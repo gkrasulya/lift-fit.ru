@@ -1,5 +1,8 @@
+# coding: utf-8
+
 from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail, EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.template import RequestContext
@@ -10,6 +13,9 @@ from django.conf import settings
 from forms import *
 from models import *
 from spares.models import *
+
+EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
+FEEDBACK_EMAILS = getattr(settings, 'FEEDBACK_EMAILS', 'gkrasulya@gmail.com')
 
 VISITS_COUNT_METRIKA = 2147
 
@@ -72,6 +78,20 @@ def post_detail(request, slug, id):
 	return render(request, 'pages/post_detail.html', {
 		'post': post
 	})
+
+def callback(request):
+
+	if request.method == 'POST':
+		email_from = EMAIL_HOST_USER
+
+		body = u'Имя: %s\n\nТелефон: %s' % (
+			request.POST.get('name'),
+			request.POST.get('phone'),
+		)
+
+		email = EmailMessage(u'Обратный звонок', body, email_from, FEEDBACK_EMAILS)
+		email.send(fail_silently=True)
+	return HttpResponse('Ok')
 
 def feedback(request):
 	"""feedback page"""

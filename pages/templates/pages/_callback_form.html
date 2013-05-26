@@ -1,0 +1,16 @@
+  <form action="" class="custom-form c" id="callbackForm" enctype="multipart/form-data" method="POST" style="width: 500px;">
+    <p>Закажите обратный звонок и мы перезвоним в ближайшее время.</p>
+
+      <div class="form-row">
+        <input type="text" name="name" id="name" maxlength="255" placeholder="Имя" />
+      </div>
+      <div class="form-row">
+        <input type="text" name="phone" id="phone" maxlength="255" placeholder="Телефон" />
+      </div>
+
+      <div class="form-row">
+        <button type="submit">Отправить</button>
+      </div>
+
+    {% csrf_token %}
+  </form>

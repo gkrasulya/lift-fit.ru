@@ -2,16 +2,21 @@
 		id="spare{{ spare.id }}"
 		data-id="{{ spare.id }}"
 		data-in-cart="{% if spare.in_cart %}1{% else %}0{% endif %}">
-  <div class="catalog-item__title">{{ spare.title }}</div> <!-- /.catalog-item__title -->
-  <div class="catalog-item__description">{{ spare.description }}</div>
-  <a href="{{ spare.photo.url }}" class="fancybox">
-  	<img src="{{ spare.thumb_catalog.url }}" alt="" class="catalog-item__image">
+
+	<header class="catalog-item__header">
+		<div class="catalog-item__title">{{ spare.title }}</div> <!-- /.catalog-item__title -->
+		<div class="catalog-item__description">{{ spare.description }}</div>
+	</header>
+  <a href="{{ spare.photo.url }}" class="fancybox catalog-item__image">
+  	<img src="{{ spare.thumb_catalog.url }}" alt="">
   </a>
   
   <div class="catalog-item__price">
     <span class="catalog-item__price__label">Цена:</span>
-    <span class="catalog-item__price__value">{{ spare.price }} Р</span>
-    <span class="catalog-item__price__new">{{ spare.new_price }} Р</span>
+    <span class="catalog-item__price__value">{{ spare.price }} руб.</span>
+    {% if spare.new_price %}
+	    <span class="catalog-item__price__new">{{ spare.new_price }} руб.</span>
+	{% endif %}
   </div> <!-- /.catalog-item__price -->
   
   <div class="catalog-item__buttons">

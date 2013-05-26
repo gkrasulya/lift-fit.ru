@@ -29,7 +29,7 @@
 					{% for order in order_list %}
 						<tr class="order-item">
 							<td style="width: 35%">{{ order.get_body_html|safe }}</td>
-							<td>{{ order.total_sum }}</td>
+							<td>{{ order.total_sum }} руб.</td>
 							<td>{{ order.get_readable_status }}</td>
 							<td>{{ order.date_added }}</td>
 						</tr>
