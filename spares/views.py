@@ -52,7 +52,7 @@ def index(request, slug=None, id=None):
 		favorite_list = request.user.favorite_list.all()
 		favorite_ids = [spare.id for spare in favorite_list]
 
-	spare_list = spare_list.order_by('special_types').all()
+	spare_list = spare_list.order_by('-special_types').all()
 
 	return render(request, 'index.html', {
 		'spare_list': spare_list,

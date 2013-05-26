@@ -681,12 +681,12 @@ body {
     }
     .catalog-item__price__old {
       color: #838383;
-      font-size: 15px;
+      font-size: 12px;
       text-decoration: line-through;
     }
     .catalog-item__price__value {
       color: #040404;
-      font-size: 22px;
+      font-size: 18px;
       font-weight: bold;
     }
   .catalog-item__buttons {
