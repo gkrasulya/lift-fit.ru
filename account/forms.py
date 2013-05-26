@@ -15,7 +15,7 @@ from models import *
 
 ORDER_SEND_EMAIL = getattr(settings, 'ORDER_SEND_EMAIL', True)
 ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
-EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
+EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'info@lift-fit.ru')
 
 class RegisterForm(forms.Form):
 	email = forms.EmailField(_(u'Email'), required=True)
