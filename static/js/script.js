@@ -392,6 +392,10 @@ return cookieValue;}};
 
 			this.$links.removeClass('selected');
 			this._getLinkBySection(section).addClass('selected');
+
+			setTimeout($.proxy(function() {
+				this._scrollToSection(section);
+			}, this), 500);
 		}
 	};
 
