@@ -1,7 +1,28 @@
-Здравствуйте.
+{% extends 'base.eml' %}
 
-Вы зарегистрировались на сайте http://lift-fit.ru
+{% block content %}
 
-Данные для входа:
-Логин: {{ email }}
-Пароль: {{ password }}
+	<table cellpading="0" cellspacing="0" width="500px" align="center">
+	  <tr>
+	    <td style="font-family: Arial, sans-serif; font-size: 14px;">
+
+			Здравствуйте!<br><br>
+			
+			Мы рады приветствовать Вас на сайте <a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}" target="_blank">lift-fit.ru</a>. Здесь Вас ждут различные акции и скидки для E-mail подписчиков а также спецпредложения для постоянных клиентов и парнеров нашего проекта. Следите за нашими новостями, поднимайтесь вместе с нами!<br><br>
+
+			<strong>
+				Ваши регистрационные данные:<br>
+				Логин: {{ email }}<br>
+				Пароль: {{ password }}
+			</strong><br><br>
+			
+			<a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}/account" target="_blank">Перейти в личный кабинет</a>.<br><br>
+			
+			Первый подарок мы приготовили уже сегодня: скидка 5% за первый заказ на сумму от 5000 рублей. Достаточно указать промо-код: <strong>welcome to lift-fit</strong> при составлении заказа через онлайн-магазин или прислать его по почте <a style="color: #06F; text-decoration: underline;" href="mailto:info@lift-fit.ru">info@lift-fit.ru</a> вместе с заявкой.<br><br>
+
+			Будьте внимательны, воспользоваться предложением можно до 30.06.2013
+	    </td>
+	  </tr>
+	</table>
+
+{% endblock %}

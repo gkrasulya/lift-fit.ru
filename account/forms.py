@@ -135,7 +135,8 @@ def send_register_email(email, password):
 	email_from = EMAIL_HOST_USER
 	ctx = Context({
 		'email': email,
-		'password': password
+		'password': password,
+		'SITE_ADDR': SITE_ADDR,
 	})
 	body = get_template('spares/register_email.eml').render(ctx)
 
