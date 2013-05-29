@@ -16,6 +16,7 @@ from models import *
 ORDER_SEND_EMAIL = getattr(settings, 'ORDER_SEND_EMAIL', True)
 ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'info@lift-fit.ru')
+SITE_ADDR = getattr(settings, 'SITE_ADDR', 'lift-fit.ru')
 
 class RegisterForm(forms.Form):
 	email = forms.EmailField(_(u'Email'), required=True)
@@ -147,6 +148,7 @@ def send_change_password_email(first_name, email, password):
 		'email': email,
 		'password': password,
 		'first_name': first_name,
+		'SITE_ADDR': SITE_ADDR,
 	})
 	body = get_template('spares/change_password.eml').render(ctx)
 
