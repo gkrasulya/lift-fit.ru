@@ -151,4 +151,5 @@ def send_change_password_email(first_name, email, password):
 	body = get_template('spares/change_password.eml').render(ctx)
 
 	email = EmailMessage(_(u'Смена пароля на lift-fit.ru'), body, email_from, [email])
+	email.content_subtype = 'html'
 	email.send(fail_silently=True)
