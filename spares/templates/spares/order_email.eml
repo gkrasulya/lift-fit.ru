@@ -1,5 +1,28 @@
-Здравствуйте.
+{% extends 'base.eml' %}
 
-Вы сделали заказ на сайте lift-fit.ru. Вы заказали:
+{% block content %}
 
-{{ body }}
+	<table cellpading="0" cellspacing="0" width="500px" align="center">
+	  <tr>
+	    <td style="font-family: Arial, sans-serif; font-size: 14px;">
+		    
+		    {% if name %}
+				Здравствуйте, {{ name }}.
+			{% else %}
+				Здравствуйте.
+			{% endif %}
+
+			Вы составили список на сайте <a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}" target="_blank">lift-fit.ru</a> необходимого Вам оборудования:<br><br>
+
+			<strong>
+			{{ body }}
+			</strong>
+			
+			<strong>На Ваш электронный адрес будет направлено/отправлено коммерческое предложение с информацией по условиям оплаты и срокам поставки товара.</strong><br><br>
+			
+			<a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}/account" target="_blank">Перейти в личный кабинет</a>.<br><br>
+	    </td>
+	  </tr>
+	</table>
+
+{% endblock %}

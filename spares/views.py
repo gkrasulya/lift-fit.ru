@@ -281,7 +281,7 @@ def order(request):
 			form = OrderForm(data)
 
 	if is_order and form.is_valid():
-		form.body = body
+		form.body = body.replace('\n', '<br>')
 		order = form.save(commit=False)
 		order.total_sum = total_sum
 		order.status = 0

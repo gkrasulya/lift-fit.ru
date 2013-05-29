@@ -82,8 +82,10 @@ def send_order(order, customer_body, **kwargs):
 		email.send(fail_silently=False)
 
 		customer_body = get_template('spares/order_email.eml').render(Context({
-			'body': customer_body
+			'name': order.name,
+			'body': customer_body,
 		}))
 
 		email = EmailMessage(_(u'Заказ на lift-fit.ru'), customer_body, 'info@lift-fit.ru', [order.email])
+		email.content_subtype = 'html'
 		email.send(fail_silently=False)
