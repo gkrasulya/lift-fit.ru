@@ -112,7 +112,7 @@ class ChangePasswordForm(forms.Form):
 		password = self.cleaned_data['password']
 		request.user.set_password(password)
 		request.user.save()
-		send_change_password_email(request.user.first_name, request.user.email, password)
+		send_change_password_email(request.user.profile.name, request.user.email, password)
 
 
 class EditForm(forms.ModelForm):
@@ -142,12 +142,12 @@ def send_register_email(email, password):
 	email = EmailMessage(_(u'Регистрация на lift-fit.ru'), body, email_from, [email])
 	email.send(fail_silently=True)
 
-def send_change_password_email(first_name, email, password):
+def send_change_password_email(name, email, password):
 	email_from = EMAIL_HOST_USER
 	ctx = Context({
 		'email': email,
 		'password': password,
-		'first_name': first_name,
+		'name': name,
 		'SITE_ADDR': SITE_ADDR,
 	})
 	body = get_template('spares/change_password.eml').render(ctx)
