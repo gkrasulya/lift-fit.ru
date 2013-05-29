@@ -16,6 +16,7 @@ from models import *
 ORDER_SEND_EMAIL = getattr(settings, 'ORDER_SEND_EMAIL', True)
 ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'info@lift-fit.ru')
+DEFAULT_FROM_EMAIL = getattr(settings, 'DEFAULT_FROM_EMAIL', 'info@lift-fit.ru')
 SITE_ADDR = getattr(settings, 'SITE_ADDR', 'lift-fit.ru')
 
 class RegisterForm(forms.Form):
@@ -122,7 +123,7 @@ class EditForm(forms.ModelForm):
 
 
 def send_restore_email(email, token):
-	email_from = EMAIL_HOST_USER
+	email_from = DEFAULT_FROM_EMAIL
 	ctx = Context({
 		'token': token
 	})
@@ -132,7 +133,7 @@ def send_restore_email(email, token):
 	email.send(fail_silently=False)
 
 def send_register_email(email, password):
-	email_from = EMAIL_HOST_USER
+	email_from = DEFAULT_FROM_EMAIL
 	ctx = Context({
 		'email': email,
 		'password': password,
@@ -145,7 +146,7 @@ def send_register_email(email, password):
 	email.send(fail_silently=True)
 
 def send_change_password_email(name, email, password):
-	email_from = EMAIL_HOST_USER
+	email_from = DEFAULT_FROM_EMAIL
 	ctx = Context({
 		'email': email,
 		'password': password,

@@ -16,6 +16,7 @@ ORDER_SEND_EMAIL = getattr(settings, 'ORDER_SEND_EMAIL', True)
 ORDER_EMAILS = getattr(settings, 'ORDER_EMAILS', 'gkrasulya@gmail.com')
 EMAIL_HOST_USER = getattr(settings, 'EMAIL_HOST_USER', 'feedback@lift-fit.ru')
 FEEDBACK_EMAILS = getattr(settings, 'FEEDBACK_EMAILS', 'feedback@lift-fit.ru')
+SITE_ADDR = getattr(settings, 'SITE_ADDR', 'lift-fit.ru')
 
 class OrderForm(forms.ModelForm):
 	body = ''
@@ -84,6 +85,7 @@ def send_order(order, customer_body, **kwargs):
 		customer_body = get_template('spares/order_email.eml').render(Context({
 			'name': order.name,
 			'body': customer_body,
+			'SITE_ADDR': SITE_ADDR,
 		}))
 
 		email = EmailMessage(_(u'Заказ на lift-fit.ru'), customer_body, 'info@lift-fit.ru', [order.email])
