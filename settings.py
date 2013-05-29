@@ -6,6 +6,8 @@ def rel(path):
 DEBUG = 'DEV' in os.environ
 TEMPLATE_DEBUG = DEBUG
 
+SITE_ADDR = 'http://lift-fit.ru'
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -175,3 +177,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 LOGIN_URL = '/account/login/'
+
+try:
+    from local_settings import *
+except:
+    pass
