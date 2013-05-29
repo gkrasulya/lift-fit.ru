@@ -5,3 +5,4 @@ static/cache
 static/attachments
 *.pyc
 Django-1.3.3/
+local_settings.py
