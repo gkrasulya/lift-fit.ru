@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<table cellpading="0" cellspacing="0" width="500px" align="center">
+  <tr>
+    <td><img src="{{ SITE_ADDR }}/static/images/logo.png" alt="LIFT-FIT" /></td>
+  </tr>
+  <tr>
+    <td width="500" height="20"><img src="{{ SITE_ADDR }}/static/images/email/blank.gif" width="500" height="20"></td>
+  </tr>
+  <tr>
+    <td width="500" height="1"><img src="{{ SITE_ADDR }}/static/images/email/black.gif" width="500" height="1"></td>
+  </tr>
+  <tr>
+    <td width="500" height="20"><img src="{{ SITE_ADDR }}/static/images/email/blank.gif" width="500" height="20"></td>
+  </tr>
+</table>
+
+{% block content %}{% endblock %}
+
+<table cellpading="0" cellspacing="0" width="500px" align="center">
+  <tr>
+    <td width="500" height="20"><img src="{{ SITE_ADDR }}/static/images/email/blank.gif" width="500" height="20"></td>
+  </tr>
+  <tr>
+    <td width="500" height="1"><img src="{{ SITE_ADDR }}/static/images/email/black.gif" width="500" height="1"></td>
+  </tr>
+  <tr>
+    <td width="500" height="20"><img src="{{ SITE_ADDR }}/static/images/email/blank.gif" width="500" height="20"></td>
+  </tr>
+  <tr>
+    <td style="font-family: Arial, sans-serif; font-size: 11px; color: #444;">
+      Благодарим за выбор услуг нашей компании. Мы будем рады вновь приветствовать Вас!<br><br>
+
+      С уважением,<br>
+      Команда Lift-Fit<Br>
+      LIFT-FIT | 119454, Москва, проспект Вернадского, 24, офис 3<br>
+      Тел.:+7 (926) 872 0011      <br>
+      e-mail: <a style="color: #06F; text-decoration: underline;" href="mailto:info@lift-fit.ru">info@lift-fit.ru</a> | <a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}" target="_blank">lift-fit.ru</a><br>
+
+    </td>
+  </tr>
+</table>
+
+</body>
