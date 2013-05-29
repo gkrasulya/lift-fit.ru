@@ -141,6 +141,7 @@ def send_register_email(email, password):
 	body = get_template('spares/register_email.eml').render(ctx)
 
 	email = EmailMessage(_(u'Регистрация на lift-fit.ru'), body, email_from, [email])
+	email.content_subtype = 'html'
 	email.send(fail_silently=True)
 
 def send_change_password_email(name, email, password):
