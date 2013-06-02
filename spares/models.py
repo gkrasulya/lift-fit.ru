@@ -89,7 +89,7 @@ class Spare(ImageModel):
 	)
 
 	title = models.CharField(_(u'Название'), max_length=255)
-	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, null=False)
+	price = models.IntegerField(_(u'Цена'), max_length=25, default=0, blank=True)
 	new_price = models.IntegerField(_(u'Цена'), blank=True, max_length=25, default=0, null=False)
 	description = models.TextField(_(u'Описание'), blank=True, default='')
 	description_html = models.TextField(_(u'Описание HMTL'), editable=False)

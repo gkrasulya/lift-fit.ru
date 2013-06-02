@@ -12,13 +12,18 @@
   </a>
   
   <div class="catalog-item__price">
-    <span class="catalog-item__price__label">Цена:</span>
-    {% if spare.new_price %}
-	    <span class="catalog-item__price__value">{{ spare.new_price }} руб.</span>
-	    <span class="catalog-item__price__old">{{ spare.price }} руб.</span>
-    {% else %}
-	    <span class="catalog-item__price__value">{{ spare.price }} руб.</span>
-    {% endif %}
+  	{% if spare.price %}
+	    <span class="catalog-item__price__label">Цена:</span>
+	    {% if spare.new_price %}
+		    <span class="catalog-item__price__value">{{ spare.new_price }} руб.</span>
+		    <span class="catalog-item__price__old">{{ spare.price }} руб.</span>
+	    {% else %}
+		    <span class="catalog-item__price__value">{{ spare.price }} руб.</span>
+	    {% endif %}
+  	{% else %} 
+	    <span class="catalog-item__price__label">Цена:</span>
+	    <a href="#feedbackForm" class="fancybox catalog-item__price__value">запросить</a>
+  	{% endif %}
   </div> <!-- /.catalog-item__price -->
   
   <div class="catalog-item__buttons">
