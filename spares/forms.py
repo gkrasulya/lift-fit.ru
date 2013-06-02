@@ -67,11 +67,11 @@ def send_order(order, customer_body, **kwargs):
 		email_from = EMAIL_HOST_USER
 
 		body = u'%s<br><br>Имя: %s<br>Email: %s<br>Телефон: %s<br>Купон: %s<br><br>Вы' % (
-			customer_body,
 			order.name,
 			order.email or u'нет',
 			order.phone or u'нет',
 			order.coupon or u'нет',
+			customer_body,
 		)
 
 		ctx = Context({
