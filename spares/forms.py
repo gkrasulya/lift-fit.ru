@@ -66,7 +66,7 @@ def send_order(order, customer_body, **kwargs):
 	if ORDER_SEND_EMAIL or True:
 		email_from = EMAIL_HOST_USER
 
-		body = u'%s\n\nИмя: %s\nEmail: %s\nТелефон: %s\nКупон: %s\n\nВы' % (
+		body = u'%s<br><br>Имя: %s<br>Email: %s<br>Телефон: %s<br>Купон: %s<br><br>Вы' % (
 			customer_body,
 			order.name,
 			order.email or u'нет',
@@ -80,6 +80,7 @@ def send_order(order, customer_body, **kwargs):
 		# body = get_template('spares/order_email.eml').render(ctx)
 
 		email = EmailMessage(_(u'Обратная связь'), body, 'info@lift-fit.ru', FEEDBACK_EMAILS)
+		email.content_subtype = 'html'
 		email.send(fail_silently=False)
 
 		customer_body = get_template('spares/order_email.eml').render(Context({
