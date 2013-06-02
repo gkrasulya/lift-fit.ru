@@ -202,6 +202,13 @@ class Coupon(models.Model):
 	coupon = models.CharField(_(u'Купон'), max_length=50, blank=False)
 	activated = models.BooleanField(_(u'Активирован'), default=False)
 
+	class Meta:
+		verbose_name = _(u'Купон')
+		verbose_name_plural = _(u'Купоны')
+
+	def __unicode__(self):
+		return self.coupon
+
 
 class Delivery(models.Model):
 	subject = models.CharField(_(u'Тема письма'), max_length=255)

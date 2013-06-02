@@ -15,7 +15,7 @@
 			Вы составили список на сайте <a style="color: #06F; text-decoration: underline;" href="{{ SITE_ADDR }}" target="_blank">lift-fit.ru</a> необходимого Вам оборудования:<br><br>
 
 			<strong>
-			{{ body }}
+			{{ body|safe }}
 			</strong>
 			
 			<strong>На Ваш электронный адрес будет направлено/отправлено коммерческое предложение с информацией по условиям оплаты и срокам поставки товара.</strong><br><br>

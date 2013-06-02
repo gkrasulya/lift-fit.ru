@@ -21,6 +21,9 @@ class SpareAdmin(admin.ModelAdmin):
     list_display = ('admin_photo', 'title', 'producer')
     list_filter = ('producer',)
 
+class CouponAdmin(admin.ModelAdmin):
+    pass
+
 class SearchQueryAdmin(admin.ModelAdmin):
     list_display = ('query', 'count',)
 
@@ -37,3 +40,4 @@ admin.site.register(Spare, SpareAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(SearchQuery, SearchQueryAdmin)
 admin.site.register(Delivery, DeliveryAdmin)
+admin.site.register(Coupon, CouponAdmin)
