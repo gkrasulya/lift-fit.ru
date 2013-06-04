@@ -27,7 +27,11 @@
 	          {% endfor %}
 	        </ul>
 			<div class="total-row mt15">
-				Итого <span class="total-row-text">{{ total_sum }} руб.</span>
+				{% if no_price %}
+					Итогую стоимость заказа мы укажем в коммерчеком предложении и вышлем на электронную почту.
+				{% else %}
+					Итого <span class="total-row-text">{{ total_sum }} руб.</span>
+				{% endif %}
 			</div>
 		</div>
 

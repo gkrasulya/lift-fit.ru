@@ -255,15 +255,28 @@ return cookieValue;}};
 	var $cartTable = $('#cartTable'),
 		$totalText = $('#totalText'),
 		recountAllTotal = function() {
-			var allTotal = 0;
+			var allTotal = 0,
+				noPrice = false,
+				text;
 
 			$cartTable.find('.js-product').each(function(i, product) {
-				var $product = $(product);
+				var $product = $(product),
+					price = $product.data('price');
 
-				allTotal += $product.data('price') * $product.find('.js-quantity-input').val();
+				if (! price) {
+					noPrice = true;
+					return;
+				}
+
+				allTotal += price * $product.find('.js-quantity-input').val();
 			});
 
-			$totalText.html(allTotal + ' руб.');
+			if (noPrice) {
+				text = 'Итогую стоимость заказа мы укажем в коммерчеком предложении и вышлем на электронную почту.';
+			} else {
+				text = allTotal + ' руб.';
+			}
+			$totalText.html(text);
 		};
 
 	try {

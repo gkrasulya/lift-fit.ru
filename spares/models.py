@@ -110,7 +110,7 @@ class Spare(ImageModel):
 
 	in_cart = False
 	in_favorites = False
-	
+
 	class Meta:
 		ordering = ['-is_special', '-date_added']
 		verbose_name = _(u'Запчасть')
@@ -119,6 +119,13 @@ class Spare(ImageModel):
 	class IKOptions:
 		spec_module  = 'spares.specs'
 		image_field = 'photo'
+
+	def get_price_display(self):
+		if self.price:
+			display = u'{0} руб.'.format(self.price)
+		else:
+			display = u'Под запрос'
+		return 
 	
 	def __unicode__(self):
 		return self.title

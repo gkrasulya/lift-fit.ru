@@ -30,7 +30,7 @@
 						<th></th>
 					</thead>
 					{% for spare in spare_list %}
-						<tr class="js-product" data-price="{{ spare.price }}" data-id="{{ spare.id }}" data-in-cart="1">
+						<tr class="js-product" data-price="{% if spare.price %}{{ spare.price }}{% endif %}" data-id="{{ spare.id }}" data-in-cart="1">
 							<td>
 								<input type="hidden" name="products" value="{{ spare.id }}">
 								<img src="{{ spare.thumb_catalog.url }}" alt="{{ spare.title }}" />
@@ -43,8 +43,12 @@
 									<a href="#" class="js-quantity-plus">+</a><br>
 								</div>
 							</td>
-							<td class="js-price">{{ spare.price }} руб.</td>
-							<td class="js-total">{{ spare.price }} руб.</td>
+							<td class="js-price">{% if spare.price %}{{ spare.price }} руб.{% else %}под запрос{% endif %}</td>
+							{% if spare.price %}
+								<td class="js-total">{{ spare.price }} руб.</td>
+							{% else %}
+								<td></td>
+							{% endif %}
 							<td class="actions">
 								<a href="#" class="action js-remove-product">убрать</a><br>
 								<a href="#" class="action js-add-to-favorites" data-remove="1">переместить в избранное</a>

@@ -52,10 +52,12 @@ def index(request, slug=None, id=None):
 		favorite_list = request.user.favorite_list.all()
 		favorite_ids = [spare.id for spare in favorite_list]
 
-	spare_list = spare_list.order_by('-special_types').all()
+	spare_list = spare_list.filter(special_types='').all()
+	special_spare_list = Spare.objects.exclude(special_types='').order_by('?').all()
 
 	return render(request, 'index.html', {
 		'spare_list': spare_list,
+		'special_spare_list': special_spare_list,
 		'cart_ids': cart_ids,
 		'favorite_ids': favorite_ids,
 		'spare_lists': spare_lists,
@@ -251,9 +253,13 @@ def order(request):
 	order_products = []
 	body = []
 	total_sum = 0
+	no_price = False
 	for i, spare in enumerate(spare_list):
 		body.append(u'* %s - %s шт.' % (spare.title, quantities[i]))
-		total_sum += spare.price * quantities[i]
+		if spare.price:
+			total_sum += spare.price * quantities[i]
+		else:
+			no_price = True
 		order_products.append({
 			'spare': spare,
 			'quantity': quantities[i]
@@ -298,7 +304,8 @@ def order(request):
 			'order_products': order_products,
 			'form': form,
 			'is_order': is_order,
-			'total_sum': total_sum
+			'total_sum': total_sum,
+			'no_price': no_price
 		})
 
 def get_cart(request):

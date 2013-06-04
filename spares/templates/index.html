@@ -75,6 +75,10 @@
         
           {% if spare_list %}
           
+            {% for spare in special_spare_list %}
+              {% include 'spares/_spare.html' %}
+            {% endfor %}
+          
             {% for spare in spare_list %}
               {% include 'spares/_spare.html' %}
             {% endfor %}
