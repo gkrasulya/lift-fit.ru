@@ -131,7 +131,7 @@ class Spare(ImageModel):
 		return self.title
 
 	def get_absolute_url(self):
-		return '%s#spare%s' % (reverse('spares-producer-detail', args=[self.producer_id]), self.id)
+		return '%s#spare%s' % (self.producer.get_absolute_url(), self.id)
 		
 	def save(self, force_insert=False, force_update=False):
 		self.description_html = format_text(self.description)
