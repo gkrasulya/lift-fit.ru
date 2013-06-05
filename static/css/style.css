@@ -543,11 +543,10 @@ body {
     overflow: hidden;
     text-align: right;
   }
-  .carouse-item__title {
-    font-size: 11px;
+  .carousel-item__title {
     overflow: hidden;
   }
-    .carouse-item__title a {
+    .carousel-item__title a {
       text-decoration: underline;
     }
 
