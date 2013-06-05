@@ -443,7 +443,7 @@ body {
   }
 
 .brands-nav {
-  font: 20px 'PFHandbookMedium';
+  font: 16px 'PFHandbookMedium';
   margin-top: 10px;
   text-align: justify;
   text-transform: uppercase;
@@ -538,7 +538,7 @@ body {
     text-align: right;
   }
   .carouse-item__title {
-    font-size: 13px;
+    font-size: 11px;
   }
     .carouse-item__title a {
       text-decoration: underline;
