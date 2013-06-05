@@ -18,14 +18,16 @@
       <div class="page-header__bookmarks l c" id="bookmarks"></div> <!-- /.page-header__bookmarks -->
       <div class="page-header__search r"></div>
       
-      <div class="page-header__lang r">
-        {% if is_english %}
-          <a title="English" href="/english"><i class="icon icon_flag icon_flag_en"></i></a>
-          <a title="Русский" href="/"><i style="margin-top: 5px;" class="icon mt5 icon_flag icon_flag_ru"></i></a>
-        {% else %}
-          <a title="English" href="/english"><i class="icon icon_flag icon_flag_en"></i></a>
-        {% endif %}
-      </div>
+      {% comment %}
+        <div class="page-header__lang r">
+          {% if is_english %}
+            <a title="English" href="/english"><i class="icon icon_flag icon_flag_en"></i></a>
+            <a title="Русский" href="/"><i style="margin-top: 5px;" class="icon mt5 icon_flag icon_flag_ru"></i></a>
+          {% else %}
+            <a title="English" href="/english"><i class="icon icon_flag icon_flag_en"></i></a>
+          {% endif %}
+        </div>
+      {% endcomment %}
     </div> <!-- /.page-header__right__top -->
     
     <div class="page-header__right__bottom c">
