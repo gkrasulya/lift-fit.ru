@@ -543,6 +543,7 @@ body {
   }
   .carouse-item__title {
     font-size: 11px;
+    overflow: hidden;
   }
     .carouse-item__title a {
       text-decoration: underline;
