@@ -41,7 +41,7 @@
           <div class="carousel__inner c js-inner">
             {% for spare in action_spares %}
               <div class="carousel-item js-item">
-                <a href="{{ spare.producer.get_absolute_url }}" class="fancybox"><img src="{{ spare.thumb_carousel.url }}" alt="{{ spare.title }}" class="carousel-item__image"></a>
+                <a href="{{ spare.producer.get_absolute_url }}" class="fancybox"><img src="{{ spare.thumb_carousel.url }}" alt="{{ spare.title }}" class="carousel-item__image" title="{{ spare.title }}"></a>
                 <div class="carousel-item__title" style="overflow: hidden;"><a href="{{ spare.get_absolute_url }}">{{ spare.title }}</a></div>
                 {% if spare.price %}
                   <div class="carousel-item__price">от {{ spare.price }} Р</div>
