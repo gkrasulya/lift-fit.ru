@@ -23,7 +23,7 @@ def index(request):
 	page = Page.objects.get(slug='index')
 	first_post = Post.objects.order_by('-date_added')[0]
 	visits_count = Visit.objects.count() + VISITS_COUNT_METRIKA
-	action_spares = Spare.objects.filter(special_types='action')
+	action_spares = Spare.objects.order_by('?')[:10]
 	service_pages = Page.objects.filter(name='service')
 	
 	return render(request, 'pages/index.html', {
