@@ -537,8 +537,10 @@ body {
 }
   .carouse-item__image {
   }
-  .carousel-item__title,
+  .carousel-item__title
   .carousel-item__price {
+    font-size: 11px;
+    overflow: hidden;
     text-align: right;
   }
   .carouse-item__title {
